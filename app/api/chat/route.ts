@@ -2,10 +2,7 @@ import { kv } from "@vercel/kv";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 
-import { auth } from "@/app/api/auth/[...nextauth]/authOptions";
 import { nanoid } from "@/lib/chat/utils";
-
-export const runtime = "edge";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -13,18 +10,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   const json = await req.json();
-  const { messages, previewToken } = json;
-  const userId = (await auth())?.user.id;
-
-  if (!userId) {
-    return new Response("Unauthorized", {
-      status: 401,
-    });
-  }
-
-  if (previewToken) {
-    openai.apiKey = previewToken;
-  }
+  const { messages } = json;
 
   const res = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
@@ -39,10 +25,10 @@ export async function POST(req: Request) {
       const id = json.id ?? nanoid();
       const createdAt = Date.now();
       const path = `/chat/${id}`;
+
       const payload = {
         id,
         title,
-        userId,
         createdAt,
         path,
         messages: [
@@ -53,11 +39,11 @@ export async function POST(req: Request) {
           },
         ],
       };
-      await kv.hmset(`chat:${id}`, payload);
-      await kv.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${id}`,
-      });
+      //   await kv.hmset(`chat:${id}`, payload);
+      //   await kv.zadd(`user:chat:${userId}`, {
+      //     score: createdAt,
+      //     member: `chat:${id}`,
+      //   });
     },
   });
 

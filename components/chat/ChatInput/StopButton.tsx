@@ -1,0 +1,13 @@
+import { StopCircleIcon } from "@heroicons/react/16/solid";
+
+export default () => {
+  return (
+    <div className="mr-1 flex items-center">
+      <button type="submit" className="inline-flex items-center text-white">
+        <StopCircleIcon className="h-6 w-6" />
+      </button>
+    </div>
+  );
+  {
+  }
+};
