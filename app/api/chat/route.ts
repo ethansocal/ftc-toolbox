@@ -1,8 +1,6 @@
-import { kv } from "@vercel/kv";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
-
-import { nanoid } from "@/lib/chat/utils";
+import { createChat, addMessage } from "@/lib/chat/db-actions";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -10,7 +8,21 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   const json = await req.json();
-  const { messages } = json;
+  const { messages, id } = json;
+
+  // Create a chat if one doesn't exist
+  if (messages.length === 1) {
+    const title = messages[0].content.split(" ").slice(0, 3).join(" ");
+
+    await createChat({ id, title, userId: 1 });
+  }
+
+  // Add the user's message to the chat
+  const userMessage = messages[messages.length - 1];
+  await addMessage({
+    ...userMessage,
+    chatId: id,
+  });
 
   const res = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
@@ -21,29 +33,12 @@ export async function POST(req: Request) {
 
   const stream = OpenAIStream(res, {
     async onCompletion(completion) {
-      const title = json.messages[0].content.substring(0, 100);
-      const id = json.id ?? nanoid();
-      const createdAt = Date.now();
-      const path = `/chat/${id}`;
-
-      const payload = {
-        id,
-        title,
-        createdAt,
-        path,
-        messages: [
-          ...messages,
-          {
-            content: completion,
-            role: "assistant",
-          },
-        ],
-      };
-      //   await kv.hmset(`chat:${id}`, payload);
-      //   await kv.zadd(`user:chat:${userId}`, {
-      //     score: createdAt,
-      //     member: `chat:${id}`,
-      //   });
+      // Add the assistant's message to the chat
+      await addMessage({
+        content: completion,
+        role: "assistant",
+        chatId: id,
+      });
     },
   });
 

@@ -1,7 +1,10 @@
 "use client";
 
 import Chat from "@/components/chat/";
+import { nanoid } from "@/lib/chat/utils";
 
 export default () => {
-  return <Chat />;
+  const id = nanoid();
+
+  return <Chat id={id} />;
 };

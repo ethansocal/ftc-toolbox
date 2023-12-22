@@ -8,7 +8,7 @@ import ChatInput from "./ChatInput";
 import ChatList from "./ChatList";
 import EmptyScreen from "./EmptyScreen";
 
-export interface ChatProps extends React.ComponentProps<"div"> {
+export interface ChatProps {
   initialMessages?: Message[];
   id?: string;
 }
@@ -19,6 +19,7 @@ export default ({ id, initialMessages }: ChatProps) => {
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
     useChat({
+      initialMessages,
       id,
       body: {
         id,
@@ -29,7 +30,7 @@ export default ({ id, initialMessages }: ChatProps) => {
         }
       },
       onFinish() {
-        if (!path.includes("chat")) {
+        if (path == "/chat") {
           router.push(`/chat/${id}`, { scroll: false });
           router.refresh();
         }
