@@ -38,24 +38,22 @@ export default ({ id, initialMessages }: ChatProps) => {
     });
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className={"overflow-y-auto flex-grow mt-5"}>
+    <div className="flex flex-col justify-center">
+      <div className="overflow-y-auto mt-5 h-screen w-[600px]">
         {messages.length ? <ChatList messages={messages} /> : <EmptyScreen />}
       </div>
 
-      <div className="flex flex-col items-center mb-5">
-        <div className="w-full max-w-lg">
-          <ChatInput
-            id={id}
-            isLoading={isLoading}
-            stop={stop}
-            append={append}
-            reload={reload}
-            messages={messages}
-            input={input}
-            setInput={setInput}
-          />
-        </div>
+      <div className="mb-5">
+        <ChatInput
+          id={id}
+          isLoading={isLoading}
+          stop={stop}
+          append={append}
+          reload={reload}
+          messages={messages}
+          input={input}
+          setInput={setInput}
+        />
       </div>
     </div>
   );

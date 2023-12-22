@@ -1,6 +1,8 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
-import { createChat, addMessage } from "@/lib/chat/db-actions";
+import { createChat, addMessage, getChats } from "@/lib/chat/db-actions";
+import { NextResponse } from "next/server";
+import { getChat } from "@/lib/chat/db-actions";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -43,4 +45,15 @@ export async function POST(req: Request) {
   });
 
   return new StreamingTextResponse(stream);
+}
+
+export async function GET(req: Request) {
+  try {
+    //TODO: Add authentication
+    const chats = await getChats(1);
+
+    return NextResponse.json({ chats });
+  } catch (error) {
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 }
