@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import ChatInput from "./ChatInput";
 import ChatList from "./ChatList";
+import EmptyScreen from "./EmptyScreen";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages?: Message[];
@@ -36,19 +37,13 @@ export default ({ id, initialMessages }: ChatProps) => {
     });
 
   return (
-    <>
-      <div className={"pb-[200px] pt-4 md:pt-10"}>
-        {messages.length ? (
-          <>
-            <ChatList messages={messages} />
-          </>
-        ) : (
-          <>{/* <EmptyScreen setInput={setInput} /> */}</>
-        )}
+    <div className="flex flex-col h-screen">
+      <div className={"overflow-y-auto flex-grow mt-5"}>
+        {messages.length ? <ChatList messages={messages} /> : <EmptyScreen />}
       </div>
-      <div className="min-h-screen flex flex-col justify-between items-center">
-        <div></div>{" "}
-        <div className="w-full max-w-lg mb-3">
+
+      <div className="flex flex-col items-center mb-5">
+        <div className="w-full max-w-lg">
           <ChatInput
             id={id}
             isLoading={isLoading}
@@ -61,6 +56,6 @@ export default ({ id, initialMessages }: ChatProps) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
