@@ -1,12 +1,26 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import Image from "next/image";
+import { signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-    return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <button onClick={() => signIn()}>Login</button>
-        </main>
-    );
+  const { data: session, status } = useSession();
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      {status == "authenticated" ? (
+        <button onClick={() => signOut()}>Sign Out</button>
+      ) : (
+        <button onClick={() => signIn()}>Login</button>
+      )}
+
+      <div>
+        {status == "authenticated" ? (
+          <text>Logged in as: {session.user?.name}</text>
+        ) : (
+          <text>not logged in</text>
+        )}
+      </div>
+    </main>
+  );
 }
