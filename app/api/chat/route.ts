@@ -1,22 +1,35 @@
-import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
-import { createChat, addMessage, getChats } from "@/lib/chat/db-actions";
-import { NextResponse } from "next/server";
-import { getChat } from "@/lib/chat/db-actions";
+import { OpenAIStream, StreamingTextResponse } from "ai";
+
+import { getServerSession } from "next-auth/next";
+import type, { NextRequest, NextResponse } from "next/server";
+import { addMessage, createChat, getChats } from "@/lib/chat/db-actions";
+
+import authOptions from "../auth/[...nextauth]/authOptions";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const json = await req.json();
   const { messages, id } = json;
 
+  const session = await getServerSession(authOptions);
+
+  //TODO: Add a trial mode for authenticated users
+  if (!session) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  const { user } = session;
+
   // Create a chat if one doesn't exist
-  if (messages.length === 1) {
+  if (messages.length == 1) {
+    //TODO: Generate the title using GPT-3
     const title = messages[0].content.split(" ").slice(0, 3).join(" ");
 
-    await createChat({ id, title, userId: 1 });
+    await createChat({ id, title, userId: user.id });
   }
 
   // Add the user's message to the chat
@@ -26,16 +39,15 @@ export async function POST(req: Request) {
     chatId: id,
   });
 
-  const res = await openai.chat.completions.create({
+  const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages,
     temperature: 0.7,
     stream: true,
   });
 
-  const stream = OpenAIStream(res, {
+  const stream = OpenAIStream(response, {
     async onCompletion(completion) {
-      // Add the assistant's message to the chat
       await addMessage({
         content: completion,
         role: "assistant",
@@ -47,10 +59,22 @@ export async function POST(req: Request) {
   return new StreamingTextResponse(stream);
 }
 
-export async function GET(req: Request) {
+/*
+ * GET /api/chat
+ *
+ * Returns all chats for the authenticated user
+ */
+export async function GET() {
   try {
-    //TODO: Add authentication
-    const chats = await getChats(1);
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+
+    const { user } = session;
+
+    const chats = await getChats(user.id);
 
     return NextResponse.json({ chats });
   } catch (error) {

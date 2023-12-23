@@ -24,7 +24,7 @@ export default () => {
       <li>
         <div className="text-xs font-semibold  text-gray-400">Chat History</div>
         <ul role="list" className="-mx-2 mt-2 space-y-1">
-          {data.chats.map((chat: ChatProps) => (
+          {data.chats?.map((chat: ChatProps) => (
             <li key={chat.id}>
               <a
                 href={`/chat/${chat.id}`}

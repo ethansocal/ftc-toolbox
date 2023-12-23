@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 interface ChatProps {
   id: string;
   title: string;
-  userId: number;
+  userId: string;
 }
 
 interface MessageProps {
@@ -25,7 +25,7 @@ const getChat = async (id: string) => {
   });
 };
 
-const getChats = async (userId: number) => {
+const getChats = async (userId: string) => {
   return await prisma.chat.findMany({
     where: {
       userId,
