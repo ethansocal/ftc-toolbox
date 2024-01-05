@@ -1,4 +1,5 @@
 import { type Message } from "ai";
+import MessageBox from "./MessageBox";
 
 export interface ChatList {
   messages: Message[];
@@ -9,17 +10,14 @@ export default function ChatList({ messages }: ChatList) {
     return null;
   }
 
+  console.log(messages);
+
   return (
     <div>
       {messages.map((message, index) => (
         <div key={index}>
-          <div>{message.content}</div>
-
-          {index < messages.length - 1 && (
-            <div className="relative flex py-5 items-center">
-              <div className="flex-grow border-t border-gray-400"></div>
-            </div>
-          )}
+          <MessageBox message={message} />
+          <div className="mt-5"></div>
         </div>
       ))}
     </div>
