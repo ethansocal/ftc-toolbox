@@ -1,0 +1,670 @@
+[
+  {
+    "question": "When having a discussion of the rules about the backdrop and drones. Several students questioned what would happen if a drone went back and hit the backdrop and knocked down pixels of the opposite alliance. Would there be a penalty for the drone hitting the backdrop.",
+    "answer": "The *Pixel* descoring rule, GS04, applies to this gameplay scenario. A *Minor Penalty* will be assessed for each *Pixel* descored from the opposing *Alliance's Backdrop*."
+  },
+  {
+    "question": "Per rule <gs05> robots can’t possess/control more than 2 pixels, and doing so results in a minor penalty for each additional pixel as well as another minor penalty after every 5 seconds.\n\nQ1: We were wondering if there is an exception to be made for intaking a 3rd pixel and immediately spitting it back out.\n\nQ2: Additionally, if such an exception is the case, are there limitations on our actions while the 3rd pixel is in our possession/control? (ex. driving)</gs05>",
+    "answer": "A1: Yes there is an exception. The *Robot* in this scenario is unlikely to be *Penalized* for *Controlling* too many *Pixels*. The referee should view the *Robot's* actions as being both *Inadvertent* and *Inconsequential* and not call a rule GS05 *Penalty* as allowed by rule G10.\n\nA2: Yes, for this scenario, there are limitations to being excused for a rule GS05 *Penalty*. The *Robot* is unlikely to receive a rule GS05 *Penalty* if the *Robot* satisfies the following two conditions: 1) It ejects the extra *Pixel* in a reasonable amount of time and; 2) It refrains from playing the game while *Controlling* the extra *Pixel*. Two examples of playing the game are: a) Traveling to a different location and; b) Placing a *Pixel In* a *Scoring Area*. If the *Robot's* actions are clearly focused on removing the extra *Pixel* and not playing other aspects of the game, it is highly unlikely that it will receive a GS05 *Penalty\"."
+  },
+  {
+    "question": "Q1: Are the yellow tubes on the truss considered rigging or just the red / blue tubes?\nQ2: The rule <gs06> states: “There is a limit of one (1) Supported Robot per Rigging.”  Is this per tube, or the entire Truss? Q3: Asked another way, is it possible for two alliance robots to hang from the Truss - each on a different alliance colored tube?</gs06>",
+    "answer": "A1: The red and blue pipes are the *Rigging*. The yellow pipes are not *Rigging*. See illustration C-4 in Appendix C of Game Manual Part 2.\n\nA2: The rule GS06.c limitation is per tube. There are four (4) *Alliance Specific Riggings*, two (2) red and two (2) blue as stated in the definition of *Rigging* in the game definitions section (4.3) of Game Manual Part 2.\n\nA3: Yes."
+  },
+  {
+    "question": "<gs12> line c: Human Players may place a maximum of two (2) Pixels or one (1) Drone In a Wing at a time. This has “or”. Is this in one human action? An action being human placing one or two elements, and pull back outside boundary, \nOther rule, <gs09> line d has 6 elements in wing.</gs09></gs12>",
+    "answer": "Yes, the rule GS12.c limitation is per \"human action\". The *Human Player* may place into the *Wing* either one (1) *Pixel*, two (2) *Pixels*, or one (1) *Drone* during a single action. The *Human Player* must be *Outside* the *Playing Field Perimeter* between cycles of placing objects into the *Wing*."
+  },
+  {
+    "question": "<gs05> line c):\ni. Knocking over a stack ... Pixels is allowed.\nii. Inadvertent and Inconsequential movement of a pre-set stack of unscored Pixels is allowed. Moving the stack Completely Off the tape is considered consequential.\niii. Plowing through ... is allowed.\nQ1: Does the \"Moving the stack Completely Off the tape\" apply to the entire stack, or is a single pixel on the stack able to be moved  past the tape edge? Q2: If knocking over, can more than one pixel?</gs05>",
+    "answer": "The intent of Rule GS05.c.(i&amp;ii) is to allow reasonable *Robot* interaction with a *Pixel* stack without violating the *Pixel Control/Possession* limits described in rule GS05.a. The Rule GS05.c.i exception is for *Pixel(s)* knocked off of a stack and onto the *Playing Field Floor*. The Rule GS05c.ii exception is for the movement of three (3) or more of the pre-set stacked *Pixels* as a group that stay *On* the white tape line.\n\nA1: Penalizing the movement of the *Pixel* stack applies when three (3) or more stacked *Pixels* are moved all together *Off* of the white tape line. Moving a \"single *Pixel* from the stack past the tape edge\" is allowed because it is less than the two (2) *Pixel Controller/Possession* limit described in rule GS05.a.\n\nA2: Yes, the rule GS05.c.i exemption applies to any number of *Pixels* knocked off of the stack onto the *Playing Field Floor*. The knocked off *Pixels* are not subject to rule GS05.a constraints, even if they come to rest *Off* of the white tape line.\n\n**Bonus Information:** *Pixels* in the pre-set stacks can't be *Propelled* per rule GS10."
+  },
+  {
+    "question": "Centerstage game setup has stacks of white pixels on both sides of the field.  Is a robot able to use the stacks across the field centerline during autonomous?",
+    "answer": "Yes, however, this is a risky *Autonomous Period* gameplay strategy. A *Robot* entering the opposing *Alliance's* half of the *Playing Field* during the *Autonomous Period* risks violating rule GS03."
+  },
+  {
+    "question": "Will the pixels be placed on the pixel locations stripes in a known orientation such as flat against the wall or is the orientation random?",
+    "answer": "Based on the Field Reset guide located in the Game and Season Information page (https://www.firstinspires.org/resource-library/ftc/game-and-season-info), \"Each stack of 5 *Pixels* is centered from side to side on each of the white tape lines on the audience side of the field. The *Pixels* should be touching the field perimeter wall\".  There is no specification of orientation both collectively and individually in each stack. In other words, *Pixels* can be in any setup as long as they are each touching the field perimeter wall.  Teams should design their intake mechanisms accordingly."
+  },
+  {
+    "question": "Section 4.4.4.2 End Game states that launched drones must pass over the rigging and/or stage door to be considered for scoring, which seems reinforced by GS11e.  GS11d seems to consider drones launching from suspended robots separately.  Does a drone launched from a suspended robot need to pass over the rigging/stage door to score?",
+    "answer": "Yes."
+  },
+  {
+    "question": "<gs09> Doesn't address the maximum number of drones allowed in the wing.  Does this mean there is no limit?</gs09>",
+    "answer": "A maximum of two *Drones* are allowed to be placed in their corresponding *Alliance's Wing*. \n\n**Bonus Information:** Each *Team* is allowed to provide only one (1) *Drone* for a *Match*."
+  },
+  {
+    "question": "4.4.1 specifies pixel storage but says nothing about drone storage.  Are there any constraints on the quantity or starting location/configuration of drones in excess of the one pre loaded prior to the start?",
+    "answer": "*Drive Teams* are allowed to bring one (1) *Drone* to the competition *Playing Field* for a *Match*. The *Drone* is either *Pre-Loaded* or placed into their *Alliance's Pixel Storage* area during pre-*Match* set up."
+  },
+  {
+    "question": "Per the rules, for each scoring attempt (Launch, fly, land), a Launched Drone must pass over a Rigging or top pole of the Stage Door before it is eligible to Score points. May a Drone pass over a Rigging or top pole of the Stage Door MULTIPLE times during a launch, fly, land sequence?",
+    "answer": "Yes."
+  },
+  {
+    "question": "Can you inform me if Go bilda build kits have been deemed illegal?  There is no mention of them in the legal or illegal parts and I spent a lot of money upgrading this winter to try and compete.",
+    "answer": "Teams may acquire parts and materials from any readily available source, including GoBilda, providing they do not violate any robot build rules. Pay specific attention to Rules RM01 and RM02 when purchasing parts and kits."
+  },
+  {
+    "question": "Please explain if these scenarios will be penalized:\nQ1: Robot knocks a pixel stack down (GS05.c.i). These pixels are such that they are no longer stacked and are scattered singles.\nQ2: Robot pushes 3/4/5 of the knocked down pixels into the backstage (GS05.c.iii).\nQ3: The restriction seems to be, a robot can not move a stack of 3 or more pixels from the white line.\nQ4: Scattered / knocked off pixels can be plowed. Is that accurate?",
+    "answer": "A1: No *Penalty*. Rule GS05.c.i allows a *Robot* to knock over a stack of unscored *Pixels*.\n\nA2: The *Robot* will be penalized for violating rule GS05.a because it is *Controlling* more than two (2) *Pixels*. The *Pixels* in this scenario are *Herded*, a form of *Control*, by the *Robot* because the *Pixels* are pushed to a desired location that gains a strategic advantage beyond the *Robot* moving around the *Playing Field*. The *Pixels* in this scenario do not qualify for the rule GS05.c.iii exception for *Plowing*. See the definitions of \"*Herding*\" and \"*Plowing*\" in section 4.3 of Game Manual Part 2 to fully understand the difference between these game-specific terms. \n\nA3: Correct, a *Robot* will be penalized for moving a stack of three (3) or more *Pixels Off* of the white tape line per rules GS05.a and GS05c.ii.\n\nA4: Yes, any quantity of \"scattered/knocked off *Pixels*\" can be *Plowed* per rule GS05.c.iii. See the definition of \"*Plowing*\" in section 4.3 of Game Manual Part 2 to gain an understanding of how to apply this game-specific term."
+  },
+  {
+    "question": "Launching is defined as \"Propelling Game Elements through the air or water above the Playing Field Floor.\" \n\nQ1: Are Pixels considered launched if they stay in contact with the floor? \n\nQ2: In other words, can be slid along the floor and not be considered Launched and if so, are there any constraints in how far they can go?",
+    "answer": "An understanding of the game-specific defined terms \"*Propel/Propelling*\", \"*Launch/Launching*\", and \"*Slide/Sliding*\" found in section 4.3 of Game Manual Part 2 is necessary to fully understand Q1, Q2, and their answers. Please take a moment to review these definitions before proceeding. \n\nThe \"bonus information\" following answers A1 and A2 addresses a related gameplay scenario that complements Q1 and Q2.\n\nA1: No, a *Pixel* that is \"in contact with the floor\" does not satisfy the definition of \"*Launched*\" in section 4.3 of Game Manual Part 2.\n\nA2: A *Pixel* \"slid along the floor\" does not satisfy the definition of \"*Launched*\" because the *Pixel* remains in contact with the \"Playing Field Floor\".\n\n**Bonus Information:** Rule GS10 states that *Pixels* may not be *Propelled*. Each violation of this rule results in a *Minor Penalty*. To understand how to apply rule GS10 to *Pixels* that are *Slid* by a *Robot*, we need to review the definitions of \"*Sliding*\" and \"*Propelling*\".\n\n\"*Sliding*\" is defined as *Propelling Game Elements* along the *Playing Field Floor*. \n\n\"*Propelling*\" is giving *Game Elements* enough force such that they move independent of contact with the *Robot* or *Human Player*. *Launching*, *Rolling*, and *Sliding* are forms of *Propelling*. \n\nSince \"*Sliding*\" is a form of \"*Propelling*\", a *Robot* causing a *Pixel* to *Slide* violates rule GS10."
+  },
+  {
+    "question": "TE02 says that the TGE (Prop) may include multiple shades of the assigned color, but can the Prop be made entirely of a shade of the assigned color?  So, could a Prop be light blue or pink since those are shades of blue and red?",
+    "answer": "Yes, light blue and pink are acceptable colors providing it is obvious to the field personnel which alliance the Team Prop belongs to."
+  },
+  {
+    "question": "How is \"over\" defined for the purpose of &lt;4.4.4.2&gt; \"Launched Drones must pass over the Truss and/or Stage Door for each scoring attempt to earn points.\"\n\nSpecifically, does the drone need to be fully clear of touching its launching robot before the leading edge of the drone passes the plane over the Rigging or before the trailing edge leaves the plane above the Rigging?",
+    "answer": "A *Robot* must release  the *Drone* (i.e, no *Drone* contact with the *Robot*) before any part of the *Drone* passes over the *Rigging* or top pole of the *Stage Door*.\n\nThe following text demonstrates how to use the Game Manual to substantiate the answer.\n\nThe answer to the question is found by applying the game-specific definitions of \"*Launch/Launching*\" and \"*Propel/Propelling*\" found in section 4.3 of Game Manual Part 2 to rule GS11.e.\n\nRule GS11.e states that \"for each scoring attempt (*Launch*, fly, land), a *Launched Drone* must pass over a *Rigging* or top pole of the *Stage Door* before it is eligible to *Score* points. The key point is that the *Drone* must be *Launched* before passing over the specified *Game Elements*. Next, we need to understand and apply the definition of \"*Launch*.\"\n\n\"*Launch/Launching*\" is defined as *Propelling Game Elements* through the air or water above the *Playing Field Floor*. Okay, now we need to review the definition of \"*Propelling*.\"\n\n\"*Propel/Propelling*\" is defined as giving *Game Elements* enough force such that they move independent of contact with the *Robot* or *Human Player*.\n\nTherefore, a \"*Launched*\" *Drone* is no longer touching the *Robot*."
+  },
+  {
+    "question": "I followed all process mentioned on FTC machine learning Tool chain manual (https://ftc-docs.firstinspires.org/en/latest/ftc_ml/index.html ) to train and creating videos and Datasets with same Label but still \"Start Training model\" button is disable? Has anyone faced this problem?",
+    "answer": "Welcome to FIRST Tech Challenge! As a new (and even veteran!) team it can be difficult to know where to turn for help. Officially there are four places to get official information and help in FIRST Tech Challenge:\n\n(1) Weekly [FIRST Tech Challenge Team Blasts](https://www.firstinspires.org/resource-library/ftc/team-blast-archive) - Every week FIRST Tech Challenge provides the information teams crave! The archive gets updated periodically, but teams receive the emails each week with helpful Weekly Tech Tips (new!) and updates teams need to know.\n\n(2) Periodically [FIRST Tech Challenge Blog](http://firsttechchallenge.blogspot.com/) and [FIRST Tech Challenge Social Media](https://www.facebook.com/FTCTeams/) - The Blog is FIRST Tech Challenge's place to talk more in-depth about topics of interest to FIRST Tech Challenge teams, and is updated periodically. Also the Social Media ([Facebook](https://www.facebook.com/FTCTeams/), [Instagram](https://www.instagram.com/first_official_/?hl=en), [Twitter/X](https://twitter.com/FTCTeams), etc...) is a way to keep up with topics of interest.\n\n(3) On-Demand [FTC-Community Forums](https://ftc-community.firstinspires.org/) - The FTC-Community forums are the official FIRST Tech Challenge forums for technical questions and help. This forum uses the same credentials that you use to access the FIRST Dashboard, and the forum is monitored by FIRST Tech Challenge Engineering Staff as well as the FIRST Tech Challenge Tech Team (as well as the Community!). If you've got a technical question, we technically have an answer! FTC-ML questions are absolutely welcome in the FTC-Community forums.\n\n(4) On-Demand [FIRST Tech Challenge Question and Answer System](https://ftc-qa.firstinspires.org/) - That's this site you're using right now. This system is designed to help teams get clarification on game-specific questions. No other forum or system can give you official game-specific answers like this! This system also isn't designed for discussions like the FTC-Community forums are.\n\nI hope this helps. Have a great season!"
+  },
+  {
+    "question": "Q1: Does a robot have to be suspended at the end of the match to count for suspend points? Q2: Does the robot still get the points for suspending if they suspend from the rigging at end game, make it obvious and unambiguous, and then come down off the rigging and go on the floor?",
+    "answer": "The answers that you seek are found by reading the description of the *Robot* location tasks in Game Manual Part 2 section 4.4.4 *End Game*.\n\nA1: Yes, to earn 20 points for being *Suspended from the Rigging*, a *Robot* must be *Suspended* from the *Rigging* when the scoring system *Match* timer reaches zero seconds (0:00) remaining in the *Match* or at some point during the end of *Match* sound played by the scoring system. After the *Match* ends, the *Robot* may remain *Suspended* or lower to the *Playing Field Floor* without affecting the previously earned 20 points for completing the *Suspended from the Rigging* achievement.\n\nA2: No, a *Robot* located on the *Playing Field Floor* at the end of the *Match* (i.e., match time equals 0:00) does not satisfy the requirement of being *Suspended* by the *Rigging* at the *End of the Period*. However, there is still time to complete the scoring achievement; the *Robot Suspension* task may still occur, provided that the *Robot* is *Suspended* by the conclusion of the end of *Match* sound played by the scoring system.\n\n**Note:** A1 and A2 were updated on November 6, 2023 to recognize that the end of *Match* buzzer length is a \"grace period\" for accomplishing the *Suspension* task."
+  },
+  {
+    "question": "Section <re09> of Game Manual Part 1 does not list any type of GoBilda motor as an allowed motor. Seeing how GoBilda advertises their motors as FTC legal, they have been widely used in previous years, and that they are a selectable option in the robot configuration, are the 5203 Series GoBilda motors FTC legal?</re09>",
+    "answer": "goBILDA motor/gearbox combinations utilizing the Modern Robotics/MATRIX 12V DC Motors, along with their attached single degree-of-freedom gearboxes, are legal per rule RE10c. This currently includes motor/gearbox combinations in the goBILDA Yellow Jacket 5201, 5202, 5203, and 5204 series."
+  },
+  {
+    "question": "Is it legal to intake 2 pixels, while a robot's other parts (e.g. a beam) are touching other pixels on the pixel stack?",
+    "answer": "Yes, the *Robot's* actions are legal, provided that the *Robot* does not already *Possess* or *Control* any *Pixels* when it \"intakes 2 *Pixels*.\""
+  },
+  {
+    "question": "The rule <dr02> states – \"... the aerodynamic surfaces cause the Drones to follow a non-ballistic trajectory while flying.\"\nThere is a non-zero chance that, unintentionally, the drone ends up flying with a near ballistic trajectory. \nQ: Does the team incur a penalty if this happens?</dr02>",
+    "answer": "If the *Drone* has passed inspection and it remains in a legal configuration (rule GS11.f) throughout the *Match*, a gameplay penalty is not assessed if it flies with a \"near ballistic trajectory.\"\n\nA referee may require the *Drone* to be reinspected before it is used in a subsequent *Match* if there is concern that it violates a construction rule."
+  },
+  {
+    "question": "Rule <dr05> Construction Material Constraints: states - \"... The Drone must be made of a single, continuous sheet of paper no larger than a single sheet of 8 ½ x 11 or A4 size uncoated printer paper. ...\"\n\n\nQ1: Can the paper size be smaller than the standard  Letter/A4 size paper?\nQ2: Can the paper be cut up to make individual drone parts that are later attached together? Team members thought of an origami airplane that requires multiple separate parts that need to be joined together.</dr05>",
+    "answer": "Q1: Yes, a Drone may be made from a single sheet of paper smaller than a standard letter/A4 sheet.\nQ2: No, multiple pieces of paper, even if in aggregate they are less than a standard letter/A4 sheet, are not allowed."
+  },
+  {
+    "question": "Can a robot pick up pixels in the wing and then drop the pixels in tile row 3 or 4 for another robot to pick up and place on the backdrop?",
+    "answer": "Yes, the *Robot's* actions do not violate any gameplay rules."
+  },
+  {
+    "question": "Are stacked pixels pinned against the playing field wall considered controlled/possessed by the robot?",
+    "answer": "No."
+  },
+  {
+    "question": "Good evening. Provided no other rules are violated, which of the following kits are legal COTS items under the <rm02> exception for COTS drive chassis? Assume that a \"swerve module\" is a collection of parts including a wheel and mechanisms to rotate the wheel in two axis. 1) A single \"swerve module.\" 2) A bundle of 2 or more \"swerve modules.\" 3) A complete \"swerve\" drivetrain, including 2 or more \"swerve modules\" and a frame, necessitating no additional parts to be assembled as a drive chassis.</rm02>",
+    "answer": "Q1: A single swerve module kit does not meet the requirements in Rule RM02 and therefore is not legal. \n\nQ2: A bundle of swerve modules violates Rule RM02and is not legal.\n\nQ3:  A complete drivetrain made up of illegal parts is not legal."
+  },
+  {
+    "question": "<gs05> c) i. Knocking over a stack of unscored Pixels is allowed. Q1: Is knocking over more than one stack allowed? Q2: Is it also allowed to knock over the stacks in the opposing Alliance’s half of the Playing Field? Q3: What is the penalty for knocking over more than one stack (if applicable)?</gs05>",
+    "answer": "A1: Yes.\n\nA2: Yes this action is allowed during the *Driver-Controlled Period*. Knocking over a *Pixel* stack  in the opposing *Alliance's* half of the *Playing Field* during the *Autonomous Period* violates rule GS03.\n\nA3: No penalty during the *Driver-Controlled Period\". During the *Autonomous Period*, each instance of knocking over a *Pixel* stack that affects an opposing *Alliance Robot* during the *Autonomous Period* is penalized per rule GS03.\n\nNote: The answers were updated on 09/21/2023."
+  },
+  {
+    "question": "Is the Adafruit NeoDriver, I2C to NeoPixel Driver Board, https://www.adafruit.com/product/5766 legal to use for controlling addressable LED lights of the WS2812 variety (NeoPixels)\n\nThe module would be plugged into and powered by the Control Hub's 5V auxiliary ports. Using a JST SH (Stemma QT) to PH cable, the NeoDriver would be connected to an I2C port on the Control Hub. The NeoPixel wires would be connected to the remaining 3 terminals, 5Vo, GND, and NEO (data).",
+    "answer": "Yes, per RE12.e"
+  },
+  {
+    "question": "Are Gobilda linear servos legal?",
+    "answer": "As long as a servo meets the constraints listed in RE10 it is allowed."
+  },
+  {
+    "question": "In past years, we have seen odometry kits banned.  Are GoBilda's new odometry pods legal, or do we need to continue to build our own?  https://www.gobilda.com/odometry-pod-43mm-width-48mm-wheel-2048-ppr-encoder/",
+    "answer": "Each new season brings a new set of Game Manuals and rules, it's never advised to make assumptions based on prior seasons. \n\nRule RM02 this season includes a trio of exceptions, one of them allowing odometry kits."
+  },
+  {
+    "question": "Rule <rg07> Propelling Game Scoring Elements in GM1 states in part that scoring elements may only propel scoring elements with enough velocity to score and that Robots may not propel a scoring element in the air more than a 18 ft. (5.49 m) distance or more than 5 ft. (1.52 m) in elevation. Q1: Since the field + the scoring zone is 18' what is the penalty if the drone overshoots? Q2: How will the height be measured?</rg07>",
+    "answer": "A1: The first instance of violating the *Drone* trajectory constraints during gameplay will not be penalized and the *Drone* is eligible to earn points for *Parking In* a *Landing Zone*. If a referee believes that the *Drone* exceeded the constraints described in rule RG07, the *Drone* must be reinspected before it can be used again in a *Match*.\n\nA2: A typical *Drone* trajectory testing area will be an open space next to a wall. Tape on the floor and wall will mark the distance and height constraints. The *Robot* will be positioned so that the *Launched Drone's* trajectory is along/parallel to the wall. The inspector will observe the *Robot Launching* the *Drone* several times to determine compliance with rule RG07."
+  },
+  {
+    "question": "The middle metal poles holding the truss, rigging, and stage door seem to have no way of electrically grounding themselves to outside of the field, so when metal on the robot touches these elements, there is a static discharge that cannot be avoided by teams. <rg01> i) states robots cannot ground themselves to the playing field, and a grounding strap doesn't help. Will there be any rules that ensure competition fields are set up to remove static build-up on these poles?</rg01>",
+    "answer": "This may come as a shock (pun intended), but grounding the field may have the opposite effect that you intend. By grounding certain elements of the field you virtually guarantee that ESD shocks will be more intense and more frequent, as there will almost always be a large difference in potential between any floating object sliding/moving on the field (robot, game pieces, etc...) and the grounded elements. Understand also that the common wisdom of “touching metal” also doesn’t apply the same as it may have 5-6 years ago either - realize that virtually all aluminum extrusion on robots today is anodized, which is an electrically non-conducting coating on the extrusion. Older Tetrix anodized aluminum seems to have a thinner anodized layer, so it wears/scratches/rubs off more easily, and thus it was more likely that the aluminum would be electrically conductive and charge-accessible. This means you're not able to consistently rely on \"metal\" to \"electrically connect\" areas around the robot (i.e. thinking of the frame as a “wire” isn’t as applicable). Also the grounding strap is not meant to \"ground\" your robot, it's meant to attempt to equalize the potential between your electronics and areas of static build-up on the robot that the strap is connected to so that when ESD does happen the charge potential is hopefully small and thus has little to no effect. The [Managing ESD](https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/managing_esd/managing-esd.html) article on ftc-docs has several recommendations for how teams can protect their robots. No one solution is a silver bullet, though, careful attention is key!\n\nYou’ve asked about what event organizers are doing to reduce ESD buildup on the fields. Heavy Duty Staticide is a staple for treating fields, especially those that are at high risk for static charge buildup like areas with extremely low humidity. This Heavy Duty Staticide has been proven to be extremely effective at significantly reducing (or eliminating) static charge buildup."
+  },
+  {
+    "question": "Consider these scenarios: Q1: A robot places a pixel in the opposing alliance's half of the playing field and the pixel disrupts an opposing alliance's robot. Q2: A robot knocks over the pixel stacks on the opposing alliance's half of the playing field and their robot is no longer able to pick them up in autonomous. Q3: Are any of these scenarios considered interference as long as my bot doesn't touch their bot or interfere with the randomization task scoring?",
+    "answer": "A1: This scenario violates the *Autonomous Interference* rule, GS03. \n\nA2: Knocking over a *Pixel* stack in the opposing *Alliance's* half of the *Playing Field* that affects an opposing *Alliance Robot* during the *Autonomous Period*, violates rule GS03.\n\nA3: Yes, both of the scenarios in this question thread violate rule GS03, even though there is no direct *Robot* to *Robot* contact.\n\n**Note**: These are great questions that may lead to the Game Design Committee adding clarifying text to the *Autonomous Period Interference* rule, GS03, in a future release of the Game Manual Part 2. For now, per the text in section 4.5 of Game Manual Part 2, the answers in this question thread take precedence over all information in the game manuals."
+  },
+  {
+    "question": "Are we allowed to cut a notch in the drone in order to attach a rubber band, spring or similar device?",
+    "answer": "There is no rule against cutting a notch in the Drone."
+  },
+  {
+    "question": "<dr05> states that we may use a color printer to achieve the required red and blue colors.  In the description, it also says \"images.\"  Are we also allowed to print folding lines to assist with the construction?</dr05>",
+    "answer": "Yes, that is a legal image."
+  },
+  {
+    "question": "Q1: A human player can not be in the wing, if a robot is in the wing. Correct?\n\nQ2: If a drone is not pre-loaded on the robot before the match, it can be placed in the wing by the human player. Does the robot have to load the drone itself? I'm assuming that it could not be done by the human player.",
+    "answer": "A1: Yes, this is a correct statement. See rule GS12 to learn all of the *Human Player* constraints.\n\nA2: Yes, the *Robot* would need to load the *Drone* itself without human assistance per rule GS12.h."
+  },
+  {
+    "question": "Will the Intel T265 Tracking Camera be legal this season 2023-2024? This camera model was legal in the past. A lot of teams purchased and spent a lot of time on them already.",
+    "answer": "No, the Intel T265 is not legal for use. The Intel T265 is a stereoscopic (having more than one image sensor) camera which would violate rule RE13.b.iii in Game Manual 1."
+  },
+  {
+    "question": "GM2 section 4.4.1(4)(c) says that field personnel will move the Randomization Object to the chosen Spike Mark.  For teams using TGE (Team Props), will the field personnel attempt to maintain the orientation of the TGE as placed on the field by the Drive Team, or should teams anticipate that the TGE orientation will change as a result of randomization?",
+    "answer": "Yes, field personnel will strive to maintain the *Team Prop's* orientation when it is repositioned to a different *Spike Mark*. \n\nRandomization relocation is not a precision activity, *Teams* should design their *Team Prop* detection system to tolerate some change in orientation when it is relocated. The *Drive Team* should immediately alert field personnel if there is a significant change in the *Team Prop's* orientation. Using the referee question box after the *Match* ends to alert the Head Referee about a change in *Team Prop* orientation during randomization is too late to affect any *Match* outcome and it is not a justification to replay a *Match*."
+  },
+  {
+    "question": "Our team was discussing the rigging suspension task and thinking about years past about how there was a weight limit for suspending. Q1: Is there going to be an update to a weight limit? Q2: If not, what is the ruling if a pole bends or brakes due to robot weight?",
+    "answer": "A1: No, we feel that the *Truss* and *Rigging* will be able to withstand a \"maximum\" weight *Robot*. *Robot* weight was a major consideration when designing the *Truss* structure and writing the *Truss* constraints rule, GS06.\n\nA2: Rule S01 in Game Manual Part 2 describes the consequences for *Playing Field* damage. Some bending of the *Rigging* is expected while a *Robot* is *Suspended*. No *Penalty* will be administered if the *Rigging* returns to its nominal shape in time for the next *Match* on that *Playing Field*."
+  },
+  {
+    "question": "A drone is defined as a \"paper airplane\" but it then says that it can be made out of any acceptable building material. Q1) do we have to make it out of paper? Q2) does it have to be in the shape of an airplane?",
+    "answer": "The rules for Drone construction are spelled out in Game Manual 1 Section 7.5\nQ1: See Rule DR05\nQ2: See Rule DR02"
+  },
+  {
+    "question": "In q25, it was asked if a complete swerve drivetrain kit is a legal COTS drive chassis. The given answer was \"A complete drivetrain made up of illegal parts is not legal.\" Follow up questions: 1) Which of the components in the proposed COTS kit are illegal parts? It would comprise entirely of motion components (bearings, shafts, gears) and structural components (mounts, frame, screws). 2) Is a complete swerve drivetrain kit compromising only of parts allowed under <rm02> a legal COTS kit?</rm02>",
+    "answer": "A swerve drive module, by its very design, takes a one degree of freedom (DOF) motion and adds additional degrees of freedom to change the motion - the total DOF is dependent on the implementation, but it is always more than one. These kinds of components are not allowed by RM02's single DOF restriction for COTS parts, whether bundled in a COTS drive chassis kit or not."
+  },
+  {
+    "question": "Q1: How will Robot Inspectors define non-ballistic trajectory (from <dr02>)?\n\nQ2: From Q21: How will Referees define \"near ballistic trajectory\"?</dr02>",
+    "answer": "A1: *Robot* Inspectors will evaluate compliance with rule DR02 by focusing on the *Drone* having the general configuration of an airplane with a defined fuselage and wings. A guide to assist *Teams* and *Robot* Inspectors with evaluating *Drone* designs will be published soon on the [Volunteer Resources](https://www.firstinspires.org/node/5146) webpage.\n\n*Robot* Inspectors are not expected to validate the non-ballistic quality of *Drone* flight. When asked by a referee, a *Robot* Inspector will verify that the *Drone's* trajectory used in gameplay complies with rule RG07 in Game Manual Part 1. The typical setup for verifying rule RG07 compliance is described in the answer to !Q30.\n\nA2: Referees will focus on: a) Compliance with the *Drone* constraints rule GS10 and; b) *Drone* trajectory height and distance compliance with rule RG07. The ballistic characteristics of the *Drone's* trajectory is not a gameplay metric for the referee."
+  },
+  {
+    "question": "Action 1. Red alliance robot picks up a pixel from their side of the field.\nAction 2. Moving it towards their backdrop/backstage, they drop the pixel outside a scoring area in the blue alliance side of field, while on the way.\n\nQ1: Can a blue alliance robot pickup the pixel and use it for their advantage?\n\nQ2: This is not autonomous interference? \n\nQ3: Does it incur any penalty?",
+    "answer": "A1: Yes. During the *Autonomous Period* it is a non-scored *Pixel* located in their *Alliance's* half of the *Playing Field*. During the *Driver-Controlled Period* it is available to a *Robot* on any *Alliance* because it is not *In* a *Scoring Area* or *Wing*, provided that no other rule is violated (for example, GS05 and GS08 to name a few).\n\nKeep in mind that during the *Autonomous Period*, *Robots* may only use its own *Pre-Loaded Pixels* to earn *Randomization Task* points per section 4.4.2 item 2.b in Game Manual Part 2.\n\nA2: The red *Alliance* violates rule GS03 each time the dropped *Pixel* disrupts a blue *Alliance Robot* during the *Autonomous Period* or if the red *Alliance Robot* directly *Interferes* with an opposing *Alliance Robot* that is in its own *Alliance's* half of the *Playing Field*. The blue *Alliance Robots* are not at risk for violating the *Autonomous Interference* rule, provided that they remain on their *Alliance's* half of the *Playing Field*.\n\nA3: See A2."
+  },
+  {
+    "question": "A drone is launched during last couple seconds of the end game phase. Does the score count if the drone is launched right before the game finishes and lands after game time is up? We are talking about 2-3 seconds of margin where the drone might be launched and up in the air and time is up after the match.",
+    "answer": "Yes, the *Drone* is eligible to earn *Landing Zone* points per rule G20.b in Game Manual Part 2."
+  },
+  {
+    "question": "Q1: Do both teams in an alliance get to have their own team prop on each side of the truss?\nQ2: May both teams on an alliance put pixels on the backdrop and score? That way we have two yellow pixels on the backdrop by end of autonomous.\nQ3: Is there any way an alliance can put more colored pixels on the backdrop during the autonomous period?",
+    "answer": "A1: Yes, see section 4.4.1 item 3.d in Game Manual Part 2 for how to place a *Team Prop* on the *Playing Field* during pre-*Match* set up.\n\nA2: Yes.\n\nA3: Each *Drive Team* may *Pre-Load* exactly one (1) yellow *Pixel* and one (1) purple *Pixel* during pre-*Match* set up as described in section 4.4.1 item 3.b in Game Manual Part 2. This is the only way non-white colored *Pixels* enter the *Playing Field* for use during the *Autonomous Period*. \n\nA highly unlikely, legal way for a *Robot* to access an additional non-white *Pixel* would be by picking up a stray non-white *Pixel* located *In* its *Alliance's* half of the *Playing Field*. Keep in mind that *Robots* may only use its own *Pre-Loaded Pixels* to earn *Randomization Task* points per  section 4.4.2 item 2.b in Game Manual Part 2."
+  },
+  {
+    "question": "Tennessee Valley Robotics sponsors a State Championship in Tennessee and Alabama. There are the only advancement competitions in Tennessee and Alabama.  Can teams in the Tennessee Valley region compete in both the Tennessee and Alabama State Championship for advancement to World and the Inspire Award?",
+    "answer": "Per the eligibility for advancement criteria outlined in section 6.1 of the Game Manual Part 1, teams may only advance from events within their home region. Teams may still compete in events outside of their home region, but are not eligible for advancement.\n\nTeams competing outside of their home region are eligible to be judged for all awards except for the Inspire award. For all awards except Inspire, teams may be considered a finalist or winner of the award but are not eligible to advance. Teams are not eligible for consideration for the Inspire award, including 2nd and 3rd place Inspire spots, outside of their home region."
+  },
+  {
+    "question": "During the autonomous period while traveling to our Alliance's Backstage, is there a penalty or de-scoring if our robot bumps: \nQ1: Our purple Pixel off the randomly selected Spike Mark.\nQ2: Our prop off the randomly selected Spike Mark.\nQ3: Our alliance partner's purple Pixel off the randomly selected Spike Mark.\nQ4: Our alliance partner's prop off the randomly selected Spike Mark.",
+    "answer": "A *Robot* is allowed to descore a *Pixel* from its own *Alliance's Scoring Area*. The only consequence is the loss of *Score* value (points) for the descored *Pixel*.\n\nA1: No *Penalty* and the *Purple Pixel* does not earn points for the *Spike Mark Randomization Task* if it is *Off* the designated (correct) *Spike Mark* at the end of the *Autonomous Period*.\n\nA2: No *Penalty*.\n\nA3: No *Penalty* and the *Purple Pixel* does not earn points for the *Spike Mark Randomization Task* if it is *Off* the designated (correct) *Spike Mark* at the end of the *Autonomous Period*.\n\nA4: No *Penalty*."
+  },
+  {
+    "question": "Q1: If the purple pixel is placed on the spike mark in the scoring position, but due to movement of robots doing other tasks, if it moves the pixel from the spike mark (alliance robot or opponent robot), how does the scoring work?\n\nQ2: If the achievement score is determined right after autonomous, in the driver-controlled period, can we use that spike mark pixel for badkrop/backstage scoring purpose?",
+    "answer": "A1: *Autonomous Period* tasks are *Scored at Rest* per section 4.4.2 in Game Manual Part 2. \"*Scored at Rest*\" is defined in section 4.3 in Game Manual Part 2.  Applying the definition to the *Pixel* placed on the *Spike Mark*, the *Pixel* is considered to be *Scored* if it is *On* the designated (correct) *Spike Mark* when the entire field has come to rest after the *Autonomous Period* ends. \n\nIn the Q1 scenario, the purple *Pixel* is not *On* the correct *Spike Mark*, therefore, the *Pixel's Score* value is zero.\n\nThere is no *Penalty* if a *Robot* descores its own *Alliance's Pixel*. Rule GS03 is violated If an opposing *Alliance Robot* descores the *Spike Mark Pixel*.\n\nA2: Yes."
+  },
+  {
+    "question": "Q1: If the purple pixel is placed on the spike mark in the scoring position, but due to movement of robots doing other tasks, if it moves the pixel from the spike mark (alliance robot or opponent robot), how does the scoring work?\n\nQ2: If the achievement score is determined right after autonomous, in the driver-controlled period, can we use that spike mark pixel for badkrop/backstage scoring purpose?",
+    "answer": "We believe !Q47 answers your question. If it does not, please rephrase your question and resubmit."
+  },
+  {
+    "question": "Q1: If the purple pixel is placed on the spike mark in the scoring position, but due to movement of robots doing other tasks, if it moves the pixel from the spike mark (alliance robot or opponent robot), how does the scoring work?\n\nQ2: If the achievement score is determined right after autonomous, in the driver-controlled period, can we use that spike mark pixel for badkrop/backstage scoring purpose?",
+    "answer": "We believe !Q47 answers your question. If it does not, please rephrase your question and resubmit."
+  },
+  {
+    "question": "I am still not clear on Q13, as well as the how to apply rule GS05 in the game manual part 2.\n\n1) GS05c. iii. - Plowing through any quantity of Scoring Elements is allowed.\n\n2) GS05a. - Controlling or Possessing more than the allowed quantity of Scoring Elements is an immediate Minor Penalty.\n\nI am looking for one example where plowing a robot through 3/4/5 elements does not violate rule GS05a, or does not belong to herding. I am unable to understand the use of GS05.c.iii.",
+    "answer": "Before proceeding with reading the following information, please review the game-specific definitions of the terms *Control*, *Possess*, *Herding*, and *Plowing* in section 4.3 of Game Manual Part 2. Applying the common or dictionary definitions of any game-specific term in section 4.3 may result in a misunderstanding of a scoring achievement requirement, rule, procedure, etc. Game-specific terms are easy to identify in the Game Manual because they have italics formatting and the first letter is capitalized. For example, the text \"*Control*\" has the correct formatting for a game-specific term. We strive to use this same formatting for defined terms contained in answers to gameplay questions in this forum.\n\nRule GS05.a limits the number of *Pixels* and *Drones* that a *Robot* can legally *Control* or *Possess*. This *Team's* question (!Q50) asks for an example of where *Plowing* through 3/4/5 *Pixels* does not violate rule GS05.a. The definition of *Control* specifically states that *Plowing* is not a form of *Control*. Therefore, all *Plowing* actions by a *Robot* do not violate the *Scoring Element Control/Possession* rule, GS05.a.\n\nThe second part of this *Team's* question asks for a *Plowing* scenario that is not *Herding*. Since *Plowing* actions and *Herding* actions are mutually exclusive, all *Plowing* actions are not *Herding*\".\n\nThe following are gameplay examples that may be helpful:\n\nExample 1: A *Robot* collects two *Pixels* from a *Pixel* stack. Since these are the only *Pixels Possessed* or *Controlled* by the *Robot*, rule GS05.a is not violated. The *Robot* drives directly through the *Truss* or *Stage Door* and stops *In* their *Alliance's Backstage*. Along the way to the *Backstage*, a stray *Pixel* on the *Playing Field Floor* is pushed by the *Robot* and it winds up *In* the *Backstage*. The *Robot* has now violated rule GS05.a because it *Possesses* two *Pixels* and it *Controlled* (*Herded*) the stray *Pixel* for a total of three (3) *Controlled Pixels*. The stray *Pixel* was *Herded* because it was moved to a location that provided the *Alliance* a strategic advantage since it was *Scored In* the *Backstage*.\n\nExample 2: Same as Example 1, except when the *Robot* encounters the stray *Pixel*, it pushes the stray *Pixel* for a short distance. The *Drive Team* quickly realizes that the *Robot* just started to *Control* too many *Pixels*.  The *Drive Team* changes the *Robot's* direction of travel so that the *Robot* sheds the stray *Pixel*, leaving it behind on the *Playing Field Floor* while the *Robot* continues on its way to the *Backstage*. In this example, the stray *Pixel* was *Plowed* (i.e, it was not moved into a location that gave the *Alliance* a strategic advantage). Therefore, rule GS05.a is not violated.\n\nIf there is still uncertainty about how *Controlling*, *Possessing*, *Herding*, and *Plowing* apply to rule GS05, the Head Referee at your next competition will be happy to answer your questions during the *Drivers Meeting.* Demonstrating gameplay scenarios on a *Playing Field* is an excellent way to gain understanding of how to apply rules to complex scenarios.\n\n**Pro Tip:** *Drive Teams* have an obligation while driving their *Robots* around the *Playing Field* to avoid *Controlling* stray *Pixels* that would cause the *Robot* to violate rule GS05. In other words, *Robots* should maneuver around stray *Pixels* if their *Herding* would cause the *Robot* to exceed the allowed number of *Controlled Pixels*.\n\n**Warning:** Deliberately placing *Pixels* in locations on the *Playing Field Floor* to use rule GS05.a constraints as a strategy to increase the difficulty for an opposing *Alliance Robot* to move around the *Playing Field* violates rule G29."
+  },
+  {
+    "question": "I have followed all the steps in the Machine Learning Tutorial Tool Chain and whenever I generate a data set, if I try to train it the start training button does not become active. This is the same issue as described in Q17 but the response to that question does not solve the problem. I have already contacted customer support at FIRST a week ago with no resolution.",
+    "answer": "This is a technical support question, not a game-specific rules clarification. If the issue persists, please seek help on the [ftc-community](https://ftc-community.firstinspires.org/) forums. The FIRST Tech Challenge engineering staff is monitoring those forums, and await your questions."
+  },
+  {
+    "question": "Q1: For the autonomous randomization task, and placing the yellow pixel on the backdrop, what exactly is meant by “A yellow Pixel on the Backdrop in the location corresponding to the designated Spike Mark”? Is it that spike marks are inferred to be, facing the spike marks, left 1, top/middle 2, and right 3. Q2: Is it the same numbering for both red and blue alliance, in all positions?",
+    "answer": "A1: The answer that you seek is found by viewing illustrations E-3, E-4, and E-5 in Appendix E of Game Manual Part 2.\n\nA2: Yes."
+  },
+  {
+    "question": "For the randomization in the autonomous period and placing the yellow pixel on the backdrop, it looks as if each location, 1, 2 &amp; 3 all have 2 slots that the pixel can be placed in, or is it only the left most slot of that location?",
+    "answer": "The answer that you seek is found by viewing illustrations E-3, E-4, E-5, and E-6 in Appendix E of Game Manual Part 2.\n\nEach randomization task *Spike Mark* location (left, center, and right) has two (2) slots on the *Backdrop* that the *Pixel* can be placed into."
+  },
+  {
+    "question": "A robot has a spinning intake that can extend ~3 feet in front of the robot, and in the process of intaking a stack in the autonomous period, the robot intakes 3 pixels. However, after the intake retracts, the 3rd pixel spits out of the robot. Would this be counted as a pixel control/possession limit violation?",
+    "answer": "We believe !Q2 answers your question. If it does not, please rephrase your question and resubmit."
+  },
+  {
+    "question": "Would a optic flow sensor considered as an image sensor as in the definition of the Vision Camera and Visions Sensor?",
+    "answer": "An optic flow sensor usually combines a camera, distance sensor (sonar or lidar are most common), and sometimes an IMU. This type of device uses these component sensors to make decisions and provides outputs that can be read/used by a control system - this is the very definition of a Vision Sensor as defined by Game Manual 1.  Just be sure the device does not violate any Vision Sensor rules in RE13.b, and also ensure that none of the component sensors violate any rules such as RE12.c in the case of optic flow sensors containing lasers (such as lidar sensors)."
+  },
+  {
+    "question": "According to Game Manual 2, specifically <gs05>, it is stated that pixels scored on the backdrop are not subject to the control/possession limit. Does this imply that an alliance can freely manipulate any number of pixels on their backdrop even after they have been scored, as long as these pixels maintain contact with the backdrop?</gs05>",
+    "answer": "Yes, provided that the *Robot* is not *In Tile* rows 1, 2, or 3 per rule GS08.d."
+  },
+  {
+    "question": "<g05> Robots or Scoring Elements that are eligible for two or more Scoring achievements earn points only for the highest value achievement. Q1: Is a Yellow Pixel placed On an Alliance’s designated Backdrop location eligible for both the 20 point randomization task and the 5 point placement task? Q2: Will the Yellow Pixel then earn 3 points at the end of the Driver-Controlled Period? Q3: Are there other scenarios where rule G05 would apply (except Drones In multiple Landing Zones and Navigating)?</g05>",
+    "answer": "A1: The short answer is Yes. \n\nThe yellow *Pixel* is in two *Scoring Areas*, *On* the *Backdrop* and *In* the *Backstage*. Applying rule G05, the *Pixel's* highest value achievement is for being *On* the *Backdrop*. During the *Autonomous Period*, all *Pixels* *On* the *Backdrop* earn five (5) points. The yellow *Pixel* has an additional *Randomization Task* scoring potential that is dependent upon its location *On* the *Backdrop* as described in section 4.4.2 item 2.b. The yellow *Pixel* may earn both the standard five (5) points for being *On* the *Backdrop* and the *Randomization Task* points for being in the location corresponding to the designated *Spike Mark*.\n\nA2: Yes, if the yellow *Pixel* is *On* the *Backdrop* at the end of the *Match*.\n\nA3: For the CENTERSTAGE game, rule G05 applies to: a) *Pixels* that are *On* the *Backdrop* and *In* the *Backstage*; b) *Robots* that are *Suspended* from the *Rigging* and are *Parked In* the *Backstage*; and c) *Drones In* two (2) *Landing Zones*.\n\nApplying rule G05 to the *Navigation* scoring achievement during the *Autonomous Period* is not necessary because there is only one location based *Scoring Area* for the *Robot* during that *Match Period*."
+  },
+  {
+    "question": "We are a rookie team so we want to know how many vision cameras are allowed to use this year (one other team told us that only one vision camera can be used). Also are Pixy or Pixy2 Cam allowed?",
+    "answer": "1. Welcome to *FIRST* Tech Challenge! \n\n2. There are no rules that specify a maximum quantity on sensors, Vision Cameras, or Vision Sensors.\n\n3. The Pixy and Pixy2 are Vision Sensors, the Pixy2 is specifically called out as a common Vision Sensor in the definition of a Vision Sensor. Note that the Pixy and Pixy2 do not have native software support in SDK 9.0, so teams will need to develop their own software drivers to use them."
+  },
+  {
+    "question": "In the third part of Q13 and in <gs05>c.ii of the game manual, it is mentioned that it is a penalty to move a stack of more than 2 white pixels off the line. My question is how many penalties would this violation cause? Would it cause multiple minor penalties for each pixel more than 2 on the stack, (Ex. 3 penalties for moving a stack of 5), or just one minor penalty for the entire stack moving?</gs05>",
+    "answer": "Rule GS05.a is restated here with the answer to your question highlighted with bold formatting: \"*Robots* may *Control* or *Possess* a maximum of two (2) *Pixels* and one (1) *Drone* at a time. *Controlling* or *Possessing* more than the allowed quantity of *Scoring Elements* is an immediate *Minor Penalty* **for each *Scoring Element* above the limit** plus an additional *Minor Penalty* per *Scoring Element* in excess of the limit for each 5-second interval that the situation continues.\"\n\nIf the *Robot* does not *Control* any *Pixels* just before it moves the *Pixel* stack *Off* the white tape line, the number of *Minor Penalties* is the quantity of *Pixels* in the stack minus two (2).  For example, if there are five (5) *Pixels* in the stack, the *Penalty* is three (3) *Minor Penalties* for *Controlling* three (3) *Pixels* above the allowed quantity of two (2). If the *Robot* continues to *Control* more than the allowed quantity of *Pixels*, an additional *Minor Penalty* for each *Pixel* over the allowed quantity of two (2) will be assessed every five (5) seconds that the *Robot* *Controls* more than two (2) *Pixels*."
+  },
+  {
+    "question": "After text searches through GM1 and GM2, I have been unable to find point values for penalties in this year's game. What are the point values for minor and major penalties respectively?",
+    "answer": "The answer that you seek is found by reading the \"*Penalties*\" section 4.4.6 in Game Manual Part 2.\n\nSection 4.4.6 states in part: \"*Minor Penalties* give the non-offending *Alliance* ten (10) points per occurrence. *Major Penalties* give the non-offending *Alliance* thirty (30) points per occurrence.\""
+  },
+  {
+    "question": "Our team is considering using a solenoid (6v) in lieu of a servo. Does this run afoul of regulations?",
+    "answer": "Solenoids are not allowed per RE16."
+  },
+  {
+    "question": "How enclosed can the pixels be in the robot? Meaning, do the refs have to see the pixels at all times or can they go into the robot?",
+    "answer": "Yes, Pixels can be in the robot.  However, once inside the Robot it is to a team's advantage to keep the Pixels visible so that it is easy for the Ref to determine the quantity of Pixels that a Robot is carrying, but it is not a requirement."
+  },
+  {
+    "question": "Scenario: There is no robot in the wing. During the gameplay, the human player inadvertently leans her head over the vertical plane of the field perimeter, into the wing/field area, perhaps to enjoy the gameplay. Q1: Does the team incur an immediate penalty in this scenario? Q2: Human player realizes her action and backs her head out of the wing/field within X seconds. Does the team still incur a penalty in this scenario? Q3: If the answer to Q2 is no, what is the value of X?",
+    "answer": "A1: The *Human Player* should receive a *Warning* the first time they extend into the *Playing Field Perimeter* without demonstrating a clear intent to place a *Scoring Element* into the *Wing*. Subsequent extensions into the *Playing Field Perimeter* without the intent of placing *Scoring Elements* into the *Wing* should receive a *Minor Penalty* for each occurrence per rule GS12.\n\nA2: Same answer as A1.\n\nA3: Not applicable."
+  },
+  {
+    "question": "Rule GS11&gt;g.i states - \"Affecting the flight of an opposing Alliances Drone above Playing Field Wall.... Opposing Alliance Drone receives points for Landing Zone 1.\"\nScenario: A tall RED robot parks itself right along the audience side perimeter wall, during the game play. A BLUE drone hits it during end game and falls into the playing field instead of landing/falling into zone 1/2/3. RED team had no way of knowing the BLUE drone trajectory. Is this scenario a violation of <gs11>g.i?</gs11>",
+    "answer": "Yes, the red *Alliance Robot* in this scenario violates rule GS11.g.i.\n\nWhen a *Drone* contacts an opposing *Alliance Robot* that is actively playing the game in the front half (audience side) of the *Playing Field*, the referee may use their judgement to decide if it was allowed gameplay or if a rule GS11.g.i violation *Warning* or *Penalty*  should be applied.\n\nIn the scenario described in the question, the *Parked Robot* is not actively playing the game and is likely to be viewed by the referee as   a strategy to interfere with a *Drone's* flightpath.\n\nThe following are a few examples of active gameplay that are unlikely to be viewed as violating rule GS11.g.i if the *Robot* contacts an opposing *Alliance Drone*.\n\na) A *Robot* driving from their *Alliance's Wing* along an approximate direct path through the *Truss* or *Stage Door* towards their *Backstage* area.\n\nb) A *Robot* returning from their *Backstage* area along an approximate direct path through the *Truss* or *Stage Door* towards their *Alliance's Wing*.\n\nc) A *Robot* preparing to *Suspend*.\n\nd) A *Suspended Robot*.\n\nExample scenarios where the referee is likely to issue a rule GS11.g.i *Warning* or *Penalty* are:\n\ne) A *Robot* moving around the front half (audience size) of the *Playing Field* without an obvious *Scoring Element* collection, transportation, or *Scoring* purpose.\n\nf) A *Robot Parked* in the front half (audience) side of the *Playing Field*.\n\n**Note:** *Robots* have an obligation during the *End Game* to avoid gameplay strategies that interfere with an opposing *Alliance Drone's* trajectory. Similarly, a *Robot Launching* a *Drone* may not use rule GS11.g protections as a strategy to receive *Landing Zone 1* points."
+  },
+  {
+    "question": "Rule <gs11>b - \"A Robot may not Possess a Drone provided by another Team. A Major Penalty will be assessed for violating this rule.\"\n\nScenario: A RED alliance drone is launched during the end game and lands inside/over a BLUE alliance robot. BLUE robot is unable to shake off the RED drone. Does the BLUE alliance incur a penalty for this inadvertent, and completely out of their control, possession of RED drone?</gs11>",
+    "answer": "No *Penalty* should be assessed for this *Inadvertent* gameplay scenario. \n\nThe inadvertently *Possessed Drone* does not count towards the *Robot's* one (1) *Drone Control/Possession* limit (GS05.a). The *Robot* may continue normal gameplay; trying to \"shake off\" the stray *Drone* is not required."
+  },
+  {
+    "question": "Hi. Is it legal to use V-Slot Aluminum?  There is a picture on page 16 of the \"Legal/Illegal Parts\" document that has V-Slot piece pictured however it is under the T-slot section.  Thanks!",
+    "answer": "Yes, v-slot aluminum is a legal material."
+  },
+  {
+    "question": "Is it legal to remove a motor mount from a Modern Robotics/MATRIX 12VDC Motor with 8mm REX™ Pinion Shaft (5000-0002-4008) to use on the robot?",
+    "answer": "Yes, it is legal to use a motor in which the motor mount/pinion shaft has been removed."
+  },
+  {
+    "question": "Past interpretation of the prior version of RE11.a allowed for many 5v in, 3.3v out sensors to be connected to the aux 5v port. The new RE11.a seems to clarify where sensors can be connected, but was it intentional to outlaw use of the 5v aux port to power them even though they are otherwise connected to the analog, digital, and i2c ports for all but power? The aux port is used to power other sensor port devices, like I2C lights (see Q27)",
+    "answer": "No.  Sensors may only be powered via the ports listed in RE11.a.  If your sensor needs 5v, you will need to utilize the REV Logic Level Converter as described in RE11.b"
+  },
+  {
+    "question": "Q1: The answer to Q30 may imply that only straight drone flights are permitted, what if a drone is meant to follow a curved glide path?\n\nQ2: Is it right to assume that the drone cannot exceed a 12' wide x 18' long x 5' high space flight space?\n\nQ3: If following a curved trajectory, may a drone leave the field space before returning to the Landing Zone?",
+    "answer": "A1: In general, a curved glide path is allowed.\n\nA2: The Game Manual does not specify a lateral (wide) trajectory constraint. The geometry of the gameplay area is the practical limitation for the *Drone* trajectory. The eighteen (18) ft. long and five (5) ft. high *Drone* trajectory limits described in rule RG07 will be enforced.\n\nA3: A *Drone* is allowed to exit the *Playing Field* in any direction. There are consequences if the *Drone* impacts something *Outside* the *Playing Field Wall* as described in rules GS11.g.iii, GS11.g.iv, GS11.g.v., and S1 if there is a safety hazard.\n\n**Note 1:** *Drone* trajectory strategies that exit the *Playing Field Perimeter* other than through the audience edge of the *Playing Field Wall* do so at their own risk. \n\n**Note 2:** A *Drone* impacting a *Drive Team* member of either *Alliance* in a manner that is not interference (i.e., the *Drive Team* member was not able to avoid being hit) should be treated as a *Scoring Element* out of bounds and returned to the owning *Alliance's Pixel Storage* at the earliest, safe opportunity."
+  },
+  {
+    "question": "Reading RE14.k, it seems that the only legal connection points for a REV Grounding Strap are the female XT30 ports of a Control Hub, Expansion Hub, XT30 Power Distribution Block, or the female XT30 on a REV PowerPole to XT30 adapter. Q1: Is this an accurate conclusion? Q2: Does the \"No other...adapters are permitted\" portion of RE14.k also apply to electrical connections \"upstream\" (towards the Main Power Switch) of the CH/EH/PDB/PP component the grounding strap is connected to?",
+    "answer": "Answer 1: RE14k requires that the REV Grounding Strap be directly connected to a fully-COTS component with XT30 connectors (includes the REV provided XT30/Powerpole adapter).  It may not be connected to team manufactured wiring.\n\nAnswer 2: No. Teams are allowed to wire their robot as needed as long as the wiring does not violate any of the provisions of RE14."
+  },
+  {
+    "question": "What are the specifications for a team prop",
+    "answer": "Specifications for the Team Prop are listed in Game Manual 1, Section 7.4."
+  },
+  {
+    "question": "Is it correct to conclude that RM06 does not constrain (the design or construction of) the prop?",
+    "answer": "Yes, Rule RM06 applies to the Team Prop.  Note that RM06 should be interpreted as pertaining only to the previous season's game elements (Power Play), not every game element from every FTC game."
+  },
+  {
+    "question": "Would a single, continuous A4 piece of paper, that has a 1\" long cut in the center of the paper, such that the paper maintains the same surface area, and remains one piece with continuous edges, meet the requirements of <dr05> ?</dr05>",
+    "answer": "Yes, that satisfies the single sheet requirement."
+  },
+  {
+    "question": "Is this servo legal, https://a.co/d/cFk2HOy?  If not, are there any legal servos that have 50-70 kg per centimeter with 270 degree rotation?",
+    "answer": "In general, it is not possible for us to rule on the legality of every possible servo.\nAs long as the servo meets the criteria in RE10 it is legal.\n\nWe thought it important to add a few cautions for teams exploring large servos:\n- watch your total power budget. the main robot battery is fused at 20A\n- the servo power module is over-current limited at 15A\n- pay attention to the stall current.  the above servo has a 8.5A stall current - a significant percentage of total robot power and of servo power module capacity\n- plan for variances in the stated stall currents for servos - a plus/minus 10% variance is likely \n- sustained high-current draw can cause the battery to \"brown out\", with the voltage dropping. large drops can cause loss of connectivity and reboots of control/expansion hubs"
+  },
+  {
+    "question": "When the Drone lands on a zone line between zones how are points counted? Say if the Drone lands on the zone line separating Zones 1 &amp; 2 and 2 &amp; 3.",
+    "answer": "The answer that you seek is found by reading rule G05 in Game Manual Part 2. Also, *Drone Landing Zone Scoring* example B1 in Appendix F, illustration F-5, shows how a *Drone Parked* in two *Landing Zones* is *Scored*.\n\nRule G05 states: \"*Robots* or *Scoring Elements* that are eligible for two or more *Scoring* achievements earn points only for the highest value achievement. If the achievement values are equal, only one achievement counts as *Scored*.\"\n\nApplying rule G05 to the two scenarios in the question:\n\nA *Drone Parked* in both Landing Zones 1 &amp; 2* earns 30 points for *Landing Zone 1*. \n\nA *Drone Parked* in both Landing Zones 2 &amp; 3* earns 20 points for *Landing Zone 2*."
+  },
+  {
+    "question": "TE02 specifies the Team Prop must be Red or Blue. TE03 disallows fiducial markers. Can a Team Prop incorporate red- or blue-colored retroreflective tape in its construction, or does that count as a fiducial marker?",
+    "answer": "Per Rule TE03, a Team Prop may not have any retroreflective materials."
+  },
+  {
+    "question": "Q18, A1 specified that after the 0:00 buzzer, the suspended robots may descend from the rigging without losing the bonus points. The flowchart in Section 4.4.7 of GM2 indicates that pressing stop on the Driver Station is the last action in Driver-Controlled Period. Pressing stop on the robot should depower motors used for hanging which will allow some robots to descend unpowered. Does such unpowered movement negate the ‘at rest’ condition for scoring purposes?",
+    "answer": "The answer that you seek is found by reading the description of the Robot location tasks in Game Manual Part 2 section 4.4.4 End Game.\n\nPer section 4.4.4 in Game Manual Part 2, the *Robot* location (*Suspended* and *Parked*) *End Game Scoring* achievements are *Scored at the End of the Period*.\n\n*Scored at the End of the Period* is defined in section 4.3 of Game Manual Part 2 as: \"The achievement’s *Scoring* status is determined based on the *Robot* or *Scoring Element’s* position at the *End of the Period* (*Autonomous* or *Driver-Controlled*)\". The *End of the Period* for the *Driver-Controlled Period* occurs when the scoring system *Match* timer reaches zero seconds (0:00) remaining in the *Match*. The condition \"at rest\" is intentionally omitted from the definition of *End of Period Scoring*. \n\nThe Game Design Committee (GDC) selected *End of Period Scoring* for the *End Game Robot* location *Scoring* achievements for the reason stated in the question. After the required action of pressing the stop button on the *Driver Station*, *Robots* without a mechanical lock to maintain their position, are likely to lower to the *Playing Field Floor*. The GDC wants *Suspended Robots* at the *End of the Period* to earn the *Suspended from the Rigging* points, even if the *Robot* lowers and touches the *Playing Field Floor* after the *Match* ends and the *Driver Station* stop button is pressed."
+  },
+  {
+    "question": "Are Solo, or other disposable cups allowed to be used as team props this year. In Game Manual 1, Section 7.4. there is no mention of not using Solo or other cups. I recall last year they were not allowed due to many teams using them in Freight Frenzy. \nAdditionally, <rm06> Current Season Game and Scoring Elements  does not disallow them either</rm06>",
+    "answer": "Drinking cups in general are allowed providing they meet all the other Team Prop requirements, specifically size and uniform color.  Many cups have a solid exterior color but are white inside.  To be used in a Match, the cup would have to be oriented such that no white is visible, i.e. open side down. The cup would have to be inspected in the same orientation it will be used on the field."
+  },
+  {
+    "question": "Are specialty papers like those made with Tyvek allowed for drone construction as long as they are 20lb weight or lower and not \"coated\"? (Example: https://www.jampaper.com/white-14lb-tyvek-8-1-2x11-paper-item-2179214491).",
+    "answer": "No, specialty papers such as Tyvek are not allowed."
+  },
+  {
+    "question": "Are rubber bands legal?",
+    "answer": "Yes, rubber bands are a legal part of the Robot.  They are not a legal part of the Drone, so when shooting the Drone, the rubber band must remain attached to the Robot."
+  },
+  {
+    "question": "We were wondering if the OpenMV Cam RT1062 qualifies as a Vision Sensor since you can upload your own code to it, but it doesn't stream images to the control hub if you use it with I2C, however, if you connect it with USB it can. (Section 7.2.1 Game Manual 1)\n\nSo is it allowed to be used?",
+    "answer": "No. This is a user programmable microcontroller board and as such falls into the category of \"Additional Electronics disallowed by RE16."
+  },
+  {
+    "question": "<rm06> b. says \"The following season game and scoring elements are not allowed for Robot construction: ... Team manufactured replicas of COTS current or previous season’s scoring elements.\" Is the intended meaning of \"previous season’s scoring elements\" to be \"scoring elements of previous season\" i.e. prohibiting just POWERPLAY replicas, or (if we reposition the apostrophe) \"previous seasons' scoring elements\" as in \"scoring elements of [ALL] previous seasons\"?</rm06>",
+    "answer": "Rule RM06 should be interpreted as referring to only the previous season's game and scoring elements, which for Centerstage means any of the Power Play  game and scoring elements."
+  },
+  {
+    "question": "We have some questions about using an (coiled) CAT 6 ethernet cable to power multiple servos, so we don't need cable extensions, since it is within spec of CAT 6. Could you please clarify if this is allowed, and if so, under what circumstances:\n\n  a) Is it allowed to cut the ethernet cable and solder servo mounts to it?\n  b) Can we use a keystone, so you don't need to cut the cable?\n  c) Create a custom PCB connecting an RJ45 connector to multiple servo connectors? (With appropriate insulation)",
+    "answer": "In general, bundled cables could be legal, as long as the individual wires within the bundle meet the requirements of RE14.i as applied to the specific connection being extended.\n\nBe aware that typical CAT6 cables use 23 AWG, thinner than the minimum required for servo interconnections (22 AWG).\n\nIf you do end up utilizing bundled cables, be prepared to show documentation for the specifications of bundle and the specific circuits/interconnections made through the bundle.\n\nFor your other questions:\n\n* a) attaching connectors to allowed wiring is permitted per RE14.e \n* b) keystone connectors fall under RE14.e as well \n* c) no. a PCB would be an example of a custom circuit and disallowed per RE16"
+  },
+  {
+    "question": "Q1: Provided no rules are violated, during the Driver-Controlled period may a robot place Pixels On either Alliance's Backdrop during gameplay? Q2: For example, during Driver-Controlled, may a Robot on the Blue Alliance places a Pixel On the Red Alliance's Backdrop?",
+    "answer": "A1: No, placing a *Pixel On* the opposing *Alliance's Backdrop* violates rule G29 for amplifying the difficulty of creating a *Mosaic*.  \n\nA2: No, per A1.\n\n\n**Note:** The *Drive Team* needs to be careful not to violate rules G28 (*Pinning*, *Trapping*, and *Blocking*), GS04 (descoring), and GS08 (*Backdrop* and *Backstage* constraints) while their *Robot* is near the opposing *Alliance's Backdrop* and *Backstage*."
+  },
+  {
+    "question": "When we printed off the field \"April Tags\" at 100% on our printer, they did not measure 2\" and 5\" square, respectively. So we printed them off at 106%, and the sizes were correct, but the right (Tag ID: 10) and left (Tag ID: 7) dashed edges of the graphics were cut off. Does this matter?",
+    "answer": "Good job verifying the AprilTag size! All printers print differently, so this is a great pointer to all teams to verify the printed area for your printer. The dotted lines themselves are not critical to the detection of the AprilTags, they're there mostly as an indicator of the recommended whitespace around the tag. In our testing as long as there is still at least 50% of the whitespace remaining on the truncated side of the black square of the AprilTag body (compare the whitespace on the truncated side with the other sides) there should be no problem."
+  },
+  {
+    "question": "Rule G03 only mentions the case where an alliance forces another alliance to break a rule, but does not receive a penalty. Q1: What happens, for example, if a RED robot pushes/bumps a BLUE robot into the BLUE Backdrop, causing pixels to be descored? Does the RED robot receive penalties as if it were the one to directly descore the pixels? Q2: If the answer to Q1 is that the RED robot will receive penalties, how will it be determined if the RED robot's actions are enough to warrant a penalty?",
+    "answer": "A1: Yes, the red *Alliance* will receive one *Minor Penalty* for each affected *Pixel*, completed *Mosaic*, and *Set Bonus*. For example, descoring two *Pixels* that are part of a completed *Mosaic* and a *Set Bonus* achievement. Receive four *Minor Penalties* as described below:\n\na) Two (2) descored *Pixels* =  Two (2) *Minor Penalties*.\n\nb) Two (2) *Pixels* from the same *Mosaic* = One (1) *Minor Penalty*.\n\nc) One (1) or two (2) *Pixels* eliminating one (1) *Set Line* achievement = One (1) *Minor Penalty*.\n\nA2: Any direct *Robot* contact initiated by the red *Alliance Robot* should be penalized if *Pixels* are descored. Maneuvering close to an opposing *Alliance Robot* that is close to their *Alliance's Backdrop* and/or *Backstage* is a risky gameplay strategy that does not have an obvious strategic gameplay advantage other than to disrupt the opposing *Alliance Robot*. In the scenario described in the question, the referee should penalize the red *Alliance Robot* for violating the descoring rule GS04."
+  },
+  {
+    "question": "Does the interpretation of <rg06> include grappling hooks? In other words if a hook mechanism is attached to the Rigging, then released form the robot so that it is only held by aircraft cable and then that cable is winched back in order to lift the robot, is this allowed?</rg06>",
+    "answer": "A mechanism that operates as described is legal. Note that launching the hook is not legal."
+  },
+  {
+    "question": "Can we place the purple pixel for randomization task on the field mat and push it to the spike mark, or the pixel has to be loaded onto the robot?",
+    "answer": "The answer that you seek is found by reading section 4.4.1 item 3.b and the definition of *Pre-Load* in section 4.3 of the Game Manual Part 2.\n\nYes, the *Drive Team* may set up their *Robot* on the *Playing Field* with their allowed *Pre-Load* purple *Pixel* on the *Playing Field Floor* provided that the *Pixel* is touching their *Robot*."
+  },
+  {
+    "question": "Will there be a penalty if a robot pushes their alliance's team prop away from the spike mark during the autonomous or driver-controlled period?",
+    "answer": "No."
+  },
+  {
+    "question": "Will the field personnel always try to place the team prop in the middle of the selected spike mark segment during randomization?",
+    "answer": "Yes.\n\n**Note:** Randomization relocation is not a precision activity, *Teams* should design their *Team Prop* detection system to tolerate some variation in placement location and/or orientation when it is relocated by field personnel to a different *Spike Mark*. The *Drive Team* should immediately alert field personnel if there is a significant issue with the *Team Prop's* centered location and/or orientation. Using the referee question box after the *Match* ends to alert the Head Referee about a significant issue with *Team Prop* location and/or orientation during randomization is too late to affect any *Match* outcome and it is not a justification to replay a *Match*."
+  },
+  {
+    "question": "What is the max that a robot may weigh this year. I believe in the past it was 40 lbs.",
+    "answer": "There is no weight restriction this year. See Q38 for additional details."
+  },
+  {
+    "question": "According to rule GS06 in section 4.5.3 of GM2, \"Contact with the other parts of the Truss is allowed for stabilization of the Robot while Suspended.\" Does this rule allow the robot to stabilize itself off of the height-restricting yellow bars below the Rigging?",
+    "answer": "Yes, provided that the *Rigging* (blue or red pipe) provides the primary support for the *Robot* per rule GS06.a."
+  },
+  {
+    "question": "This is an clarification on Q89. Which of the following would be considered launching the hook?\n\na) The hook is propelled from the robot attached with fishing line.\nb) The hook is propelled from the robot attached with aircraft cable.\nc) The hook is propelled from the robot attached with #25 chain (a safety hazard, yes, but a great hypothetical as we reduce degrees of freedom)\nd) The hook is propelled from the robot attached to a spring-loaded linear slide.",
+    "answer": "Placing a hook onto the Rigging by a mechanism (arm, slider, etc.) and then winching on a cable to lift the Robot is allowed. Launching the hook where it travels independent of the Robot is illegal per Rule RG06,  regardless of what the connecting cable is made of, and will receive a G24 penalty (major plus yellow card). A1: illegal A2: illegal A3: illegal A4: As long as the hook remains attached to the slide until it is placed on the Rigging, then this mechanism is allowed."
+  },
+  {
+    "question": "Is the GoBilda Steel Viper-Slide (https://tinyurl.com/5bdx8rpb) a legal COTS part under RM02?",
+    "answer": "Per RM02, linear slides are a legal COTS. Therefore, the Gobilda Linear Slide is a legal COTs part."
+  },
+  {
+    "question": "If for some reason our drone was launched accidentally before the end game starts, do we get a penalty?",
+    "answer": "There is no *Penalty* for *Launching* a *Drone* before the start of the *End Game*. The *Drone* is not eligible to earn *Landing Zone* points per section 4.4.4 in Game Manual Part 2 because it was *Launched* before the start of the *End Game*. \n\nIf the *Drone* is accessible *Inside* the *Playing Field Boundary*, the *Robot* may try another *Drone Scoring* attempt per rule GS11.e."
+  },
+  {
+    "question": "Are we allowed to use a Motorola phone as a camera sensor connected to a Rev Robotics Control Hub in order to have a video processing stream as opposed to a frame by frame processing stream.  We do not want to use the FTC app on the phone as a secondary control hub.",
+    "answer": "The short answer is no.\n\nThis type of phone usage would need to fit into either a Vision Sensor model or a Vision Camera model.\n\nRE11.a requires that sensors (including vision sensors) be connected only to I2C, digital I/O, encoder, or analog ports of the REV control or expansion hubs. A USB port is not a valid connection for a sensor. The usage is therefore not a Vision Sensor usage\n\nRE16 disallows additional electronics.  Using a phone in the above described fashion is creating a user-programmable device and falls under the guidance of RE16. Vision Cameras cannot be user-programmable devices."
+  },
+  {
+    "question": "The answer to Q88 says that \"...descoring two Pixels that are part of a completed Mosaic and a Set Bonus achievement. Receive four Minor Penalties as described below\". What is the rule basis for the answer? <gs04> says \"A Minor Penalty will be assessed for each Pixel that is descored.\", which in the given example is only 2 pixels. I see no rule that gives penalties for descoring a mosaic or a set bonus.</gs04>",
+    "answer": "Descoring is a change of state of a *Scoring Element* that reduces an *Alliance’s* total *Score*. Removing or repositioning a *Pixel On* the opposing *Alliance’s Backstage* has three potential descoring impacts on the *Score* (*On* the *Backdrop*, *Mosaic*, and *Set Line Bonus*). Per !Q88, a *Minor Penalty* is assessed for each descoring impact on the *Score*.\n\n**Note:** Applying separate *Minor Penalties* for each affected *Scoring* achievement properly compensates the *Alliance* for the descoring impact on their total *Score*."
+  },
+  {
+    "question": "Is this a legal drone design (assuming it was the correct team color had a team number on it)? It follows a non-ballistic trajectory and has a fuselage and 4 wings (<dr02>).\nPictures:\nhttps://docs.google.com/document/d/1vxjkC7jRas4xYdUXCO9SUta7wY9F9WxlcpdZV3v545g/edit?usp=sharing</dr02>",
+    "answer": "No, this is not legal for several reasons. It does not look like a \"paper airplane\", it does not follow a glide path, and it has 4 fins not wings."
+  },
+  {
+    "question": "According to S02, intentional robot extension outside the playing field perimeter is prohibited and will earn a yellow card if contact is made with any object. Wouldn't this mean robots are not intentionally allowed to extend above the upper half of the backdrop (which is located outside the field perimeter) even to score, and risk earning a yellow card? Given that propelling pixels is illegal (GS10), wouldn't that make scoring on the upper half of the backdrop essentially impossible?",
+    "answer": "Yes, *Robot* access to the entire *Backdrop* is necessary to fully play the game. When applying rule S02, the *Playing Field Perimeter* is extend outward to include the *Backdrop* boundary."
+  },
+  {
+    "question": "As per Game Manual Part I, \"Commercial Off the Shelf (COTS) interface modules designed to solely control light sources are allowed between the light sources and the components listed in <re12>d\"\nOur team wishes to modify a REV Digital LED Indicator to change the color of the LED diodes as to avoid creating a \"custom circuit\" (RE16). As this is not listed as either an allowed or disallowed modification in RE15, are we allowed to do this, if the replacement diode is of a similar spec?</re12>",
+    "answer": "This type of modification is not allowed.  This would constitute an internal modification of the circuits in the LED indicator and is not allowed per RE15"
+  },
+  {
+    "question": "I don't know if we heard this improperly, but at a Kickoff event, we heard that robots cannot travel to the other side of the trusses during autonomous. Is this true?",
+    "answer": "*Robots* are allowed to travel through the *Truss* and/or *Stage Door* during the *Autonomous* and *Driver Controlled Periods*."
+  },
+  {
+    "question": "GS09 gives major (plus minor) penalties for robots moving in the opposing alliance Wing. However, the wing has no function until driver controlled period and it is in the interference-free half of the field.  The robot in the starting location near the wing has very limited spaces to maneuver during autonomous. Should penalties be given for this during autonomous when there is no negative impact to the opposing team (assuming out by end of period)?",
+    "answer": "Rule GS09 applies to all periods of gameplay. However, a limited, brief, and *Inconsequential* entry into the opposing *Alliance’s Wing* during the *Autonomous Period* is likely to be excused by the referee per rule G10."
+  },
+  {
+    "question": "My team and many others have spent a lot of effort creating software based on Intel T265, not to mention the cost of acquiring it.\n\nPlease note that although T265 is stereoscopic, it is not used for vision at all. Teams use the estimated position it provides that s calculated by its internal algorithms that combine its camera views and its IMU. In our view it is essentially a alternate for dead wheel odometry.\n\nWe graciously request it be allowed as in previous years.",
+    "answer": "Game Manual Part 1 is the definitive answer as to the allowed use of cameras, either as Vision Cameras or as Vision Sensors. Both usages are limited to a single image sensor. Vision Cameras are additionally limited to provide image/video streams only\n\nAs such, the Intel T265 camera is not legal for use as it fails the image sensor limitation and provides other than just image/video stream data."
+  },
+  {
+    "question": "My team and many others have spent a lot of effort creating software based on Intel T265, not to mention the cost of acquiring it. Please note that although T265 is stereoscopic, it is not used for vision at all. Teams use the estimated position it provides which it calculates using its internal algorithms that combine its camera views and its IMU. In our view it is essentially an alternate for dead wheel odometry. We graciously request it be allowed as in previous years.",
+    "answer": "Game Manual Part 1 is the definitive answer as to the allowed use of cameras, either as Vision Cameras or as Vision Sensors. Both usages are limited to a single image sensor. Vision Cameras are additionally limited to provide image/video streams only\n\nAs such, the Intel T265 camera is not legal for use as it fails the image sensor limitation and provides other than just image/video stream data."
+  },
+  {
+    "question": "The answer to Q20 notes it is legal to intake pixels (from a stack) while the robot is touching other pixels on a stack, provided the robot does not already control any other pixels. We seek clarification that bracing the pixel stack against say the field wall, while extracting a pixel from that stack, does not constitute herding (and thus control), since the manual defines as pushing one/more scoring elements to a desired...direction.",
+    "answer": "We believe !Q24 answers your question. If it does not, please rephrase your question and resubmit.\n\nBracing the *Pixel Stack* against the *Playing Field Wall*, while extracting a *Pixel* from that stack, does not constitute *Control* of the *Pixel Stack*."
+  },
+  {
+    "question": "Is there a penalty for moving your team prop off of the spike mark during autonomous?",
+    "answer": "We believe !Q91 answers your question. If it does not, please rephrase your question and resubmit.\n\nDuring the *Autonomous Period*, *Robots* are allowed to move their *Alliance’s Team Prop* off of the *Spike Mark*."
+  },
+  {
+    "question": "Q1: If a robot during the autonomous period rams the wall in a way that knocks over multiple pixel stacks (on both red and blue sides of the field). Would this be deemed a violation of GS03?\n\nQ2: If a robot did this same action but only was able to knock over its own three stacks on its side of the field, would this be disallowed?",
+    "answer": "A1: For this *Autonomous Period* gameplay scenario, the consequences are dependent upon the location of the knocked over *Pixel Stack* as described below:\n\n*Alliance’s* half of the *Playing Field*: There are no rule GS03 consequences. *Robots* are allowed to knock over *Pixel Stacks* on their *Alliance’s* side of the *Playing Field*, provided that all of the *Pixels* remain on the owning *Alliance’s* half of the *Playing Field*. *Pixels* relocated to the opposing *Alliance’s* half of the *Playing Field* are treated as described below if the *Pixels* impact an opposing *Alliance’s Robot*.\n\nOpposing *Alliance’s* half of the *Playing Field*: Rule GS03.c is violated if knocking over or moving the *Pixels* impacts or impedes the opposing *Alliance’s Autonomous Period Scoring* actions. Per rule GS03.c, a *Major Penalty* will be applied for each impacted *Scoring* action by an opposing *Alliance Robot*. There are many possible opposing *Alliance Robot Scoring* actions that are protected by rule GS03.c. One example scenario is a *Major Penalty* is assessed for each cycle of an opposing *Alliance Robot*: a) driving up to a pre-set *Pixel Stack* location (i.e. on the white tape adjacent to the *Playing Field Wall*) to pick up a *Pixel*, and then b) moving away to continue playing the game. \n\nA2: See A1.\n\n**Warning:** The referee will likely have a conversation with the *Drive Team* about this gameplay scenario. *Robot* impact with the *Playing Field Wall* that knocks over a *Pixel Stack* is likely to be viewed as violating rule S01 for unsafe *Robot* operation."
+  },
+  {
+    "question": "Game Manual 1 says Team Prop has to be of solid color of red or blue, except for Team number.  So is it ok we print team number on a piece of white paper then stick it onto the team prop?",
+    "answer": "No, the only non-alliance color on the Team Prop can be the numbers themselves."
+  },
+  {
+    "question": "My drive team is finding it near impossible to view the pixel(s) during intake from the wing (due to large opaque robot size). Is it legal for the human player to communicate with the drive team via: a) short verbal commands (forward, backward, intake, outtake, etc.), b) hand signs (raised finger(s), open palm, closed fist, etc.), c) small colored flags/paper tokens?",
+    "answer": "The *Human Player* actions described in a), b) and c) are all allowed provided that the *Human Player* does not:\n\n1) Distract an opposing *Alliance Drive Team* per rule G16.c.\n\n2) Reach *Into* the *Playing Field* per rule GS12.h.\n\n3) Use electronics of any type per rule G11.\n\n4) Dropping or placing signaling aids into the *Playing Field* are subject to rule G22."
+  },
+  {
+    "question": "Clarification about knocking pixels off the stack.  Q1: Autonomous - Is there a penalty if a robot knock pixels off own Alliance's stack while picking them, as long as the knocked-over pixels do not interfere with the opposing Alliance robot.  Q2: Driver Control Period - Is there a penalty for ramming into own or opposing Alliance's pixel stack (to knock them over) and then picking up 2 pixels.",
+    "answer": "A1: No *Penalty* per rule GS05.c.i. A rule GS03.c *Penalty* does not apply because the scenario description stated that the knocked over *Pixels* do not interfere with an opposing *Alliance Robot*.\n\nA2: No *Penalty* per rule GS05.c.i., provided that no other rules are violated. For example, *Pixels* may not be *Propelled* per rule GS10.\n\n**Note:** All *Pixel* stacks are *Alliance Neutral* during the *Driver-Controlled Period*."
+  },
+  {
+    "question": "How calculate the ranking of teams in the competition? is it the same of previous season? (By how many matches did the team win or by points?)",
+    "answer": "The answer you seek is located in section 5.0 of Game Manual Part 1 - both Traditional and Remote."
+  },
+  {
+    "question": "If there is a team competing in a region other than its home region, it cannot qualify for the World Championship, but if a team from the home region allies with it and they win the final match, does this qualify it to qualify for the World Championship instead?",
+    "answer": "If a team is part of the winning alliance at an event outside of their home region, this does not qualify the team for advancement. The advancement spots available would skip over the out of home region team to the next eligible advancing team within the home region."
+  },
+  {
+    "question": "Are you able to have printing on the drone?\n\nIf it is unseen?",
+    "answer": "Yes, printing is allowed provided rule DR05 b is satisfied, no other rules are violated and the printing is not offensive. Note that the rules for the Team Scoring Element (Drone) are different than the rules for the Team Game Element (Team Prop). The Drone only needs to be predominantly red or blue and may have images, symbols, lettering, on it. The reason for the rule requiring predominantly red or blue is so that Field Personnel can easily determine which alliance earns points."
+  },
+  {
+    "question": "At the end of the autonomous period, the robot can earn 5 points for being parked in the appropriate backstage area. How much of the robot must be within the taped area to earn the bonus points?",
+    "answer": "The answer that you seek is found by reading the the definition of \"*In*\" found in section 4.3 of Game Manual Part 2.\n\nThe definition of \"*In*\" in section 4.3 is:  \"An object that has crossed into the upwards vertical extension (i.e., at a right angle to the *Playing Field Floor*) of a defined *Area’s* boundary is *Inside* the *Area*. An object that is entirely within the upwards vertical extension of a defined *Area’s* boundary is *Completely Inside* the *Area*. The boundary element (tape, wall, markings, etc.) is part of the *Area* for the purposes of determining *Inside* and *Outside*, unless otherwise specified.\"\n\nThe *Autonomous Navigation* task requirements are satisfied if the *Robot* is *Parked* (i.e., motionless) and any portion of the *Robot* has crossed into the upwards vertical extension (i.e., at a right angle to the *Playing Field Floor*) of the *Backstage* taped boundary.\n\n**Pro Tip:** The scoring referee has a short period of time between the end of the *Autonomous Period* and the start of the *Driver-Controlled Period* to record all of the *Autonomous Period Scoring* tasks. *Teams* can help the scoring referee accurately record an *Alliance's* scoring tasks by designing their *Autonomous* software so that their *Robot* is unambiguously *In* the *Backstage* at the end of the period."
+  },
+  {
+    "question": "Trying to make paper drones like these planes... \nhttps://thetravelbible.com/wp-content/uploads/2023/08/tim-samedov-10-1600x900.jpg\nhttps://i.stack.imgur.com/orPsV.jpg\nhttps://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.lA1GE6CtrJyVQyR3W7bc3AAAAA%26pid%3DApi&amp;f=1&amp;ipt=3f426fc713fe25df6dfcd0c4d8b67173bd61612d8953f3bd91dd980372c07826&amp;ipo=images\n\nOK or not?",
+    "answer": "We cannot make a decision on hypothetical Drones. When you have a Drone built from allowable materials please submit the photo and we will rule on the legality of the design."
+  },
+  {
+    "question": "Can the Team Prop be cone or cylinder or water cup of base radius and its height more than 3\" but less than 4\"?",
+    "answer": "Yes, a cone shaped Game Element with a base between 3\" and 4\" in diameter and between 3\" and 4\" tall meets TE04."
+  },
+  {
+    "question": "Per RE12 F.ii, it states that an external COTS USB battery pack is allowed to power LEDs on the robot. What is considered an external COTS battery pack? What are the limitations on said battery packs? Additionally, are converters designed to pull 12V from the battery pack such as https://www.amazon.com/dp/B08NRM6X2Y allowed? It would be connected to this adapter to allow use with the REV Blinkin https://www.amazon.com/dp/B0BHNNWJMD.",
+    "answer": "The COTS USB battery pack mentioned in RE12.f.ii is a simple USB charging battery intended to allow mobile recharging of USB powered devices (phones, tablets, etc). There are many [examples](https://www.anker.com/products/a1287) available from many sources.\n\nThank you for asking about Battery Pack limitations. COTS USB Battery Packs are limited to a capacity of 27,000mAh or less. This is also the standard [TSA limit](https://www.faa.gov/hazmat/packsafe/lithium-batteries) for taking Lithium-containing COTS USB Battery Packs (with 3.7V cells) onto aircraft in the USA.\n\nCOTS USB Battery Packs that adhere to the USB-PD or USB-QC specification may be used to provide a 12V source as described. Please ensure that the COTS USB External Battery is in no way connected to the robot's power system.\n\nWhen using COTS USB External Battery Packs for legal LED and related uses, please observe a heightened level of vigilence in their safe use. The [Robot Controller Power Distribution page](https://ftc-docs.firstinspires.org/en/latest/control_hard_compon/rc_components/power_distr/power-distr.html) on ftc-docs has been updated with proper guidance for [using COTS USB External Battery Packs](https://ftc-docs.firstinspires.org/en/latest/control_hard_compon/rc_components/power_distr/power-distr.html#cots-usb-battery-pack). Please review this information prior to using any COTS USB External Batteries."
+  },
+  {
+    "question": "The team prop can not be retroreflective. We 3D print a prop using PETG red transparent with glitter. It does not return a light beam back to it's source. Is this acceptable to use? The glitter in the filament is reflective but it is not retroreflective per the definition of \"Retroreflection occurs when a surface returns a large portion of directed light beam back to its source. Retroreflective materials appear brightest to observers nearest the light source\"",
+    "answer": "No, this is not a legal material. Red transparent PETG with metal flake does not satisfy rule TE02 for being a uniform color."
+  },
+  {
+    "question": "Is it allowed to cut (or tear) a notch in the drone to aid in launching?",
+    "answer": "Yes, Teams may make cuts in their Drones provided no other rules are violated."
+  },
+  {
+    "question": "<dr05> states that we may use a color printer to achieve the required red and blue colors.  I know the drone has to have the team number to be easily identifiable, but does it have to be colored to match our alliance color?</dr05>",
+    "answer": "Rule DR03 states that \"The predominant color of a Drone must match the Team’s assigned Alliance color for the Match (red or blue)\"."
+  },
+  {
+    "question": "Is this COTS I2C to SPI converter legal as per RE11.f? https://www.mikroe.com/i2c-to-spi-click\nA legal sensor with an SPI interface would be connected to the converter and the converter would be connected only to the I2C port of a Control or Expansion Hub.",
+    "answer": "Yes, this I2C to SPI converter is an example of the types of protocol converters allowed by RE11.f"
+  },
+  {
+    "question": "Q57 makes it clear that pixels on the backdrop do not count toward the possession limit. If a robot is holding two pixels, will it incur possession penalties by removing a pixel from the backdrop (therefore no longer being supported by the backdrop) and placing it back on the backdrop?",
+    "answer": "The answer that you seek is found by reviewing the *Robot Control/Possession* limits for *Scoring Elements* rule (GS05). \n\nAfter removing the *Pixel* from the *Backdrop*, the *Robot* in this scenario is no longer protected by rule GS05.c.v and is therefore *Possessing* three (3) *Pixels*, one (1) more than the maximum allowed number of *Pixels* per rule GS05.a. The *Robot/Alliance* should receive an immediate *Minor Penalty* for *Possessing* one  *Pixel* over the allowed limit of two (2) *Pixels*. An additional *Minor Penalty* for the excess *Possessed Pixel* should be assessed for each 5-second interval that the *Robot* continues to *Possesses* three (3) *Pixels*.\n\nIf the *Robot* *Scores* a *Pixel* on the *Backdrop* or in the *Backstage* while *Possessing* three (3) *Pixels*, the *Robot/Alliance* will receive an additional *Minor Penalty* per rule GS05.b."
+  },
+  {
+    "question": "Q1: May the drive team coach use a white board or pre-printed signs to communicate with the human player on color and placement of pixels in the wing?\nQ2: May the drive team coach move around the Alliance Station to be closer to the human player and then return to their drive team?",
+    "answer": "A1: Yes, *Drive Team* members may use signaling aids that satisfy the restrictions listed below. \n\n!Q111 provides the *Human Player* with guidance for using signaling aids. *Drive Team* members in an *Alliance Station* may also use signaling aids with additional restrictions to address safety and interference issues that arise from six (6) people occupying a confined space. Guidance for the *Human Player* is less restrictive due to the isolated, single occupant *Human Player Station*.\n\n*Drive Team* members may use signaling aids when abiding by the following restrictions:\n\n1) The signaling aids are not a safety hazard. For example, placing a signaling aid on the floor is a tripping hazard.\n\n2) Small hand-held signaling aids, including white boards and pre-printed signs, are allowed.\n\n3) The signaling aid may not be intentionally dropped or placed on the floor.\n\n4) If the signaling aid is accidentally dropped, it will not harm the venue floor. \n\n5) The signaling aid and *Drive Team* member do not distract an opposing *Alliance Drive Team* per rule G16.c.\n\n6) The *Drive Team* member doesn't reach *Into* the *Playing Field* per rule GS12.h.\n\n7) The signaling aid doesn't use electronics of any type per rule G11.\n\n8) Dropped or placed signaling aid(s) into the *Playing Field* are subject to rule G22.\n\nA2: Yes, provided that the *Drive Team* member remains *In* their *Alliance Station* per rules G16 and G16a, and does not distract nor interfere with the opposing *Alliance’s Human Player* or *Drive Team* per rule G16.c."
+  },
+  {
+    "question": "(a) Can we use glue or tape on the drone? (b) Can we apply water to the paper during construction to help folds in the paper become sturdy / stiff?",
+    "answer": "A) No, rule DR05d state that no other materials are allowed.  This includes tape, glue, paperclips, etc.\nB) Providing the water has evaporated and it leaves no residue, it is permissible to wet the paper during construction."
+  },
+  {
+    "question": "Continue on Q117, how do I submit pictures, a pdf file?",
+    "answer": "There is a new resource \"Is your Drone Legal\" that contains instructions on how to submit Drone photos.  You can find the document at https://www.firstinspires.org/resource-library/ftc/game-and-season-info"
+  },
+  {
+    "question": "Q1: In Q100 you cite a \"glide path\". Is this replacing the \"non-ballistic trajectory\" Q2: In the new \"Is Your Drone Legal?\" document, L2 clearly has wings, IL2 clearly has no wings, what is the place where there is \"enough wing\" between those two designs?",
+    "answer": "A1: Glide path and non-ballistic trajectory are interchangeable terms.\n\nA2: FIRST strives to compose robot construction rules that can be applied objectively and consistently across all FIRST Tech Challenge competitions. Despite our best efforts to try and write a subjective rule, the application of is subjective. The Inspectors will be looking for Drone characteristics that have the general configuration of an airplane with a defined fuselage and wings that have a reasonable potential for providing meaningful aerodynamic lift. The \"Is Your Drone Legal\" guide and the Robot Inspector's guide are two resources we made available to teams and inspectors to help you in building legal drones."
+  },
+  {
+    "question": "My team doesn't have enough people able to attend the competitions to have the two people necessary to operate the robot, a coach, and a human player. Can we not have a coach and just have the gamepad operators also manage the driver station android device, or do we need to find another person?",
+    "answer": "Yes, the * Drive Team* is not required to have a *Coach*. The *Drivers* (i.e., gamepad operators) are allowed to hold the *Team's Driver Station* Android device and interact with it to select an Op Mode, view information displayed on the screen, and initialize, start, stop, and reset the *Robot* per rule G23.\n\n**Note:** Only one (1) *Human Player* represents an entire *Alliance* in a *Match* as stated in the definition of \"*Drive Team*\" in section 4.3 of Game Manual Part 2. The *Alliance* selects which *Team* supplies the *Human Player* for their *Match*. The *Human Player* that does not represent the *Alliance* during the *Match* is required to leave the *Competition Area* before the *Alliances* are directed by field personnel to approach the *Playing Field* to set up their *Robots*."
+  },
+  {
+    "question": "RG02 mentions that servos can move during initialization to fit within the sizing limit. Q1: What about motors? If our robot is too large before initialization, can our initialization routine power motors to make the robot fit? Q2: If so, can the motors stay powered/stalling while the robot size is measured?",
+    "answer": "A1: Yes, provided that the motors do not stall and the same initialization process is used when setting up the *Robot* for a *Match*.\n\nA2: No, stalling a DC motor for an extended period of time such as Pre-*Match* set up and inspection risks damaging the motor (most motors rely on spinning to ensure proper cooling) and consumes a significant amount stored energy from the *Robot's* main battery. More importantly, stalled motors can create smoke and noxious gases as well as generate extreme heat within the motor that can lead to fire (depending on the motor and materials surrounding the motor)."
+  },
+  {
+    "question": "Improbable as It may seem, this has now happened 2-5% of runs, wherein the yellow pixel delivered by the robot in autonomous period jumps around to settle over a position corresponding to two spike marks! The pixel's edge rests over the crest of the backdrop slots. See https://drive.google.com/open?id=1gIEEtlAQ1KHr4CF19mJkUWxGK5fp-6xP&amp;usp=drive_fs where BLUE robot delivered yellow pixel, for RIGHT team prop location, over a crest.\nQ: Does the team earn yellow pixel placement bonus points?",
+    "answer": "A: The *Pixel* shown in the image does not satisfy the *Scoring* requirements for the *Autonomous Period Backdrop Randomization Task*. The *Pixel* is not touching a valid *AprilTag Scoring* surface; it is balanced on the crest. The *Pixel* does earn five (5) points for being *On* the recessed *Scoring* area of their *Alliance Backdrop*.\n\nSee illustrations E-3, E-4, E-5, and E-6 in Game Manual Part 2 for examples of legally *Scored Pixels* for the *Autonomous Period Backdrop Randomization Task*."
+  },
+  {
+    "question": "How do you use the ExposureControl classes with the Camera now that Vuforia has been removed from the Library?",
+    "answer": "This is not a rule clarification question, but a technical support question. As such, this question should be asked on the [FTC-Community forums](https://ftc-community.firstinspires.org) where the FIRST Tech Challenge engineering staff and community members are ready to take your questions."
+  },
+  {
+    "question": "May a team participate in another region's league events and their State Championship, if the home region has only the State Championship event? Understand that teams can only advance from their home region and can participate in one league tournament.",
+    "answer": "A team can participate in a League outside their region, provided that is the only League they participate in. A team may not advance from a League Tournament to a Regional Championship that is outside of their region unless the Program Delivery Partners in both regions have agreed to move a team to a new region for the entire season."
+  },
+  {
+    "question": "May the robot place a pixel on top of another pixel on the designated spike mark for both pixels to score?",
+    "answer": "The answer that you seek is found by reading the *Randomization Task* description in section 4.4.2 of Game Manual Part 2.\n\nNo, the *Pre-Loaded* purple *Pixel* is the only *Pixel* that is eligible to earn the *Spike Mark Randomization Task* points. All other *Pixels* on the *Spike Mark* have zero *Score* value.\n\n**Note:** A purple *Pixel* *On* another *Pixel* or *Team Prop* that is located *On* the *Spike Mark* is eligible to earn points for the *Spike Mark Randomization Task*, provided that if the underlying *Pixel* or *Team Prop* were removed, the purple *Pixel* would be *On* the correct *Spike Mark*. (The note was updated on November 7. 2023.)"
+  },
+  {
+    "question": "Are digital voltmeters allowed? (This is the one we have been using: https://www.amazon.com/gp/product/B086RHJ95R/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;th=1).",
+    "answer": "The referenced voltage sensor is not allowed because it is not powered by a REV Expansion Hub or REV Control Hub via analog, digital, encoder, or I2C ports as required by rule RE05.c in Game Manual Part 2."
+  },
+  {
+    "question": "In the rulebook we could see no mention of a penalty for the Human Player placing Pixels in their Wing during Autonomous. Is it allowed for a Human Player to place Pixels during Autonomous for the purpose of scoring additional Pixels?",
+    "answer": "The answer that you seek is found by reading the *Human Player* constraints rule (GS12.b) in Game Manual Part 2.\n\nNo, *Drones* and *Pixels* may be placed or dropped into the *Wing* only during the *Driver-Controlled Period* per rule GS12.b. Each violation of this rule during the *Autonomous Period* or during the transition between the *Autonomous* and *Driver-Controlled Periods* results in a *Minor Penalty*."
+  },
+  {
+    "question": "We wanted to confirm that the answer to 2) is a change from last year’s response, which said stalling was allowed. For clarification, we wanted to pose another case: during initialization (both during inspection &amp; pre-game) could we have the motors that power our lift move so that the lift is raised to a specific height? In this instance, the motor is not stalling: it is running to a position and then holding that position, the same way a servo holds its position while the robot is initialized.",
+    "answer": "Motors and servos \"hold position\" very differently. Motors with a load applied to their motor shaft can \"hold position\" through mechanical friction (via a gearbox/gear train) or through stalling. Servos with a load applied to their splines generally only \"hold position\" through stalling. If the motor can \"hold position\" even when power is no longer being applied to the motor, then that is legal. If power must be applied to the motor to hold position, it's not legal."
+  },
+  {
+    "question": "4.2.2 #3a, 4.4.2 #2a and forum answers indicate that the purple pixel must be placed On the randomly selected Spike Mark to score.\nAppendix E – Randomization E-1 through E-5 show the white pixel on the spike mark Scoring examples E-7, E-8, and E-9 show bonus scored when a purple pixel was on the taped line or on the white pixel; purple pixel was not exactly on the spike mark center line to score bonus. Question: Does the purple pixel score bonus if purple pixel is anywhere On the correct tape?",
+    "answer": "The answer that you seek is found by reading the definition of *Spike Mark* in section 4.3 and the *Scoring* requirement stated in section 4.4.2 #2.a in Game Manual Part 2.\n\nFrom section 4.3, the *Spike Mark* is the entire one (1) inch wide by twelve (12) inch long piece of tape. \n\nThe *Randomization Task Scoring* task requirement from section 4.4.2 #2.a is that the purple *Pixel* must be placed *On* the designated *Spike Mark*.\n\nCombining the definition of *Spike Mark* with the *Randomization Task Scoring* task requirement, the purple *Pixel* can be anywhere *On* the correct tape line to be eligible to earn the *Spike Mark Randomization Task* points."
+  },
+  {
+    "question": "I see that in <te05> b &amp;c, team numbers must be no more than 0.5 inch in height. and may only appear on the team prop one time. It looks like this rule may apply to team numbers that are on the team prop in a color other than red or blue.  If the team has designed &amp; 3D printed a team prop that includes their team number as a part of the 3D print (i.e. completely red or blue 3D printed material), and the team number is larger than 0.5 and/or appears more than one time, would that be acceptable?</te05>",
+    "answer": "3D printed numbers must follow the same rules as any other method. Therefore, a Team Prop that includes their team number as part of the 3D print and is larger than .5 inch or appears more than once is not allowed."
+  },
+  {
+    "question": "The [GND, 3.3V] pins on the REV Hubs appear to be on the same internal [GND, 3.3V] buses.  Is it permissible to connect the [GND, 3.3V] pins to external [GND, 3.3V] buses?  External Bus could be two wires of appropriate guage on a slip ring or coiled wire.  We feel this would simplify wiring for many applications.",
+    "answer": "No sharing of GND or 3.3v wiring. For two predominant reasons;\n- keep the inspection process simple and easy to understand\n- not all 3.3v ports are internally connected to the same protections circuit."
+  },
+  {
+    "question": "This paper appears to be legal, 8.5 x 11, 20 LBS, non-coated, Red and Blue, but it says Bond on the label, https://a.co/d/2cAYTTL.\n\nBond Paper, https://en.wikipedia.org/wiki/Bond_paper, is basically made from high-quality durable fiber pulp.",
+    "answer": "Yes, Bond paper is a common printer paper and is an acceptable material for building Drones"
+  },
+  {
+    "question": "When RG05 says be careful in the stored energy from spring-like or other mechanisms, Is it then a fair assumption that it is ok to deform a rubber band, spring device, or surgical tubing in a way that stores energy prior to the start of the match. Our intent would be to store energy for the purpose of launching the drone.",
+    "answer": "Yes, rubber bands, springs, etc. are all acceptable methods for launching a Drone. The intent of RG05 is not to eliminate stored energy devices but to ensure that teams use them safely.  Remember that during a match FTA's may have to access your robot and we don't want anyone hurt if the energy is accidentally released."
+  },
+  {
+    "question": "Would it be acceptable to use a bow string (or similar) to launch the paper drones from the robot?",
+    "answer": "There is no rule against using a bow string as a stored energy device to launch a Drone providing it is done safely.  See Q143 for additional details."
+  },
+  {
+    "question": "REV has instructions for updating the firmware in the Blinkin LED Driver, including how to modify the firmware to create custom light patterns.   https://github.com/REVrobotics/Blinkin-Firmware\nQ1: Could custom firmware following the \"Creating a custom function\" instructions solely for producing custom light patterns to indicate the color of pixels held in the robot be legal? \nQ2: If no, would it still be legal to follow REV's instructions to update the OEM firmware without modification?",
+    "answer": "The answer to both questions is no.\n\nUpdating the REV Blinkin firmware in the described manner would violate RE15 - for allowed modifications as well as RE16 as the system would now effectively be equivalent to a generic programmable device (i.e. arduino, raspberry pi, etc.)"
+  },
+  {
+    "question": "Some robots have been peeling tape off the field, such as those that include ramps to \"scoop\" pixels off the field. Q1: Would a team be penalized for peeling tape off the field, either partially or entirely? Q2: If yes, what is the penalty? Would it mean the part itself is illegal (violates <rg01>a), or the action of peeling the tape is illegal (violates <s01>)? Q3: For example, would a soft ramp that slides along the floor be legal, provided it never peels off tape or causes any other damage?</s01></rg01>",
+    "answer": "A1: Yes, rule S01 is violated if the damage is significant enough to require *Match* delaying repair.\n\nA2: The consequences of violating rule S01 are described in section 4.5.1 of Game Manual Part 2: \"If at any time the *Robot* operation is deemed unsafe or has damaged the *Playing Field* or another *Robot*, by the determination of the referees, the offending *Robot* may be *Disabled*, and the *Team* may be issued a *Yellow Card*. Re-inspection of the *Robot* is required before it may play another *Match*. Damage that requires significant repair and/or delays subsequent *Match* play is likely to escalate to a *Red Card*.\"\n\nA3: Ramps are not inherently illegal *Robot* parts; how the ramp is used in gameplay determines its illegality unless the ramp is identified as having obviously unsafe characteristics during *Robot* inspection."
+  },
+  {
+    "question": "One of my FTC student is interested in pursuing a pneumatics solution for the claw mechanism. I am trying to lean in and say YES to ideas right now and am exploring any legal or illegal game rules but don't see any related to pneumatics or dc motors with pump valve attachments?",
+    "answer": "No, Rule RG01 J expressly forbids the use of pneumatic devices."
+  },
+  {
+    "question": "Do pixels that are in contact with or on the backdrop, but not scored on the backdrop, count towards the possession limit defined in GS05.a? Specifically, are they exempted from the possession limit as defined in GS05.c.v and Q57?",
+    "answer": "The answer that you seek is found by reading rule GS05.c.v and the definition of the defined term \"*On*\" in section 4.3 in Game Manual Part 2.\n\n\"*On*\" is defined as: \"An object that is physically in contact with and at least partially *Supported* by an object, surface, etc. is considered *On*. An object that is entirely *Supported* by an object, surface, etc. is *Completely On*.\"\n\nRule GS05.c.v: \"*Pixels On* the *Backdrop* are exempt from the *Control/Possession* limit.\"\n\nYes, *Pixels On* the *Backdrop* are exempted from the rule GS05.a *Possession* limit."
+  },
+  {
+    "question": "The rules state that a team may not interfere with the opposing alliance's drone while in flight and the result is the launching team gets 30 points.  What happens if an opponent bumps a robot that is in the process of launching  (and altering the path of the drone) without actually touching the drone?",
+    "answer": "The gameplay described in the question is not allowed per rule GS11.g.iii. *Drive Teams* may not directly or indirectly affect the flight of a *Drone*. The *Robot* in this scenario is under control of the *Drive Team* during all valid *Drone* launching times, *Robot* interactions that affect *Drone* flight are controlled by the *Drive Teams* yielding indirect *Interference*."
+  },
+  {
+    "question": "May a robot use 2 spinning wheels to shoot pixels into the backdrop, while the robot is in the backstage area?",
+    "answer": "A *Robot* may use spinning wheels to eject *Pixels*, provided that the *Pixels* are not *Propelled* per rule GS10.\n\nA *Robot's Pixel* manipulator that is adjacent to the *Backdrop* is allowed to eject *Pixels* with no more energy than needed to gently place *Pixels On* the *Backdrop*. The expectation is that the ejected *Pixel* is in contact with the *Backdrop* and the wheels are simply used to release the *Pixel* from the *Robot*.\n\n*Pixels* that are *Propelled* or ejected with excessive energy for *Scoring* violates rule GS10."
+  },
+  {
+    "question": "Our team is wondering if it's legal to use a laser mouse sensor with SPI protocol(like PMW3389 from https://www.tindie.com/products/citizenjoe/pmw3389-motion-sensor/) using a laser, allowed by RE12c and connected to an I2C port on the REV control hub via I2C to SPI bridge(like https://www.mikroe.com/i2c-to-spi-click), because we can't connect the sensor to the hub via USB as it seems it's restricted by RE11a.",
+    "answer": "Yes, as long as the laser module complies with all applicable rules (i.e. RE12.c) and all protocol converters comply with sensor rules (i.e. RE11.f)"
+  },
+  {
+    "question": "The most visible part of our robot where we could install the team numbers is on our arm. Would we be allowed to install the team number onto the arm even though it moves? Another point of concern is that at some points in the game the team number might be upside down.",
+    "answer": "Yes, placing numbers on a moving part of the Robot is allowed providing the numbers are always clearly visible through the range of motion of the mechanism.  A Team Number that is temporarily upside down is acceptable."
+  },
+  {
+    "question": "In GM Part 2: 4.4.4 - 1. Robot Location – There are two mutually exclusive location-based Scoring opportunities, <if> Robot Location is Scored at End of the Period\nQ1: Is it accurate to say that as long as the robot is obviously suspended at some point during the end of match buzzer it should be scored as a suspend? Q2: Or must the robot have begun its suspension by the 2:00 mark which is defined as end of period?</if>",
+    "answer": "A1: Yes, provided that the *Robot* does not start *Suspending* before the *End Game Period* begins.\n\nA2: A *Robot* is not required to be *Suspended* before the 2:00 minute time mark."
+  },
+  {
+    "question": "Do the interlocking teeth on the edge of a foam tile count as part of the tile for the purposes of starting location (i.e, if a robots wheel is on the jagged edge of a tile, would they be considered \"Completely In Tile\")?",
+    "answer": "No, a *Robot* that is *In* a *Tile's* interlocking teeth is *In* more than one *Tile*. The *Pre-Match Robot* set up requirement is that the *Robot* is *Completely In* only one (1) of the required *Tiles*. See section 4.4.1 item #3 in Game Manual Part 2 for all of the *Pre-Match Robot* set up requirements."
+  },
+  {
+    "question": "When flexible (easily bends) tubing is installed on the robot for intake, can the tubing extend slightly (1/2 inch) beyond the 18-inch boundary of the robot?",
+    "answer": "The maximum size of the Robot for starting a Match is 18 inches (wide by 18 inches  long by 18 inches high. However, per Rule RG02 b allows for flexible materials surgical tubing to extend up to 0.25 inches (0.635 cm) beyond the 18 inch size constraint. A 1/2\" extension is outside of the allowable margin.  Consider tucking it in at startup, once the Match starts Robots may expand beyond the starting size constraint."
+  },
+  {
+    "question": "Is this a legal way to place Pixels on the Backdrop? Please see link: https://youtu.be/e8oHDky7nCU?si=VPy0TYTErJ-AJpz2",
+    "answer": "No, the *Robot's* actions in this video violate rule GS10 because the *Pixels* are *Propelled*."
+  },
+  {
+    "question": "Can you confirm that the following sensor would be legal.\nhttps://www.adafruit.com/product/2168\n\nIts an optical break beam sensor we would like to connect to a digital input on the control hub, can function on either 3.3V or 5V (We understand that for 5V you need Logic Level Converter)",
+    "answer": "In general, it is not possible for us to rule on the legality of all potential sensors.  When determining the legality of a particular sensor, apply the constraints imposed by RE11 as a guide to legality.\n\nIn this particular case, the \"sensor\" you are asking about is in two distinct parts; an IR LED emitter and a IR detector.\n\nAs long as the IR emitter is connected and powered in accordance with RE12 and the IR detector meets the constraints of RE11, the combination would be allowed"
+  },
+  {
+    "question": "Team props are required to match the team alliance (red or blue). Could we use a game element from a previous year that is already colored red and blue as our team prop provided that it fits within the 4x4x4 sizing range for team props?",
+    "answer": "We believe Q73 answers your question. If it does not, please rephrase your question and resubmit."
+  },
+  {
+    "question": "The team is working on programming and wants to have all the correct terms. We were wondering what the front white tape lines are called where the pixels are stacked?",
+    "answer": "There is no official name for those lines. If you must call them something, use \"On-field Pixel Stack lines.\""
+  },
+  {
+    "question": "Ref. <g11>, Q125, &amp; Q111, Drive Team communication to Robot, for signaling to the Human Player. <g11> permits use of the Driver Station for “operating the robot”. Is it still legal, if its purpose is to signal the Human Player?  e.g.:  A Driver Station command causes a Robot-mounted servo to raise a colored semaphore flag, or illuminate an indicator light on the Robot. The Human Player sees this signal, and selects a colored pixel to place in the wing, based on the color of the flag, or light.</g11></g11>",
+    "answer": "The action described is legal, provided that the signaling device does not distract or interfere with an opposing *Alliance Drive Team* per rules RE12.b, and G16.c."
+  },
+  {
+    "question": "Requesting a clarification on what modifications to the drone paper are allowed.  Notches are allowed and paper smaller than 8.5x11 is allowed.  Q1: Can the starting sheet of paper be an irregular shape as long as it is smaller than 8.5x11 and a single piece?  Q2: During construction, can pieces of the paper be trimmed with scissors and discarded - final drone is still single sheet.  Q3: Can the drone have holes cut or punched in the paper assuming the cut-outs are discarded.",
+    "answer": "A1: Yes, the starting size of the paper can be any shape as long as it is equal to or smaller than 8 1/2 x 11 or A4.\nA2: Yes, the paper can be trimmed as long as the cut off parts are discarded.\nA3: Yes, holes may be cut out of the paper."
+  },
+  {
+    "question": "During pre-match robot setup, is it legal to include code to enable gamepad functionality during the autonomous initialization routine?  For example, is it allowed to have the gamepad buttons control a servo to open and close a gripper to preload pixels before the referee signals that pre-match set up is complete.",
+    "answer": "Yes, provided that the operation is performed safely and does not delay the start of a *Match* (G13.e)."
+  },
+  {
+    "question": "The answers to Q18 and Q78 make sense to me, but Q155 seems confusing related to a match I saw on webcast. A robot was still touching the ground at 0:00 when the buzzer started and the robot only left the floor while the buzzer was sounding. The definition of \"Scored at the End of the Period\" makes me think this would not count as a suspended robot, but Q155 makes me think it might.",
+    "answer": "Thank you for identifying the inconsistency between the answers to !Q18 and !Q155. !Q18 was updated on November 6, 2023 to include \nthe end of *Match* scoring system buzzer length is a \"grace period\" for completing the *End Game Suspension* task."
+  },
+  {
+    "question": "During autonomous we want to pass between the spike mark and the wall; however, we move through the opposing alliance's wing. Rule GS09 states that it is a major penalty but does that apply to autonomous?",
+    "answer": "A *Robot* moving through the opposing *Alliance's Wing* during the *Autonomous Period* should be excused from violating rule GS09 per rule G10.\n\n**Note:** The first action for a *Robot* that is *In* or *Blocking* access to the opposing *Alliance's Wing* at the start of the *Driver-Controlled Period* should be to immediately move away per rule GS09."
+  },
+  {
+    "question": "Rule GS03.c is applicable to pre-stacked white pixels in the opposing alliance half of the playing field. Q1: Is the opposing alliance stack close to their wing / human player or is it the stack closest to their spike marks? Q2: During the driver-controlled period can a robot knock over the pre-placed white pixels in the opposing alliances half of the playing field? Q3: during autonomous can the robot knock over the pre-placed white pixels closest to our spike marks?",
+    "answer": "A1: The answer that you seek is found by reading rule GS03.a. Rule GS03.a states in part: \"*Tiles* A, B, C constitute the blue side of the *Playing Field*, *Tiles* D, E, F constitute the red side of the *Playing Field*.\" *Tile* location nomenclature is described in Game Manual Part 2 Appendix B. Therefore, each *Alliance's* half of the *Playing Field* contains three (3) *Pixel Stacks*.\n\nThe *Pixel Stacks* in *Tiles* B1, B1/C1, and C1 are on the blue *Alliance's* half of the *Playing Field*. *Pixel Stacks* in *Tiles* D1, D1/E1, and E1 are on the red *Alliance's* half of the *Playing Field*.\n\nA2: We believe that !Q112 answers your question.\n\nA3: We believe that !Q112 answers your question."
+  },
+  {
+    "question": "Q141 says \"No sharing of GND or 3.3v wiring.\" (full stop), which inspectors or officials could read more broadly than we think is intended. We seek to clarify Q141's answer. The analog/digital ports are designed to support two sensor inputs per physical port, e.g. using a REV-31-1386 sensor splitter cable. Q1: Can two or more sensors connected to a common digital/analog physical port share its GND/3.3v wires? Q2: Can multiple I2C devices sharing a common I2C port (bus) share its GND/3.3v wires?",
+    "answer": "!Q141 was meant to clarify that the power/ground bus used by sensors/pathways to provide signals should be scoped to the ports/connectors that provided it. For example, Digital Connector 0/1 on the Control Hub provides a power/ground plane intended to be used to power sensors/pathways to provide a signal for Digital Channel 0 and/or Digital Channel 1 - not for a device/pathway providing signal to Digital Channel 2 nor for Analog Channel 0, and certainly not for powering an I2C device chain."
+  },
+  {
+    "question": "Our intake uses two spinning wheels to suck pixels off the mat and into our robot.&nbsp; Q1: During autonomous can our intake suck in the bottom two pixels off the stack of 5 pixels (on our alliance side) leaving the top 3 to fall wherever including off the white line without getting a penalty?&nbsp; Q2: During driver-control can we do the same thing without getting a penalty?",
+    "answer": "The answers that you seek are found by reading rule GS05.c in Game Manual Part 2.\n\nA1: Yes, subject to the constraints specified in rule GS05; the three (3) *Pixels* that are not *Possessed* by the *Robot* must be: a) no longer stacked (i.e., knocked over); or b) stacked *On* the white tape line.\n\nA2: Same answer as A1."
+  },
+  {
+    "question": "Sharpie offers 2 types of silver pens (1) Sharpie Oil-based Paint Marker and (2) Sharpie Permanent Marker. I believe that the paint marker is not allowed and that the permanent marker is allowed. Can you state if either are legal per <dr05>?</dr05>",
+    "answer": "A1:Per Rule DR05b, the oil-based paint version of the Sharpie is not allowed.  \nA2: The standard Sharpie Permanent Marker is legal. \n\nRemember, the reason for requiring a Team Number is so that Drones can be returned to the Teams post Match.  Any attempt to \"game the rules\" by adding weight by the use of excess ink or other marking materials will result in the Drone being disallowed."
+  },
+  {
+    "question": "RE13.b.ii specifies that Vision Cameras can connect to REV Control Hub (Robot Controller) using a \"powered USB hub\", but doesn't mention allowed power sources for the USB hub. RE14.c.ii mentions energy sources for a powered USB hub, but RE14 also says \"smartphone\" robot controller device and RE14.c.ii refers only to connecting the hub to an Expansion Hub USB. Thus RE14 perhaps excludes the Control Hub USB. Q: Can a USB hub connected to a Control Hub be powered by sources listed in RE14.c.ii?",
+    "answer": "Yes, powered USB Hubs may only draw energy from the sources listed in RE14.c.ii."
+  },
+  {
+    "question": "Q1: During the autonomous period a robot moves the team prop into the opposing alliance's side of the playing field (e.g., red to blue), is there a penalty?\n\nQ2: If the team prop that was moved hits the opposing robot is that a penalty?",
+    "answer": "A1: A *Major Penalty* will be assessed if the *Robot* or the relocated *Team Prop* impacts or impedes the opposing *Alliance’s Autonomous Period Scoring* actions per rule GS03.a.\n\nA2: Yes, per rule GS03.a."
+  }
+]
