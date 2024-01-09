@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -46,6 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   chats         Chat[]
+  teamMember TeamMember?
 }
 
 model VerificationToken {
@@ -58,7 +59,7 @@ model VerificationToken {
 
 model Chat {
   id        String     @id @unique
-  title     String
+  title     String 
   messages  Message[]
   createdAt DateTime   @default(now())
   user      User       @relation(fields: [userId], references: [id])
@@ -72,4 +73,27 @@ model Message {
   createdAt DateTime   @default(now())
   chat      Chat     @relation(fields: [chatId], references: [id])
   chatId    String
+}
+
+model TeamMember {
+  id        String     @id @default(cuid())
+  role    Role
+  user    User     @relation(fields: [userId], references: [id])
+  userId  String @unique
+  team    Team     @relation(fields: [teamId], references: [id])
+  teamId  String
+
+  @@unique([userId, teamId])
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+model Team {
+  id          String        @id @unique
+  number        Int
+  teamMembers TeamMember[]
 }
