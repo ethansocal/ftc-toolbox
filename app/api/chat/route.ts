@@ -1,13 +1,67 @@
-import OpenAI from "openai";
+// import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
 import type, { NextRequest, NextResponse } from "next/server";
 import { addMessage, createChat, getChats } from "@/lib/chat/db-actions";
 import { auth } from "@/lib/auth";
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+import { ChatOpenAI } from "@langchain/openai";
+import { OpenAI } from "langchain/llms/openai";
+
+import { PrismaVectorStore } from "@langchain/community/vectorstores/prisma";
+import { OpenAIEmbeddings } from "@langchain/openai";
+import { PrismaClient, Prisma, Document } from "@prisma/client";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+import { MultiQueryRetriever } from "langchain/retrievers/multi_query";
+import { formatDocumentsAsString } from "langchain/util/document";
+import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
+import { JSONLoader } from "langchain/document_loaders/fs/json";
+import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import { ParentDocumentRetriever } from "langchain/retrievers/parent_document";
+
+const model = new OpenAI({
+  modelName: "gpt-4",
+  openAIApiKey: process.env.OPENAI_API_KEY,
 });
+
+const loader = new DirectoryLoader("documents", {
+  ".json": (path) => new JSONLoader(path, "/text"),
+  ".pdf": (path) =>
+    new PDFLoader(path, { parsedItemSeparator: "", splitPages: false }),
+});
+
+const db = new PrismaClient();
+const vectorStore = PrismaVectorStore.withModel<Document>(db).create(
+  new OpenAIEmbeddings(),
+  {
+    prisma: Prisma,
+    tableName: "Document",
+    vectorColumnName: "vector",
+    columns: {
+      id: PrismaVectorStore.IdColumn,
+      content: PrismaVectorStore.ContentColumn,
+    },
+  }
+);
+
+const chatModel = new ChatOpenAI({});
+const outputParser = new StringOutputParser();
+
+const prompt = ChatPromptTemplate.fromMessages([
+  [
+    "system",
+    `Answer the following question based only on the provided context:
+
+  <context>
+  {context}
+  </context>
+  `,
+  ],
+  ["user", "{input}"],
+]);
+
+const chain = prompt.pipe(chatModel).pipe(outputParser);
 
 export async function POST(req: NextRequest) {
     const json = await req.json();
@@ -47,17 +101,17 @@ export async function POST(req: NextRequest) {
         stream: true,
     });
 
-    const stream = OpenAIStream(response, {
-        async onCompletion(completion) {
-            await addMessage({
-                content: completion,
-                role: "assistant",
-                chatId: id,
-            });
-        },
-    });
+  // const stream = OpenAIStream(response, {
+  //   async onCompletion(completion) {
+  //     await addMessage({
+  //       content: completion,
+  //       role: "assistant",
+  //       chatId: id,
+  //     });
+  //   },
+  // });
 
-    return new StreamingTextResponse(stream);
+  // return new StreamingTextResponse(stream);
 }
 
 /*
