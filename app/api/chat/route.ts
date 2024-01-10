@@ -1,11 +1,9 @@
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
-import { getServerSession } from "next-auth/next";
 import type, { NextRequest, NextResponse } from "next/server";
 import { addMessage, createChat, getChats } from "@/lib/chat/db-actions";
-
-import authOptions from "../auth/[...nextauth]/authOptions";
+import { auth } from "@/lib/auth";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -15,7 +13,7 @@ export async function POST(req: NextRequest) {
     const json = await req.json();
     const { messages, id } = json;
 
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     //TODO: Add a trial mode for authenticated users
     if (!session) {
@@ -69,7 +67,7 @@ export async function POST(req: NextRequest) {
  */
 export async function GET() {
     try {
-        const session = await getServerSession(authOptions);
+        const session = await auth();
 
         if (!session) {
             return NextResponse.json(

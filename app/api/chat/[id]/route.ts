@@ -1,15 +1,14 @@
 import { NextResponse } from "next/server";
 import { Request } from "express";
 import { getChat } from "@/lib/chat/db-actions";
-import authOptions from "../../auth/[...nextauth]/authOptions";
-import { getServerSession } from "next-auth/next";
+import { auth } from "@/lib/auth";
 
 export async function GET(
     req: Request,
     { params }: { params: { id: string } },
 ) {
     try {
-        const session = await getServerSession(authOptions);
+        const session = await auth();
         const chat = await getChat(params.id);
 
         if (!chat) {
