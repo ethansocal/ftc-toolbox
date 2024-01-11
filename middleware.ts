@@ -1,14 +1,12 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import authConfig from "@/auth.config";
+import NextAuth from "next-auth";
 
-export async function middleware(request: NextRequest) {
-    if (request.nextUrl.pathname.startsWith("/api")) {
-        // const session = await getServerSession(authOptions);
-        // console.log(session);
+const { auth } = NextAuth(authConfig);
+
+export default auth((req) => {
+    const isLoggedin = req.auth?.user;
+    console.log(isLoggedin);
+    if (req.nextUrl.pathname.startsWith("/api")) {
         console.log("APII");
     }
-
-    //   if (request.nextUrl.pathname.startsWith('/dashboard')) {
-    //     return NextResponse.rewrite(new URL('/dashboard/user', request.url))
-    //   }
-}
+});

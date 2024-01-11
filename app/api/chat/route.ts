@@ -16,9 +16,8 @@ export async function POST(req: Request) {
         threadId: string | null;
         message: string;
     } = await req.json();
-
     console.log(input);
-    // const session = await getServerSession(authOptions);
+
     // //TODO: Add a trial mode for authenticated users
     // if (!session) {
     //     return NextResponse.json(
