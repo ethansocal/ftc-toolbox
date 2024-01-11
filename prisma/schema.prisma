@@ -9,8 +9,6 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-
 }
 
 model Account {
@@ -62,7 +60,7 @@ model VerificationToken {
 
 model Chat {
   id        String     @id @unique
-  title     String 
+  title     String
   messages  Message[]
   createdAt DateTime   @default(now())
   user      User       @relation(fields: [userId], references: [id])

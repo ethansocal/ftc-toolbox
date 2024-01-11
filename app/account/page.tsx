@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@/components/catalyst/input";
 import { useSession } from "next-auth/react";
 
 export default function AccountPage() {
@@ -11,5 +12,11 @@ export default function AccountPage() {
     if (status == "loading") {
         return <h1>Loading...</h1>;
     }
-    return <div></div>;
+    return (
+        <div>
+            <form>
+                Team Number: <Input />
+            </form>
+        </div>
+    );
 }
