@@ -1,24 +1,24 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import AILogo from "@/logo.png";
-import { PaperPlaneIcon } from "@radix-ui/react-icons";
-import { Message, experimental_useAssistant as useAssistant } from "ai/react";
-
-import { createClient } from "@/utils/supabase/client";
 import { useCallback, useEffect, useState } from "react";
 
+import AILogo from "@/logo.png";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { PaperPlaneIcon } from "@radix-ui/react-icons";
+import { createClient } from "@/utils/supabase/client";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Message, experimental_useAssistant as useAssistant } from "ai/react";
+
 export default () => {
-    const userImage = "https://github.com/suleymanefe.png";
     const { status, messages, input, submitMessage, handleInputChange, error } =
         useAssistant({
             api: "/api/chat",
         });
 
     const supabase = createClient();
+
     const [loading, setLoading] = useState(true);
     const [avatar_url, setAvatarUrl] = useState(null);
 
@@ -35,7 +35,7 @@ export default () => {
                 console.log(data.user);
             }
         } catch (error) {
-            alert("Error loading user data!");
+            console.log(error);
         } finally {
             setLoading(false);
         }
