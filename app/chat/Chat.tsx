@@ -11,12 +11,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Message, experimental_useAssistant as useAssistant } from "ai/react";
 
+import MessageSkeleton from "./MessageSkeleton";
+
 export default () => {
     const { status, messages, input, submitMessage, handleInputChange, error } =
         useAssistant({
             api: "/api/chat",
         });
 
+    console.log(status);
     const supabase = createClient();
 
     const [loading, setLoading] = useState(true);
@@ -32,7 +35,6 @@ export default () => {
 
             if (data) {
                 setAvatarUrl(data.user.user_metadata.avatar_url);
-                console.log(data.user);
             }
         } catch (error) {
             console.log(error);
@@ -82,6 +84,8 @@ export default () => {
                             </div>
                         );
                     })}
+
+                    {status == "in_progress" && <MessageSkeleton />}
                 </div>
             </ScrollArea>
 
