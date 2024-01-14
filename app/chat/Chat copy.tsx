@@ -27,6 +27,7 @@ export default () => {
             api: "/api/chat",
         });
 
+    console.log(status);
     const supabase = createClient();
 
     const [loading, setLoading] = useState(true);
@@ -57,7 +58,55 @@ export default () => {
     return (
         <div className="flex flex-col h-screen">
             <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-5">
-                <div className="container mx-auto md:w-9/12 lg:w-5/12">
+                <div className="container mx-auto md:w-9/12 lg:w-5/12 md:max-w-9/12 lg:max-w-5/12">
+                    <div className="flex px-8">
+                        <MemoizedReactMarkdown
+                            className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 font-extralight leading-relaxed"
+                            remarkPlugins={[remarkGfm, remarkMath]}
+                            components={{
+                                //@ts-ignore
+                                p({ children }: { children: React.ReactNode }) {
+                                    return (
+                                        <p className="mb-2 last:mb-0">
+                                            {children}
+                                        </p>
+                                    );
+                                },
+                                //@ts-ignore
+                                code({
+                                    className,
+                                    children,
+                                    ...props
+                                }: {
+                                    className: any;
+                                    children: any;
+                                    props: any;
+                                }) {
+                                    const match = /language-(\w+)/.exec(
+                                        className || "",
+                                    );
+
+                                    return match ? (
+                                        <CodeBlock
+                                            key={Math.random()}
+                                            language={(match && match[1]) || ""}
+                                            value={String(children).replace(
+                                                /\n$/,
+                                                "",
+                                            )}
+                                            {...props}
+                                        />
+                                    ) : (
+                                        <code className={className} {...props}>
+                                            {children}
+                                        </code>
+                                    );
+                                },
+                            }}
+                        >
+                            {aaa}
+                        </MemoizedReactMarkdown>
+                    </div>
                     {messages.map((message: Message, k) => {
                         const isUser = message.role === "user";
                         return (
@@ -80,7 +129,7 @@ export default () => {
                                     </text>
                                 </div>
 
-                                <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
+                                <div className="flex px-8">
                                     <MemoizedReactMarkdown
                                         className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 font-extralight leading-relaxed"
                                         remarkPlugins={[remarkGfm, remarkMath]}
@@ -136,7 +185,7 @@ export default () => {
                                             },
                                         }}
                                     >
-                                        {message.content}
+                                        {aaa}
                                     </MemoizedReactMarkdown>
                                 </div>
                             </div>
