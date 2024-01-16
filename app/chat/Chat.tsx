@@ -17,14 +17,14 @@ import { MemoizedReactMarkdown } from "./Markdown";
 
 export default ({
     messages,
-    avatar_url,
+    user,
     submitMessage,
     handleInputChange,
     input,
     status,
 }: {
     messages: any;
-    avatar_url: any;
+    user: any;
     submitMessage: any;
     handleInputChange: any;
     input: any;
@@ -43,7 +43,7 @@ export default ({
                                         <AvatarImage
                                             src={
                                                 isUser
-                                                    ? avatar_url!
+                                                    ? user.avatar_url!
                                                     : AILogo.src
                                             }
                                             alt="Profile Picture"
