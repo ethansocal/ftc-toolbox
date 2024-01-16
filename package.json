@@ -40,7 +40,9 @@
     "@supabase/supabase-js": "latest",
     "@tailwindcss/typography": "^0.5.10",
     "@types/react-syntax-highlighter": "^15.5.11",
+    "ai": "^2.2.31",
     "autoprefixer": "10.4.15",
+    "axios": "^1.6.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
@@ -51,13 +53,14 @@
     "lucide-react": "^0.309.0",
     "next": "latest",
     "next-themes": "^0.2.1",
+    "openai": "^4.24.7",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-day-picker": "^8.10.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.49.3",
     "react-markdown": "^9.0.1",
-    "react-resizable-panels": "^1.0.8",
+    "react-resizable-panels": "^1.0.9",
     "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
@@ -73,7 +76,12 @@
     "@types/node": "20.3.1",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.5",
+    "embla-carousel": "^8.0.0-rc19",
     "encoding": "^0.1.13",
-    "prettier": "^3.1.1"
-  }
+    "prettier": "^3.1.1",
+    "supabase": "^1.131.4"
+  },
+  "trustedDependencies": [
+    "supabase"
+  ]
 }
