@@ -52,7 +52,8 @@ Welcome to our project - we are super excited to have you on board!
 
 ## 🗺️ Roadmap
 
-[Coming Soon\...]
+-  [x] **Version 1.0.0**: Basic chatbot functionality with a knowledge base.
+- 
 
 ## 🔧 Contribute
 
