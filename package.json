@@ -42,6 +42,8 @@
     "@supabase/supabase-js": "latest",
     "@tailwindcss/typography": "^0.5.10",
     "@types/react-syntax-highlighter": "^15.5.11",
+    "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.4",
     "ai": "^2.2.31",
     "autoprefixer": "10.4.15",
     "axios": "^1.6.5",
