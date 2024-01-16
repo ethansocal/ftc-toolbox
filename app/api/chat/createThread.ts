@@ -10,9 +10,19 @@ export async function createThread() {
     const thread = await openai.beta.threads.create();
 
     const cookieStore = cookies();
-    // const supabase = createClient(cookieStore);
+    const supabase = createClient(cookieStore);
+    
+    const { data, error } = await supabase.from('threads').insert(
+        {
+            thread_id: thread.id,
+        }
+    
+    )
 
-    // const { data, error } = await supabase.from('profiles')
+    if(error) {
+        console.log(error);
+        return
+    }
 
     // Return the thread
     return thread.id;
