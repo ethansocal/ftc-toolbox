@@ -1,0 +1,4331 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FTC Events API",
+    "description": "FTC Events API is a service to return relevant information about the _FIRST_ Tech Challenge (FTC). Information is made available from events operating around the world\n\nInformation is currently made available after the conclusion of the tournament.  The API will provide data as soon as it has synced, and we do not add any artificial delays.\n\n## Documentation Notes\n\n### Timezones\n\nAll times are listed in the local time to the event venue. HTTP-date values will show their timezone.\n\n### Query Parameters\n\nIf you specify a parameter, but no value for that parameter, it will be ignored. For example, if you request `URL?teamNumber=` the `teamNumber` parameter would be ignored.\n\nFor all APIs that accept a query string in addition to the base URI, the order of parameters do not matter, but the name shown in the documentation must match exactly, as does the associated value format as described in details.\n\nFor response codes that are not HTTP 200 (OK), the documentation will show a body message that represents a possible response value. While the \"title\" of the HTTP Status Code will match those shown in the response codes documentation section exactly, the body of the response will be a more detailed explanation of why that status code is being returned and may not always be exactly as shown in the examples.\n\n### Experimenting with the API\n\nThis documentation is rendered at both [api-docs](https://ftc-events.firstinspires.org/api-docs) and [try-it-out](https://ftc-events.firstinspires.org/try-it-out).\n\n[api-docs](https://ftc-events.firstinspires.org/api-docs) has a three panel, easy to read layout, while [try-it-out](https://ftc-events.firstinspires.org/try-it-out)\nhas a feature that allows you try out endpoints from within the page.\n\nAdditionally, the Open API Json is availabe at [Open API](https://ftc-events.firstinspires.org/swagger/v2.0/swagger.json).  This can be imported into a tool\nsuch as [Postman](https://www.postman.com) for experimentation as well.\n\n\n### Last-Modified, FMS-OnlyModifiedSince, and If-Modified-Since Headers\nThe FTC Events API utilizes the `Last-Modified` and `If-Modified-Since` Headers to communicate with consumers regarding the age of the data they are requesting. With a couple of exceptions, all calls will return a `Last-Modified` Header set with the time at which the data at that endpoint was last modified. The Header will always be set in the HTTP-date format, as described in the HTTP Protocol. There are two exceptions: the `Last-Modified` Header is not set if the endpoint returns no results (such as a request for a schedule with no matches).\n\nConsumers should keep track of the `Last-Modified` Header, and return it on subsequent calls to the same endpoint as the If-Modified-Since. The server will recognize this request, and will only return a result if the data has been modified since the last request. If no changes have been made, an HTTP 304 will be returned. If data has been modified, ALL data on that call will be returned (for \"only modified\" data, see below).\n\nThe FTC Events API also allows a custom header used to filter the return data to a specific subset. This is done by specifying a `FMS-OnlyModifiedSince` header with each call. As with the `If-Modified-Since` header, consumers should keep track of the Last-Modified Header, and return it on subsequent calls to the same endpoint as the `FMS-OnlyModifiedSince` Header. The server will recognize this request, and will only return a result if the data has been modified since the last request, and, if returned, the data will only be those portions modified since the included date. If no changes, have been made, an HTTP 304 will be returned. Using this method, the server and consumer save processing time by only receiving modified data that is in need of update on the consumer side.\n\nIf the Headers are improperly passed (such as the wrong Day of Week for the matching date, or a date in the future), the endpoint will simply ignore the Header and return all results. If both headers are specified, the request will be denied.\n\n## Response Codes\n\nThe FTC Events API HTTP Status Codes correspond with the [common codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), but occasionally with different \"titles\". The \"title\" used by the API is shown next to each of the below possible response HTTP Status Codes. Throughout the documentation, Apiary may automatically show the common \"title\" in example returns (like \"Not Found\" for 404) but on the production server, the \"title\" will instead match those listed below.\n\n### HTTP 200 - \"OK\"\nThe request has succeeded. An entity corresponding to the requested resource is sent in the response. This will be returned as the HTTP Status Code for all request that succeed, even if the body is empty (such as an event that has no rankings, but with a valid season and event code were used)\n\n### HTTP 304 - \"Not Modified\"\nWhen utilizing a Header that allows filtered data returns, such as `If-Modified-Since`, this response indicates that no data meets the request.\n\n### HTTP 400 - \"Invalid Season Requested\"/\"Malformed Parameter Format In Request\"/\"Missing Parameter In Request\"/\"Invalid API Version Requested\":\nThe request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications. Specifically for this API, a 400 response indicates that the requested URI matches with a valid API, but one or more required parameter was malformed or invalid. Examples include an event code that is too short or team number that contains a letter.\n\n### HTTP 401 - \"Unauthorized\"\nAll requests against the API require authentication via a valid user token. Failing to provide one, or providing an invalid one, will warrant a 401 response. The client MAY repeat the request with a suitable Authorization header field.\n\n### HTTP 404 - \"Invalid Event Requested\"\nEven though the 404 code usually indicates any not found status, a 404 will only be issued in this API when an event cannot be found for the requested season and event code. If the request didn't match a valid API or there were malformed parameters, the response would not receive a 404 but rather a 400 or 501. If this HTTP code is received, the season was a valid season and the event code matched the acceptable style of an event code, but there were no records of an event matching the combination of that season and event code. For example, HTTP 404 would be issued when the event had a different code in the requested season (the codes can change year to year based on event location).\n\n### HTTP 500 - \"Internal Server Error\"\nThe server encountered an unexpected condition which prevented it from fulfilling the request. This is a code sent directly by the server, and has no special alternate definition specific to this API.\n\n### HTTP 501 - \"Request Did Not Match Any Current API Pattern\"\nThe server does not support the functionality required to fulfill the request. Specifically, the request pattern did not match any of the possible APIs, and thus processing was discontinued. This code is also issued when too many optional parameters were included in a single request and fulfilling it would make the result confusing or misleading. Each API will specify which parameters or combination of parameters can be used at the same time.\n\n### HTTP 503 - \"Service Unavailable\"\nThe server is currently unable to handle the request due to a temporary overloading or maintenance of the server. The implication is that this is a temporary condition which will be alleviated after some delay. If known, the length of the delay MAY be indicated in a `Retry-After` header. This code will not always appear, sometimes the server may outright refuse the connection instead. This is a code sent directly by the server, and has no special alternate definition specific to this API.\n\n## Authorization\nIn order to make calls against the FTC Events API, you must include an HTTP Header called `Authorization` with the value set as specified below. If a request is made without this header, processing stops and an HTTP 401 is issued. All `Authorization` headers follow the same format:\n\n```\nAuthorization: Basic 000000000000000000000000000000000000000000000000000000000000\n```\n\nWhere the Zeros are replaced by your Token. The Token can be formed by taking your username and your AuthorizationKey and adding a colon. For example, if your username is `sampleuser` and your AuthorizationKey is `7eaa6338-a097-4221-ac04-b6120fcc4d49` you would have this string:\n\n```\nsampleuser:7eaa6338-a097-4221-ac04-b6120fcc4d49\n```\n\nThis string must then be encoded using Base64 Encoded to form the Token, which will be the same length as the example above, but include letters and numbers. For our example, we would have:\n\n```\nc2FtcGxldXNlcjo3ZWFhNjMzOC1hMDk3LTQyMjEtYWMwNC1iNjEyMGZjYzRkNDk=\n```\n\nMost API client libraries can handle computing the authorization header using a username and password for you\n\nNOTICE: Publicly distributing an application, code snippet, etc, that has your username and token in it, encoded or not, WILL result in your token being blocked from the API. Each user should apply for their own token.\n\nIf you wish to acquire a token for your development, you may do so by requesting a token through our automated system on this website.\n",
+    "version": "v2.0"
+  },
+  "servers": [
+    {
+      "url": "http://ftc-api.firstinspires.org"
+    }
+  ],
+  "paths": {
+    "/v2.0/{season}/advancement/{eventCode}": {
+      "get": {
+        "tags": [
+          "Advancement"
+        ],
+        "summary": "Event Advancement",
+        "description": "The event advancement endpoint returns details about teams advancing from a particular event in a particular season.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the event advancement is requested. Must be 4 digits > 2022",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the advancement results are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeSkipped",
+            "in": "query",
+            "description": "`excludeSkipped=true` to exclude skipped advancement slots. Slots are skipped if no team meets the criteria, the team has already advanced, or the team was ineligible.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvancementModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/advancement/{eventCode}/source": {
+      "get": {
+        "tags": [
+          "Advancement"
+        ],
+        "summary": "Advancement Source",
+        "description": "The advancement source API returns details about where teams advanced to a specified event from.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the advancement is requested. Must be 4 digits >= 2022",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event for which teams advanced to. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdvancementSourceModel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/leagues": {
+      "get": {
+        "tags": [
+          "Leagues"
+        ],
+        "summary": "League Listings",
+        "description": "The league listings API returns all FTC leagues in a particular season. You can specify a `regionCode` to filter to leagues within a particular region. To filter to a specific league, supply both a `regionCode` and a `leagueCode`. The returned objects have a `parentLeagueCode` field, which indicates the league is a child league if not null and provides the code of the parent league. The `regionCode` of the parent league will always match the child.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year from which the league listings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "regionCode",
+            "in": "query",
+            "description": "Case-sensitive alphanumeric `regionCode` of a region to filter for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "leagueCode",
+            "in": "query",
+            "description": "Case-sensitive alphanumeric `leagueCode` of the league within the specified region to query.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeasonLeagueListingsModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/leagues/members/{regionCode}/{leagueCode}": {
+      "get": {
+        "tags": [
+          "Leagues"
+        ],
+        "summary": "League Membership",
+        "description": "The league membership API returns the list of team numbers for the teams that are members of a particular league. Leagues are specified by a `regionCode` in combination with a `leagueCode`.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "regionCode",
+            "in": "path",
+            "description": "Case sensitive alphanumeric `regionCode` of the region the league belongs to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "leagueCode",
+            "in": "path",
+            "description": "Case sensitive alphanumeric `leagueCode` of the league.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeagueMemberListModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/leagues/rankings/{regionCode}/{leagueCode}": {
+      "get": {
+        "tags": [
+          "Leagues"
+        ],
+        "summary": "League Rankings",
+        "description": "The league rankings API returns team ranking detail from a particular league in a particular season. League rankings are only the cumulative rankings from League Meets - they do not include performance at the League Tournament. To get League Tournament Rankings, use the Event Rankings endpoint.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "regionCode",
+            "in": "path",
+            "description": "Case sensitive alphanumeric `regionCode` of the region the league belongs to.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "leagueCode",
+            "in": "path",
+            "description": "Case sensitive alphanumeric `leagueCode` of the league.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventRankingsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "API Index",
+        "description": "Root level call with no parameters.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiIndexModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2.0/{season}": {
+      "get": {
+        "tags": [
+          "Season Data"
+        ],
+        "summary": "Season Summary",
+        "description": "The season summary API returns a high level glance of a particular FTC season.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the season summary is requested. Must be 4 digits.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeasonSummaryModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/events": {
+      "get": {
+        "tags": [
+          "Season Data"
+        ],
+        "summary": "Event Listings",
+        "description": "The event listings API returns all FTC official regional events in a particular season. You can specify an `eventCode` if you would only like data about one specific event. If you specify an `eventCode` you cannot specify any other optional parameters. Alternately, you can specify a `teamNumber` to retrieve only the listings of events being attended by the particular team. If you specify a `teamNumber` you cannot specify an `eventCode`.\n\nThe response for event listings contains a special field called divisionCode. For example, the FIRST Championship contains two Divisions. As an example of a response, the event listings for a Division will have a divisionCode that matches the FIRST Championship event code (as they are divisions of that event). This allows you to see the full structure of events, and how they relate to each other.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year from which the event listings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "query",
+            "description": "Case insensitive alphanumeric `eventCode` of the event about which details are requested.",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "Numeric `teamNumber` of the team from which the attending event listings are requested.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeasonEventListingsModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/teams": {
+      "get": {
+        "tags": [
+          "Season Data"
+        ],
+        "summary": "Team Listings",
+        "description": "The team listings API returns all FTC official teams in a particular season. If specified, the `teamNumber` parameter will return only one result with the details of the requested `teamNumber`. Alternately, the `eventCode` parameter allows sorting of the team list to only those teams attending a particular event in the particular season. If you specify a teamNumber parameter, you cannot additionally specify an `eventCode` and/or `state` in the same request, or you will receive an HTTP 501. If you specify the `state` parameter, it should be the full legal name of the US state or international state/prov, such as New Hampshire or Ontario. Values on this endpoint are \"pass through\" values from the TIMS registration system. As such, if the team does not specify a value for a field, it may be presented in the API as null.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year from which the team listings are requested. Must be 4 digits.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "Numeric `teamNumber` of the team about which information is requested. Must be 1 to 5 digits.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "query",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which details are requested.",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Full legal name of the US state or international state/prov",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Numeric page of results to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeasonTeamListingsModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/schedule/{eventCode}/{tournamentLevel}/hybrid": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Hybrid Schedule",
+        "description": "The schedule API returns the match schedule for the desired tournament level of a particular event in a particular season in the hybrid format. When a match has been played, the match result related details will be filled. When a match has not yet happened, match result related fields will be null. All parameters, except start and end, are required for the hybrid schedule.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the hybrid schedule is requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric eventCode of the event from which the hybrid schedule is requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tournamentLevel",
+            "in": "path",
+            "description": "Required tournamentLevel of desired score details.",
+            "required": true,
+            "schema": {
+              "enum": [
+                "qual",
+                "playoff"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "`start` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "`end` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 999
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventScheduleHybridModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/schedule/{eventCode}": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Event Schedule",
+        "description": "The schedule API returns the match schedule for the desired tournament level of a particular event in a particular season. You must also specify a `tournamentLevel` from which to return the results. Alternately, you can specify a `teamNumber` to filter the results to only those in which a particular team is participating. There is no validation that the `teamNumber` you request is actually competing at the event, if they are not, the response will be empty. You can also specify the parameters together, but cannot make a request without at least one of the two.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the schedule is requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the schedule are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tournamentLevel",
+            "in": "query",
+            "description": "Required tournamentLevel of desired score details.",
+            "schema": {
+              "enum": [
+                "qual",
+                "playoff"
+              ],
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "`teamNumber` to search for within the schedule. Only returns matches in which the requested team participated.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "`start` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "`end` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 999
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventScheduleModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/rankings/{eventCode}": {
+      "get": {
+        "tags": [
+          "Rankings"
+        ],
+        "summary": "Event Rankings",
+        "description": "The rankings API returns team ranking detail from a particular event in a particular season. Optionally, the `top` parameter can be added to the query string to request a subset of the rankings based on the highest ranked teams at the time of the request. Alternately, you can specify the `teamNumber` parameter to retrieve the ranking on one specific team. You cannot specify both a `top` and `teamNumber` in the same call.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the rankings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the rankings are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "Team number of the team whose ranking is requested.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "number of requested `top` ranked teams to return in result.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventRankingsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/alliances/{eventCode}": {
+      "get": {
+        "tags": [
+          "Alliance Selection"
+        ],
+        "summary": "Event Alliances",
+        "description": "The alliances API returns details about alliance selection at a particular event in a particular season.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the event alliances are requested. Must be 4 digits.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the alliance selection results are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllianceSelectionModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/alliances/{eventCode}/selection": {
+      "get": {
+        "tags": [
+          "Alliance Selection"
+        ],
+        "summary": "Alliance Selection Details",
+        "description": "This returns the in-order details of each step through the alliance selection process for a particular event.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the event alliances are requested. Must be 4 digits.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the alliance selection results are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllianceSelectionDetailModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/matches/{eventCode}": {
+      "get": {
+        "tags": [
+          "Match Results"
+        ],
+        "summary": "Event Match Results",
+        "description": "The match results API returns the match results for all matches of a particular event in a particular season. Match results are only available once a match has been played, retrieving info about future matches requires the event schedule API. You cannot receive data about a match that is in progress. You can, however, request the Hybrid Schedule if you would like data about upcoming and played matches at the same time. \n\nIf you specify the `matchNumber`, `start` and/or `end` optional parameters, you must also specify a `tournamentLevel`. If you specify the `teamNumber` parameter, you cannot specify a `matchNumber` parameter. If you specify the `matchNumber`, you cannot define a start or end. \n\nNote: If you specify `start`, and it is higher than the maximum match number at the event, you will not receive any match results in the response. The same is true in reverse for the `end` parameter.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the match results are requested. Must be 4 digits.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the results are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tournamentLevel",
+            "in": "query",
+            "description": "Required tournamentLevel of desired score details.",
+            "schema": {
+              "enum": [
+                "qual",
+                "playoff"
+              ],
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "`teamNumber` to search for within the results. Only returns match results in which the requested team was a participant.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "matchNumber",
+            "in": "query",
+            "description": "specific single `matchNumber` of result.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "`start` match number for subset of results to return.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "`end` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 999
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventMatchResultsModel_Version2"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/scores/{eventCode}/{tournamentLevel}": {
+      "get": {
+        "tags": [
+          "Match Results"
+        ],
+        "summary": "Score Details",
+        "description": "The score details API returns the score detail for all matches of a particular event in a particular season and a particular tournament level. Score details are only available once a match has been played, retrieving info about future matches requires the event schedule API. You cannot receive data about a match that is in progress.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the match results are requested. Must be 4 digits.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric eventCode of the event from which the details are requested. Must be at least 3 characters.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tournamentLevel",
+            "in": "path",
+            "description": "Required tournamentLevel of desired score details.",
+            "required": true,
+            "schema": {
+              "enum": [
+                "qual",
+                "playoff"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "`teamNumber` to search for within the results. Only returns details in which the requested team was a participant.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "matchNumber",
+            "in": "query",
+            "description": "specific single `matchNumber` of result.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "`start` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "`end` match number for subset of results to return (inclusive).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 999
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchScoresModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/awards/list": {
+      "get": {
+        "tags": [
+          "Awards"
+        ],
+        "summary": "Award Listings",
+        "description": "The award listings API returns a listing of the various awards that can be distributed in the requested season. This is especially useful in order to avoid having to use the name field of the event awards API to know which award was won. Instead the awardId field can be matched between the two APIs.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the award listings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeasonAwardListingsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/awards/{teamNumber}": {
+      "get": {
+        "tags": [
+          "Awards"
+        ],
+        "summary": "Event Awards",
+        "description": "The event awards API returns details about awards presented at a particular event in a particular season. Return values may contain either `teamNumber` or `person` values, and if the winner was a `person`, and that person is from a team, the `teamNumber` value *might* be set with their `teamNumber`. You must specify either an `eventCode` or a `teamNumber` or both. If you specify the `teamNumber` parameter, you will receive only awards where the team was listed as the winner, regardless of whether or not the `person` field is `null` or empty. If you specify only the `eventCode` field, you will receive all award listings for the requested event. If you specify both, you will receive all awards won by the `teamNumber` at the `eventCode`.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the award listings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "query",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the awards are requested.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "path",
+            "description": "`teamNumber` to search for within the results.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AwardsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/awards/{eventCode}/{teamNumber}": {
+      "get": {
+        "tags": [
+          "Awards"
+        ],
+        "summary": "Event Awards",
+        "description": "The event awards API returns details about awards presented at a particular event in a particular season. Return values may contain either `teamNumber` or `person` values, and if the winner was a `person`, and that person is from a team, the `teamNumber` value *might* be set with their `teamNumber`. You must specify either an `eventCode` or a `teamNumber` or both. If you specify the `teamNumber` parameter, you will receive only awards where the team was listed as the winner, regardless of whether or not the `person` field is `null` or empty. If you specify only the `eventCode` field, you will receive all award listings for the requested event. If you specify both, you will receive all awards won by the `teamNumber` at the `eventCode`.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the award listings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the awards are requested.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "path",
+            "description": "`teamNumber` to search for within the results.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AwardsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    },
+    "/v2.0/{season}/awards/{eventCode}": {
+      "get": {
+        "tags": [
+          "Awards"
+        ],
+        "summary": "Event Awards",
+        "description": "The event awards API returns details about awards presented at a particular event in a particular season. Return values may contain either `teamNumber` or `person` values, and if the winner was a `person`, and that person is from a team, the `teamNumber` value *might* be set with their `teamNumber`. You must specify either an `eventCode` or a `teamNumber` or both. If you specify the `teamNumber` parameter, you will receive only awards where the team was listed as the winner, regardless of whether or not the `person` field is `null` or empty. If you specify only the `eventCode` field, you will receive all award listings for the requested event. If you specify both, you will receive all awards won by the `teamNumber` at the `eventCode`.",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "path",
+            "description": "Numeric year of the event from which the award listings are requested. Must be 4 digits",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "eventCode",
+            "in": "path",
+            "description": "Case insensitive alphanumeric `eventCode` of the event from which the awards are requested.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "teamNumber",
+            "in": "query",
+            "description": "`teamNumber` to search for within the results.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AwardsModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basic": [ ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdvancementModel": {
+        "title": "Advancement",
+        "type": "object",
+        "properties": {
+          "advancesTo": {
+            "type": "string",
+            "description": "The event code of the event this event advanced to.",
+            "nullable": true
+          },
+          "slots": {
+            "type": "integer",
+            "description": "The number of teams that advanced.",
+            "format": "int32"
+          },
+          "advancement": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancementSlot"
+            },
+            "description": "The ordered list of advancement criteria and teams that met them. Null if the event is unpublished.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdvancementSlot": {
+        "title": "Advancement Order",
+        "type": "object",
+        "properties": {
+          "team": {
+            "type": "integer",
+            "description": "The team number of the team earning this advancement slot. Null if no team meets the criteria.",
+            "format": "int32",
+            "nullable": true
+          },
+          "displayTeam": {
+            "type": "string",
+            "description": "The display-friendly string representation of the number of the team earning this advancement slot. Null if no team meets the criteria.",
+            "nullable": true
+          },
+          "slot": {
+            "type": "integer",
+            "description": "The number of the advancement criteria as shown in GM1 section 6.2.",
+            "format": "int32"
+          },
+          "criteria": {
+            "type": "string",
+            "description": "String describing the advancement criteria as shown in GM1 section 6.2.",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiAdvancementStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdvancementSourceModel": {
+        "title": "Advanced",
+        "type": "object",
+        "properties": {
+          "advancedFrom": {
+            "type": "string",
+            "description": "The event code of the event this team advanced from. Null if unknown.",
+            "nullable": true
+          },
+          "advancedFromRegion": {
+            "type": "string",
+            "description": "The region code of the region this team advanced from. Null if target event is a region-level event.",
+            "nullable": true
+          },
+          "slots": {
+            "type": "integer",
+            "description": "The number of teams that advanced from the source event.",
+            "format": "int32"
+          },
+          "advancement": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancementSlot"
+            },
+            "description": "The ordered list of advancement criteria and teams that met them. Null if the event is unpublished.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AllianceModel_Version2": {
+        "title": "Alliance",
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "captain": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "captainDisplay": {
+            "type": "string",
+            "nullable": true
+          },
+          "round1": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "round1Display": {
+            "type": "string",
+            "nullable": true
+          },
+          "round2": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "round2Display": {
+            "type": "string",
+            "nullable": true
+          },
+          "round3": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "backup": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "backupReplaced": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AllianceScore_2020": {
+        "title": "Ultimate Goal Single Team Breakdown",
+        "type": "object",
+        "properties": {
+          "adjust": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTowerLow": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTowerMid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTowerHigh": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "navigated1": {
+            "type": "boolean"
+          },
+          "navigated2": {
+            "type": "boolean"
+          },
+          "wobbleDelivered1": {
+            "type": "boolean"
+          },
+          "wobbleDelivered2": {
+            "type": "boolean"
+          },
+          "autoTowerLow": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTowerMid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTowerHigh": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTowerPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPowerShotLeft": {
+            "type": "boolean"
+          },
+          "autoPowerShotCenter": {
+            "type": "boolean"
+          },
+          "autoPowerShotRight": {
+            "type": "boolean"
+          },
+          "autoPowerShotPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleRings1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleRings2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleEnd1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleEnd2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleEndPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleRingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoWobblePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endPowerShotLeft": {
+            "type": "boolean"
+          },
+          "endPowerShotCenter": {
+            "type": "boolean"
+          },
+          "endPowerShotRight": {
+            "type": "boolean"
+          },
+          "endPowerShotPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "navigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AllianceSelectionDetailModel": {
+        "title": "Alliance Selection Details",
+        "type": "object",
+        "properties": {
+          "selections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SelectionModel"
+            },
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AllianceSelectionModel_Version2": {
+        "title": "Alliance Selection",
+        "type": "object",
+        "properties": {
+          "alliances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllianceModel_Version2"
+            },
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApiAdvancementStatus": {
+        "enum": [
+          "NULL",
+          "FIRST",
+          "ALREADY_ADVANCING",
+          "ADVANCING_ABOVE",
+          "INELIGIBLE"
+        ],
+        "type": "string",
+        "description": "The advancement status describes how this team's appearance in this slot corresponds to the overall event advancement list. A value of \"FIRST\" represents the first time they appear and thus the criteria for which they would advance given enough available slots. \"ALREADY_ADVANCED\" means the team had already advanced to the target event prior to the start of this event. \"ADVANCING_ABOVE\" means this team has already met a higher-priority advancement criteria at this event.\"INELIGIBLE\" means this team was not eligible to advance from this event."
+      },
+      "ApiIndexModel": {
+        "title": "API Information",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "api name",
+            "nullable": true
+          },
+          "apiVersion": {
+            "type": "string",
+            "description": "api version",
+            "nullable": true
+          },
+          "serviceMainifestName": {
+            "type": "string",
+            "nullable": true
+          },
+          "serviceMainifestVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "codePackageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "codePackageVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentSeason": {
+            "type": "integer",
+            "description": "current season in the eyes of FTC",
+            "format": "int32",
+            "example": 2020
+          },
+          "maxSeason": {
+            "type": "integer",
+            "description": "max season that can be retrieved from the API/webpages",
+            "format": "int32",
+            "example": 2020
+          }
+        },
+        "additionalProperties": false
+      },
+      "AutoNavigatedStatus": {
+        "enum": [
+          "NONE",
+          "IN_STORAGE",
+          "COMPLETELY_IN_STORAGE",
+          "IN_WAREHOUSE",
+          "COMPLETELY_IN_WAREHOUSE"
+        ],
+        "type": "string"
+      },
+      "AutoNavigation": {
+        "enum": [
+          "NONE",
+          "SUBSTATION_TERMINAL",
+          "SIGNAL_ZONE"
+        ],
+        "type": "string"
+      },
+      "AwardAssignmentModel": {
+        "title": "Award Assignment",
+        "type": "object",
+        "properties": {
+          "awardId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "teamProfileId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "eventId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "eventDivisionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "eventCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "series": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "schoolName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullTeamName": {
+            "type": "string",
+            "nullable": true
+          },
+          "person": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AwardsModel": {
+        "title": "Award Assignment List",
+        "type": "object",
+        "properties": {
+          "awards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AwardAssignmentModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BarcodeElement": {
+        "enum": [
+          "DUCK",
+          "TEAM_SHIPPING_ELEMENT"
+        ],
+        "type": "string"
+      },
+      "Coordinate": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          },
+          "m": {
+            "type": "number",
+            "format": "double"
+          },
+          "coordinateValue": {
+            "$ref": "#/components/schemas/Coordinate"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoordinateEqualityComparer": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CoordinateSequence": {
+        "type": "object",
+        "properties": {
+          "dimension": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "measures": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "spatial": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ordinates": {
+            "$ref": "#/components/schemas/Ordinates"
+          },
+          "hasZ": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasM": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "zOrdinateIndex": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "mOrdinateIndex": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoordinateSequenceFactory": {
+        "type": "object",
+        "properties": {
+          "ordinates": {
+            "$ref": "#/components/schemas/Ordinates"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dimension": {
+        "enum": [
+          "P",
+          "Curve",
+          "A",
+          "Collapse",
+          "Dontcare",
+          "True",
+          "Unknown"
+        ],
+        "type": "string"
+      },
+      "EndGameLocation": {
+        "enum": [
+          "NONE",
+          "BACKSTAGE",
+          "RIGGING"
+        ],
+        "type": "string"
+      },
+      "EndgameParkedStatus": {
+        "enum": [
+          "NONE",
+          "IN_WAREHOUSE",
+          "COMPLETELY_IN_WAREHOUSE"
+        ],
+        "type": "string"
+      },
+      "Envelope": {
+        "type": "object",
+        "properties": {
+          "isNull": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "diameter": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minX": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maxX": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minY": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maxY": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minExtent": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maxExtent": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "centre": {
+            "$ref": "#/components/schemas/Coordinate"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventMatchResultsModel_Version2": {
+        "title": "Match Result List",
+        "type": "object",
+        "properties": {
+          "matches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatchResultModel_Version2"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventRankingsModel": {
+        "title": "Event Ranking List",
+        "type": "object",
+        "properties": {
+          "Rankings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamRankingModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventScheduleHybridModel_Version2": {
+        "title": "Hybrid Schedule",
+        "type": "object",
+        "properties": {
+          "schedule": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleHybridModel_Version2"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventScheduleModel_Version2": {
+        "title": "Scheduled Match List",
+        "type": "object",
+        "properties": {
+          "schedule": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledMatchModel_Version2"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FieldSide": {
+        "enum": [
+          "SCORING_SIDE",
+          "AUDIENCE_SIDE"
+        ],
+        "type": "string"
+      },
+      "FTCEventLevel": {
+        "enum": [
+          "OTHER",
+          "QUALIFICATION",
+          "SEMIFINAL",
+          "FINAL",
+          "PLAYOFF"
+        ],
+        "type": "string"
+      },
+      "Geometry": {
+        "type": "object",
+        "properties": {
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "numPoints": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isEmpty": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "dimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "boundaryDimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "coordinate": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "geometryType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ogcGeometryType": {
+            "$ref": "#/components/schemas/OgcGeometryType"
+          },
+          "boundary": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "factory": {
+            "$ref": "#/components/schemas/GeometryFactory"
+          },
+          "userData": {
+            "nullable": true
+          },
+          "srid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          },
+          "numGeometries": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isSimple": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isValid": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "centroid": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "interiorPoint": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "pointOnSurface": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "envelope": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "envelopeInternal": {
+            "$ref": "#/components/schemas/Envelope"
+          },
+          "isRectangle": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeometryFactory": {
+        "type": "object",
+        "properties": {
+          "precisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          },
+          "coordinateSequenceFactory": {
+            "$ref": "#/components/schemas/CoordinateSequenceFactory"
+          },
+          "srid": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "geometryServices": {
+            "$ref": "#/components/schemas/NtsGeometryServices"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeometryOverlay": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "JunctionElement": {
+        "enum": [
+          "MY_CONE",
+          "OTHER_CONE",
+          "MY_R1_BEACON",
+          "MY_R2_BEACON",
+          "OTHER_R1_BEACON",
+          "OTHER_R2_BEACON"
+        ],
+        "type": "string"
+      },
+      "LeagueMemberListModel": {
+        "title": "League Members",
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatchResultModel_Version2": {
+        "title": "Match Result",
+        "type": "object",
+        "properties": {
+          "actualStartTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "tournamentLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "series": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreRedFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreRedFoul": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreRedAuto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreBlueFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreBlueFoul": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreBlueAuto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "postResultTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MatchResultTeamModel_Version2"
+            },
+            "nullable": true
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatchResultTeamModel_Version2": {
+        "title": "Match Result Team",
+        "type": "object",
+        "properties": {
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "station": {
+            "type": "string",
+            "nullable": true
+          },
+          "dq": {
+            "type": "boolean"
+          },
+          "onField": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MatchScoresModel": {
+        "title": "Match Score List",
+        "type": "object",
+        "properties": {
+          "MatchScores": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModel_2019"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModel_2020"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModelSinglePlayer_2020"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModel_2021"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModelSinglePlayer_2021"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModel_2022"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModelSinglePlayer_2022"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModel_2023"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreDetailModelSinglePlayer_2023"
+                }
+              ]
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NtsGeometryServices": {
+        "type": "object",
+        "properties": {
+          "geometryOverlay": {
+            "$ref": "#/components/schemas/GeometryOverlay"
+          },
+          "coordinateEqualityComparer": {
+            "$ref": "#/components/schemas/CoordinateEqualityComparer"
+          },
+          "defaultSRID": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "defaultCoordinateSequenceFactory": {
+            "$ref": "#/components/schemas/CoordinateSequenceFactory"
+          },
+          "defaultPrecisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OgcGeometryType": {
+        "enum": [
+          "Point",
+          "LineString",
+          "Polygon",
+          "MultiPoint",
+          "MultiLineString",
+          "MultiPolygon",
+          "GeometryCollection",
+          "CircularString",
+          "CompoundCurve",
+          "CurvePolygon",
+          "MultiCurve",
+          "MultiSurface",
+          "Curve",
+          "Surface",
+          "PolyhedralSurface",
+          "TIN"
+        ],
+        "type": "string"
+      },
+      "Ordinates": {
+        "enum": [
+          "None",
+          "X",
+          "Y",
+          "XY",
+          "Spatial3",
+          "XYZ",
+          "Spatial4",
+          "Spatial5",
+          "Spatial6",
+          "Spatial7",
+          "Spatial8",
+          "Spatial9",
+          "Spatial10",
+          "Spatial11",
+          "Spatial12",
+          "Spatial13",
+          "Spatial14",
+          "Spatial15",
+          "Spatial16",
+          "AllSpatialOrdinates",
+          "Measure1",
+          "XYM",
+          "XYZM",
+          "Measure2",
+          "Measure3",
+          "Measure4",
+          "Measure5",
+          "Measure6",
+          "Measure7",
+          "Measure8",
+          "Measure9",
+          "Measure10",
+          "Measure11",
+          "Measure12",
+          "Measure13",
+          "Measure14",
+          "Measure15",
+          "Measure16",
+          "AllMeasureOrdinates",
+          "AllOrdinates"
+        ],
+        "type": "string"
+      },
+      "Point": {
+        "type": "object",
+        "properties": {
+          "factory": {
+            "$ref": "#/components/schemas/GeometryFactory"
+          },
+          "userData": {
+            "nullable": true
+          },
+          "srid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          },
+          "numGeometries": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isSimple": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isValid": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "centroid": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "interiorPoint": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "pointOnSurface": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "envelope": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "envelopeInternal": {
+            "$ref": "#/components/schemas/Envelope"
+          },
+          "isRectangle": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "coordinateSequence": {
+            "$ref": "#/components/schemas/CoordinateSequence"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "numPoints": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isEmpty": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "dimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "boundaryDimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "coordinate": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "geometryType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ogcGeometryType": {
+            "$ref": "#/components/schemas/OgcGeometryType"
+          },
+          "boundary": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          },
+          "m": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrecisionModel": {
+        "type": "object",
+        "properties": {
+          "isFloating": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "maximumSignificantDigits": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "scale": {
+            "type": "number",
+            "format": "double"
+          },
+          "precisionModelType": {
+            "$ref": "#/components/schemas/PrecisionModels"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrecisionModels": {
+        "enum": [
+          "Floating",
+          "FloatingSingle",
+          "Fixed"
+        ],
+        "type": "string"
+      },
+      "ScheduledMatchModel_Version2": {
+        "title": "Scheduled Match",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          },
+          "tournamentLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "series": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledMatchTeamModel_Version2"
+            },
+            "nullable": true
+          },
+          "modifiedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduledMatchTeamModel_Version2": {
+        "title": "Scheduled Match Team",
+        "type": "object",
+        "properties": {
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "displayTeamNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "station": {
+            "type": "string",
+            "nullable": true
+          },
+          "team": {
+            "type": "string",
+            "nullable": true
+          },
+          "teamName": {
+            "type": "string",
+            "nullable": true
+          },
+          "surrogate": {
+            "type": "boolean"
+          },
+          "noShow": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduleHybridModel_Version2": {
+        "title": "Hybrid Schedule Match",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "tournamentLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "series": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "actualStartTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "postResultTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "scoreRedFinal": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreRedFoul": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreRedAuto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreBlueFinal": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreBlueFoul": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreBlueAuto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreBlueDriveControlled": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scoreBlueEndgame": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "redWins": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "blueWins": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleHybridModelTeam_Version2"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduleHybridModelTeam_Version2": {
+        "title": "Hybrid Schedule Team",
+        "type": "object",
+        "properties": {
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "displayTeamNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "station": {
+            "type": "string",
+            "nullable": true
+          },
+          "surrogate": {
+            "type": "boolean"
+          },
+          "noShow": {
+            "type": "boolean"
+          },
+          "dq": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "onField": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "teamName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailAllianceModel_2020": {
+        "title": "Ultimate Goal Alliance Score Breakdown",
+        "type": "object",
+        "properties": {
+          "adjust": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTowerLow": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTowerMid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTowerHigh": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "navigated1": {
+            "type": "boolean"
+          },
+          "navigated2": {
+            "type": "boolean"
+          },
+          "wobbleDelivered1": {
+            "type": "boolean"
+          },
+          "wobbleDelivered2": {
+            "type": "boolean"
+          },
+          "autoTowerLow": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTowerMid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTowerHigh": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTowerPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPowerShotLeft": {
+            "type": "boolean"
+          },
+          "autoPowerShotCenter": {
+            "type": "boolean"
+          },
+          "autoPowerShotRight": {
+            "type": "boolean"
+          },
+          "autoPowerShotPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleRings1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleRings2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleEnd1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleEnd2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleEndPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wobbleRingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoWobblePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endPowerShotLeft": {
+            "type": "boolean"
+          },
+          "endPowerShotCenter": {
+            "type": "boolean"
+          },
+          "endPowerShotRight": {
+            "type": "boolean"
+          },
+          "endPowerShotPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "navigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliance": {
+            "type": "string",
+            "nullable": true
+          },
+          "team": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailAllianceModel_2021": {
+        "title": "Freight Frenzy Alliance Score Breakdown",
+        "type": "object",
+        "properties": {
+          "alliance": {
+            "type": "string",
+            "nullable": true
+          },
+          "barcodeElement1": {
+            "$ref": "#/components/schemas/BarcodeElement"
+          },
+          "barcodeElement2": {
+            "$ref": "#/components/schemas/BarcodeElement"
+          },
+          "carousel": {
+            "type": "boolean"
+          },
+          "autoNavigated1": {
+            "$ref": "#/components/schemas/AutoNavigatedStatus"
+          },
+          "autoNavigated2": {
+            "$ref": "#/components/schemas/AutoNavigatedStatus"
+          },
+          "autoBonus1": {
+            "type": "boolean"
+          },
+          "autoBonus2": {
+            "type": "boolean"
+          },
+          "autoStorageFreight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreight1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreight2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreight3": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledStorageFreight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledFreight1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledFreight2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledFreight3": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sharedFreight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgameDelivered": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allianceBalanced": {
+            "type": "boolean"
+          },
+          "sharedUnbalanced": {
+            "type": "boolean"
+          },
+          "endgameParked1": {
+            "$ref": "#/components/schemas/EndgameParkedStatus"
+          },
+          "endgameParked2": {
+            "$ref": "#/components/schemas/EndgameParkedStatus"
+          },
+          "capped": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carouselPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoNavigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreightPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoBonusPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledAllianceHubPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledSharedHubPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledStoragePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgameDeliveryPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allianceBalancedPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sharedUnbalancedPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgameParkingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cappingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailAllianceModel_2022": {
+        "title": "Power Play Alliance Score Breakdown",
+        "type": "object",
+        "properties": {
+          "sideOfField": {
+            "$ref": "#/components/schemas/FieldSide"
+          },
+          "initSignalSleeve1": {
+            "type": "boolean"
+          },
+          "initSignalSleeve2": {
+            "type": "boolean"
+          },
+          "robot1Auto": {
+            "$ref": "#/components/schemas/AutoNavigation"
+          },
+          "robot2Auto": {
+            "$ref": "#/components/schemas/AutoNavigation"
+          },
+          "autoTerminal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoJunctions": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/JunctionElement"
+                }
+              }
+            },
+            "description": "Two dimensional array of lists of items scored on junctions in autonomous. [0,0] is the upper-left corner of the field as viewed from the audience side of the field (V5). The array is indexed by row, then column. (e.g [0,4] is in the upper right corner of the field (Z5).) Each junction is stored bottom up (index 0 is the bottom-most element on the field). MY_* elements belong to the alliance whose score object the element appears in, OTHER_* elements belong to the opposing alliance. (e.g in a set of scores for the red alliance, MY_CONE is a red cone and OTHER_CONE is a blue cone.) For a complete example, if red.autoJunctions[4][0][1] is OTHER_CONE, there is a blue cone in the bottom left cornerof the field (V1) on top of one other cone.",
+            "nullable": true
+          },
+          "dcJunctions": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/JunctionElement"
+                }
+              }
+            },
+            "description": "Two dimensional array of lists of items scored on junctions in driver-controlled. [0,0] is the upper-left corner of the field as viewed from the audience side of the field (V5). The array is indexed by crow, then column. (e.g [0,4] is in the upper right corner of the field (Z5).) Each junction is stored bottom up (index 0 is the bottom-most element on the field). MY_* elements belong to the alliance whose score object the element appears in, OTHER_* elements belong to the opposing alliance. (e.g in a set of scores for the red alliance, MY_CONE is a red cone and OTHER_CONE is a blue cone.) *_R1_BEACON means the beacon scored by robot 1 on the corresponding alliance. For a complete example, if red.dcJunctions[4][0][1] is OTHER_CONE, there is a blue cone in the bottom left cornerof the field (V1) on top of one other cone.",
+            "nullable": true
+          },
+          "dcTerminalNear": {
+            "type": "integer",
+            "description": "Number of Scored cones in the alliance-colored terminal on the side of the field closest to the alliance station.",
+            "format": "int32"
+          },
+          "dcTerminalFar": {
+            "type": "integer",
+            "description": "Number of Scored cones in the alliance-colored terminal on the side of the field opposite the alliance station.",
+            "format": "int32"
+          },
+          "egNavigated1": {
+            "type": "boolean"
+          },
+          "egNavigated2": {
+            "type": "boolean"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoNavigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "signalBonusPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoJunctionConePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoTerminalConePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcJunctionConePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcTerminalConePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ownershipPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "circuitPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "egNavigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPointsCommitted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prePenaltyTotal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoJunctionCones": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Array of 4 cone counts scored by this alliance on ground, low, medium, and high junctions respectively, scored in autonomous. E.g. red.autoJunctionCones[2] is the total number of cones scored by red on medium-height junctions.",
+            "nullable": true
+          },
+          "dcJunctionCones": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Array of 4 cone counts scored by this alliance on ground, low, medium, and high junctions respectively, scored in driver-controlled. E.g. red.dcJunctionCones[2] is the total number of cones scored by red on medium-height junctions.",
+            "nullable": true
+          },
+          "beacons": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ownedJunctions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "circuit": {
+            "type": "boolean"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliance": {
+            "type": "string",
+            "nullable": true
+          },
+          "team": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailAllianceModel_2023": {
+        "type": "object",
+        "properties": {
+          "initTeamProp1": {
+            "type": "boolean"
+          },
+          "initTeamProp2": {
+            "type": "boolean"
+          },
+          "robot1Auto": {
+            "type": "boolean"
+          },
+          "robot2Auto": {
+            "type": "boolean"
+          },
+          "spikeMarkPixel1": {
+            "type": "boolean"
+          },
+          "spikeMarkPixel2": {
+            "type": "boolean"
+          },
+          "targetBackdropPixel1": {
+            "type": "boolean"
+          },
+          "targetBackdropPixel2": {
+            "type": "boolean"
+          },
+          "autoBackdrop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoBackstage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcBackdrop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcBackstage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mosaics": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxSetLine": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "egRobot1": {
+            "$ref": "#/components/schemas/EndGameLocation"
+          },
+          "egRobot2": {
+            "$ref": "#/components/schemas/EndGameLocation"
+          },
+          "drone1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "drone2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoNavigatingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoRandomizationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoBackstagePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoBackdropPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcBackdropPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcBackstagePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mosaicPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "setBonusPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "egLocationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "egDronePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dcPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPointsCommitted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prePenaltyTotal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliance": {
+            "type": "string",
+            "nullable": true
+          },
+          "team": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModel_2019": {
+        "title": "SkyStone Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchSeries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreDetailModelAlliance_2019"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModel_2020": {
+        "title": "Ultimate Goal Alliance Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchSeries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreDetailAllianceModel_2020"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModel_2021": {
+        "title": "Freight Frenzy Alliance Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchSeries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomization": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreDetailAllianceModel_2021"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModel_2022": {
+        "title": "Power Play Alliance Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchSeries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomization": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreDetailAllianceModel_2022"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModel_2023": {
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchSeries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomization": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alliances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreDetailAllianceModel_2023"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModelAlliance_2019": {
+        "title": "SkyStone Alliance Score Details",
+        "type": "object",
+        "properties": {
+          "alliance": {
+            "type": "string",
+            "nullable": true
+          },
+          "robot1Navigated": {
+            "type": "boolean"
+          },
+          "robot1Parked": {
+            "type": "boolean"
+          },
+          "robot1CapstoneLevel": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "robot2Navigated": {
+            "type": "boolean"
+          },
+          "robot2Parked": {
+            "type": "boolean"
+          },
+          "robot2CapstoneLevel": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoStones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Stone"
+            },
+            "nullable": true
+          },
+          "autoDelivered": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoReturned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstReturnedIsSkystone": {
+            "type": "boolean"
+          },
+          "autoPlaced": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "foundationRepositioned": {
+            "type": "boolean"
+          },
+          "foundationMoved": {
+            "type": "boolean"
+          },
+          "driverControlledDelivered": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledReturned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledPlaced": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tallestSkyscraper": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoDeliveryPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPlacedPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autonomousPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "repositionedPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "navigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledDeliveryPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledPlacedPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "skyscraperBonusPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "capstonePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parkingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endGamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModelSinglePlayer_2020": {
+        "title": "Ultimate Goal Single Team Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scores": {
+            "$ref": "#/components/schemas/AllianceScore_2020"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModelSinglePlayer_2021": {
+        "title": "Freight Frenzy Single Team Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomization": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scores": {
+            "$ref": "#/components/schemas/ScoreDetailSinglePlayer_2021"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModelSinglePlayer_2022": {
+        "title": "Power Play Single Team Score Details",
+        "type": "object",
+        "properties": {
+          "matchLevel": {
+            "$ref": "#/components/schemas/FTCEventLevel"
+          },
+          "matchNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomization": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scores": {
+            "$ref": "#/components/schemas/ScoreDetailSinglePlayer_2022"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailModelSinglePlayer_2023": {
+        "type": "object",
+        "properties": {
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scores": {
+            "$ref": "#/components/schemas/ScoreDetailSinglePlayer_2023"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailSinglePlayer_2021": {
+        "title": "Freight Frenzy Remote Score Breakdown",
+        "type": "object",
+        "properties": {
+          "barcodeElement": {
+            "$ref": "#/components/schemas/BarcodeElement"
+          },
+          "carousel": {
+            "type": "boolean"
+          },
+          "autoNavigated": {
+            "$ref": "#/components/schemas/AutoNavigatedStatus"
+          },
+          "autoBonus": {
+            "type": "boolean"
+          },
+          "autoStorageFreight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreight1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreight2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreight3": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledStorageFreight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledFreight1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledFreight2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledFreight3": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgameDelivered": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allianceBalanced": {
+            "type": "boolean"
+          },
+          "endgameParked": {
+            "$ref": "#/components/schemas/EndgameParkedStatus"
+          },
+          "capped": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "majorPenalties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carouselPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoNavigationPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoFreightPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoBonusPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledAllianceHubPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledStoragePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgameDeliveryPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allianceBalancedPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgameParkingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cappingPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autoPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverControlledPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endgamePoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "penaltyPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPoints": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreDetailSinglePlayer_2022": {
+        "title": "Power Play Remote Score Breakdown",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ScoreDetailSinglePlayer_2023": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SeasonAwardListingsModel": {
+        "title": "Award List",
+        "type": "object",
+        "properties": {
+          "awards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeasonAwardsModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonAwardsModel": {
+        "title": "Award",
+        "type": "object",
+        "properties": {
+          "awardId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "forPerson": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonEventListingsModel_Version2": {
+        "title": "Event List",
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeasonEventModel_Version2"
+            },
+            "nullable": true
+          },
+          "eventCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonEventModel_Version2": {
+        "title": "Event",
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "divisionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "remote": {
+            "type": "boolean"
+          },
+          "hybrid": {
+            "type": "boolean"
+          },
+          "fieldCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "regionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "leagueCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "districtCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "venue": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateprov": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "liveStreamUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "webcasts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timezone": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateStart": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateEnd": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonLeagueListingsModel_Version2": {
+        "title": "League List",
+        "type": "object",
+        "properties": {
+          "leagues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeasonLeagueModel_Version2"
+            },
+            "nullable": true
+          },
+          "leagueCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonLeagueModel_Version2": {
+        "title": "League",
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentLeagueCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonSummaryModel_Version2": {
+        "title": "Season Summary",
+        "type": "object",
+        "properties": {
+          "eventCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gameName": {
+            "type": "string",
+            "nullable": true
+          },
+          "kickoff": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rookieStart": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "frcChampionships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeasonSummaryModelChampionship"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonSummaryModelChampionship": {
+        "title": "Summary Championship Description",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonTeamListingsModel_Version2": {
+        "title": "Team List",
+        "type": "object",
+        "properties": {
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeasonTeamModel_Version2"
+            },
+            "nullable": true
+          },
+          "teamCountTotal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamCountPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageCurrent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageTotal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SeasonTeamModel_Version2": {
+        "title": "Team",
+        "type": "object",
+        "properties": {
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "displayTeamNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameFull": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameShort": {
+            "type": "string",
+            "nullable": true
+          },
+          "schoolName": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateProv": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "rookieYear": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "robotName": {
+            "type": "string",
+            "nullable": true
+          },
+          "districtCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "homeCMP": {
+            "type": "string",
+            "nullable": true
+          },
+          "homeRegion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectionModel": {
+        "title": "Selection",
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "team": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SelectionResult"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectionResult": {
+        "enum": [
+          "ACCEPT",
+          "DECLINE",
+          "CAPTAIN"
+        ],
+        "type": "string"
+      },
+      "Stone": {
+        "enum": [
+          "NONE",
+          "STONE",
+          "SKYSTONE"
+        ],
+        "type": "string"
+      },
+      "TeamRankingModel": {
+        "title": "Team Ranking",
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "teamNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "displayTeamNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "teamName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortOrder1": {
+            "type": "number",
+            "format": "double"
+          },
+          "sortOrder2": {
+            "type": "number",
+            "format": "double"
+          },
+          "sortOrder3": {
+            "type": "number",
+            "format": "double"
+          },
+          "sortOrder4": {
+            "type": "number",
+            "format": "double"
+          },
+          "sortOrder5": {
+            "type": "number",
+            "format": "double"
+          },
+          "sortOrder6": {
+            "type": "number",
+            "format": "double"
+          },
+          "wins": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "losses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qualAverage": {
+            "type": "number",
+            "format": "double"
+          },
+          "dq": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchesPlayed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchesCounted": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "type": "http",
+        "description": "To register for the api, register at https://ftc-events.firstinspires.org/services/API/register",
+        "scheme": "basic"
+      }
+    }
+  }
+}
