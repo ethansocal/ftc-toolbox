@@ -2,7 +2,6 @@ import OpenAI from "openai";
 import { experimental_AssistantResponse } from "ai";
 
 import type, { NextResponse } from "next/server";
-// import { addMessage, createChat, getChats } from "@/lib/chat/db-actions";
 import { MessageContentText } from "openai/resources/beta/threads/messages/messages";
 import { createThread } from "./createThread";
 
@@ -18,8 +17,6 @@ export async function POST(req: Request) {
         message: string;
     } = await req.json();
 
-
-    // Create a thread if one doesn't exist
     if(!input.threadId) {
         input.threadId = await createThread();
     }
@@ -44,12 +41,10 @@ export async function POST(req: Request) {
             });
 
             async function waitForRun(run: OpenAI.Beta.Threads.Runs.Run) {
-                // Poll for status change
                 while (
                     run.status === "queued" ||
                     run.status === "in_progress"
                 ) {
-                    // delay for 500ms:
                     await new Promise((resolve) => setTimeout(resolve, 500));
                     run = await openai.beta.threads.runs.retrieve(
                         threadId!,
@@ -57,7 +52,6 @@ export async function POST(req: Request) {
                     );
                 }
 
-                // Check the run status
                 if (
                     run.status === "cancelled" ||
                     run.status === "cancelling" ||
@@ -70,7 +64,6 @@ export async function POST(req: Request) {
 
             await waitForRun(run);
 
-            // Get new thread messages (after our message)
             const responseMessages = (
                 await openai.beta.threads.messages.list(threadId, {
                     after: createdMessage.id,
@@ -78,7 +71,6 @@ export async function POST(req: Request) {
                 })
             ).data;
 
-            // Send the messages
             for (const message of responseMessages) {
                 sendMessage({
                     id: message.id,
@@ -90,23 +82,6 @@ export async function POST(req: Request) {
             }
         },
     );
-
-    // const { user } = session;
-
-    // Create a chat if one doesn't exist
-    // if (messages.length == 1) {
-    //     //TODO: Generate the title using GPT-3
-    //     const title = messages[0].content.split(" ").slice(0, 3).join(" ");
-
-    //     await createChat({ id, title, userId: user.id });
-    // }
-
-    // // Add the user's message to the chat
-    // const userMessage = messages[messages.length - 1];
-    // await addMessage({
-    //     ...userMessage,
-    //     chatId: id,
-    // });
 }
 
 /*
