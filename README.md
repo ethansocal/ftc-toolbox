@@ -50,11 +50,21 @@ Welcome to our project - we are super excited to have you on board!
 
 <br>
 
-## 🗺️ Roadmap
+## 🌟 Roadmap: The Future of FTC Toolbox
+Our goal for FTC Toolbox is to constantly grow and innovate. We are not stopping at just an AI chatbot – we are dreaming bigger. In the near future, we plan to add new features and tools, all designed to make life easier for FTC teams. Here's a sneak peek into what we have in store:
 
--  [x] **Version 1.0.0**: Basic chatbot functionality with a knowledge base.
-- 
+##### Short-Term Goals
+- **Enhancing the AI Chatbot**: The  main update on the chatbot will be the chat history. We know that it is essential and we work hard on it. In addition, we are constantly refining the chatbot's accuracy, response time, and the breadth of topics covered. Expect regular updates that make the chatbot smarter and more intuitive.
+
+##### Long-Term Aspirations
+- **AI-Powered Scouting Tool**: Imagine a tool that can analyze matches, predict game strategies, and offer insights into potential alliance partners. We're in the early stages of developing this cutting-edge feature, aiming to revolutionize how teams prepare for competitions.
+- **Integrated Project Management Features**: We plan to incorporate tools for team management, task tracking, and progress monitoring, all tailored specifically for the unique needs of FTC teams.
+- **Community Collaboration Platform**: A dedicated space for teams to share ideas, resources, and strategies, fostering a vibrant community of collaboration and support.
+
+##### Beyond
+- **Customizable Team Dashboards**: Personalized dashboards providing quick access to team-specific data, schedules, and resources.
+- **Extended Language Support**: Making FTC Toolbox accessible to a global audience by introducing multilingual support.
+
 
 ## 🔧 Contribute
-
 [Coming Soon\...]
