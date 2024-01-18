@@ -12,18 +12,9 @@ export async function createThread() {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     
-    const { data, error } = await supabase.from('threads').insert(
-        {
+    const { error } = await supabase.from('threads').insert({
             thread_id: thread.id,
-        }
-    
-    )
+    })
 
-    if(error) {
-        console.log(error);
-        return
-    }
-
-    // Return the thread
-    return thread.id;
+    return error ? null : thread.id;
 }

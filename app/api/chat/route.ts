@@ -4,6 +4,7 @@ import { experimental_AssistantResponse } from "ai";
 import type, { NextResponse } from "next/server";
 import { MessageContentText } from "openai/resources/beta/threads/messages/messages";
 import { createThread } from "./createThread";
+import { insertMessageToDB } from "./insertMessageToDB";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -28,10 +29,11 @@ export async function POST(req: Request) {
         content: input.message,
     });
 
+    await insertMessageToDB(threadId, createdMessage);
+
     return experimental_AssistantResponse(
         { threadId, messageId: createdMessage.id },
         async ({ threadId, sendMessage, sendDataMessage }) => {
-            // Run the assistant on the thread
             const run = await openai.beta.threads.runs.create(threadId, {
                 assistant_id:
                     process.env.ASSISTANT_ID ??
@@ -72,6 +74,7 @@ export async function POST(req: Request) {
             ).data;
 
             for (const message of responseMessages) {
+                await insertMessageToDB(threadId, message);
                 sendMessage({
                     id: message.id,
                     role: "assistant",
