@@ -18,10 +18,10 @@ export async function POST(req: Request) {
         message: string;
     } = await req.json();
 
-    if(!input.threadId) {
-        input.threadId = await createThread();
+    if (!input.threadId) {
+        input.threadId = (await createThread()) as string;
     }
-    
+
     const threadId = input.threadId!;
 
     const createdMessage = await openai.beta.threads.messages.create(threadId, {
