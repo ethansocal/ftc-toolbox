@@ -124,7 +124,7 @@ export default ({
             </ScrollArea>
 
             <form
-                className="flex container rounded-md border mb-4 p-2 w-4/5 md:w-9/12 lg:w-5/12"
+                className="flex container rounded-md border mb-3 p-2 w-4/5 md:w-9/12 lg:w-5/12"
                 onSubmit={submitMessage}
             >
                 <Input
@@ -137,6 +137,17 @@ export default ({
                     <PaperPlaneIcon />
                 </Button>
             </form>
+            <div className="flex container justify-center mb-3 text-xs text-muted-foreground">
+                Centerstage AI is not always accurate. Double check important
+                information.{" "}
+                <a
+                    href="https://github.com/ethansocal/ftc-toolbox"
+                    target="_blank"
+                    className="text-blue-500 ml-1"
+                >
+                    Github
+                </a>
+            </div>
         </div>
     );
 };
