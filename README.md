@@ -71,10 +71,6 @@ Our goal for FTC Toolbox is to constantly grow and innovate. We are not stopping
 - **Integrated Project Management Features**: We plan to incorporate tools for team management, task tracking, and progress monitoring, all tailored specifically for the unique needs of FTC teams.
 - **Community Collaboration Platform**: A dedicated space for teams to share ideas, resources, and strategies, fostering a vibrant community of collaboration and support.
 
-##### Beyond
-- **Customizable Team Dashboards**: Personalized dashboards providing quick access to team-specific data, schedules, and resources.
-- **Extended Language Support**: Making FTC Toolbox accessible to a global audience by introducing multilingual support.
-
 
 ## 🔧 Contribute
 [Coming Soon\...]
