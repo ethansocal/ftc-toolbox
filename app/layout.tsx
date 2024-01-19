@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     >
                         {children}
                         <Analytics />
+                        <SpeedInsights />
                     </ThemeProvider>
                 </main>
             </body>
