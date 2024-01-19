@@ -8,6 +8,7 @@ import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         disableTransitionOnChange
                     >
                         {children}
+                        <Analytics />
                     </ThemeProvider>
                 </main>
             </body>
