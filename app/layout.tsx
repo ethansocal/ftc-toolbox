@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { type ReactNode } from "react";
 import Link from "next/link";
 import Icon from "@/public/logo.svg";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -41,12 +41,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 </span>
                             </h1>
                         </Link>
-                        <Link
-                            href="https://github.com/ethansocal/ftc-toolbox"
-                            target="_blank"
-                        >
-                            <GitHubLogoIcon className={"h-6 w-6"} />
-                        </Link>
+                        <div className={"flex flex-row items-center gap-1"}>
+                            <Link
+                                href="https://github.com/ethansocal/ftc-toolbox"
+                                target="_blank"
+                            >
+                                <GitHubLogoIcon className={"h-6 w-6"} />
+                            </Link>
+                            <Link
+                                href="https://discord.gg/ucrrz2K6Yd"
+                                target="_blank"
+                            >
+                                <DiscordLogoIcon className={"h-6 w-6"} />
+                            </Link>
+                        </div>
                     </div>
                 </header>
 
