@@ -126,7 +126,12 @@ export default ({
 
             <form
                 className="flex container rounded-md border mb-3 p-2 w-4/5 md:w-9/12 lg:w-5/12"
-                onSubmit={submitMessage}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    if (status !== "in_progress") {
+                        submitMessage();
+                    }
+                }}
             >
                 <Input
                     className="border-none focus-visible:ring-0 focus-visible:ring-offset-0 basis-4/5 sm:basis-11/12"
@@ -134,7 +139,11 @@ export default ({
                     onChange={handleInputChange}
                     value={input}
                 />
-                <Button size="icon" className="ml-auto">
+                <Button
+                    size="icon"
+                    className="ml-auto"
+                    disabled={status == "in_progress"}
+                >
                     <PaperPlaneIcon />
                 </Button>
             </form>
