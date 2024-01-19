@@ -6,23 +6,28 @@ import Link from "next/link";
 import Icon from "@/public/logo.svg";
 import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
 
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "http://localhost:3000";
 
-export const metadata = {
+export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
     title: "FTC Toolbox",
     description:
         "The fastest way to get ahead of other teams with AI tools and scouting.",
+    openGraph: {
+        images: ["/cover_image.png"],
+    },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" className={GeistSans.className}>
             <body className="bg-background text-foreground">
-                <header className="flex flex-col items-center justify-center w-full py-3 px-4 fixed top-0">
+                <header className="flex flex-col items-center justify-center w-full py-3 px-4 fixed top-0 border-b border-gray-900">
                     <div className="flex flex-row items-center justify-between w-full h-full">
                         <Link
                             href="/"
@@ -41,19 +46,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 </span>
                             </h1>
                         </Link>
-                        <div className={"flex flex-row items-center gap-1"}>
-                            <Link
-                                href="https://github.com/ethansocal/ftc-toolbox"
-                                target="_blank"
-                            >
-                                <GitHubLogoIcon className={"h-6 w-6"} />
-                            </Link>
-                            <Link
-                                href="https://discord.gg/ucrrz2K6Yd"
-                                target="_blank"
-                            >
-                                <DiscordLogoIcon className={"h-6 w-6"} />
-                            </Link>
+                        <div className={"flex flex-row items-center"}>
+                            <Button size={"icon"} variant={"ghost"}>
+                                <Link
+                                    href="https://github.com/ethansocal/ftc-toolbox"
+                                    target="_blank"
+                                >
+                                    <GitHubLogoIcon className={"h-6 w-6"} />
+                                </Link>
+                            </Button>
+                            <Button size={"icon"} variant={"ghost"}>
+                                <Link
+                                    href="https://discord.gg/ucrrz2K6Yd"
+                                    target="_blank"
+                                >
+                                    <DiscordLogoIcon className={"h-6 w-6"} />
+                                </Link>
+                            </Button>
                         </div>
                     </div>
                 </header>

@@ -1,4 +1,4 @@
-import AILogo from "@/logo.png";
+import AILogo from "@/public/logo.png";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 

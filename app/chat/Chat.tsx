@@ -1,6 +1,6 @@
 "use client";
 
-import AILogo from "@/logo.png";
+import AILogo from "@/public/logo.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
@@ -33,7 +33,7 @@ export default ({
 }) => {
     return (
         <div className="flex flex-col h-screen">
-            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-5 mt-10">
+            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-6 mt-10">
                 <div className="container mx-auto md:w-9/12 lg:w-5/12">
                     {messages.map((message: Message, k: number) => {
                         const isUser = message.role === "user";
