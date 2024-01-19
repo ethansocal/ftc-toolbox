@@ -1,5 +1,7 @@
 # FTC Toolbox
 
+![alt text]([https://github.com/ethansocal/ftc-toolbox/cover_image.png?raw=true])
+
 FTC Toolbox is a specialized AI chatbot designed for First Robotics Competition (FTC) teams. It provides answers to queries related to robot design, programming, team strategy, and competition rules.
 
 -   **🔍 Comprehensive FTC Knowledge Base**: Access a wide range of information covering robot design, programming, team strategy, and competition rules.
@@ -27,6 +29,12 @@ Welcome to our project - we are super excited to have you on board!
  <summary>Is it 100% accurate?</summary>
  While we strive for accuracy, FTC Toolbox, like any AI-powered tool, may not always be 100% accurate. It's designed to provide helpful information and guidance based on the data and algorithms it's been trained on. We recommend always cross-referencing with official FTC resources for critical decisions.
 </details>
+
+<details>
+ <summary>Why is it so slow?</summary>
+ We understand that speed is crucial, especially in a fast-paced environment like FTC. The current response time is partly due to our reliance on OpenAI's advanced assistant system, which prioritizes accuracy and comprehensive responses. We're actively working on optimizing this balance to make FTC Toolbox faster without compromising the quality of information. Stay tuned for updates!
+</details>
+
 
 <details>
  <summary>Is FTC Toolbox free to use?</summary>
