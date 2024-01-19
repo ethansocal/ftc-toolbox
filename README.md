@@ -17,7 +17,7 @@ FTC Toolbox is a specialized AI chatbot designed for First Robotics Competition 
 
 ## 🚀 About Us
 
-Hey! We are Efe and Ethan, a couple of robotics enthusiasts who found ourselves bored from sifting through pages of the game manual for every small question we had. That's when the lightbulb went off - let's build an AI Chatbot to do it for us!
+Hey! We are Efe and Ethan from team 19516 (a.k.a. The Huskyteers), a couple of robotics enthusiasts who found ourselves bored from sifting through pages of the game manual for every small question we had. That's when the lightbulb went off - let's build an AI Chatbot to do it for us!
 
 We got to work and created the FTC Toolbox, initially just for our team. But guess what? It worked fantastically! It made things so much easier for us that we thought, why not share this handy tool with everyone? And so, here we are, hoping FTC Toolbox can be as much of a game-changer for your team as it has been for ours.
 
