@@ -1,6 +1,6 @@
 import OpenAI from "openai";
-import {createClient} from "@/utils/supabase/server"
-import { cookies } from "next/headers";
+// import {createClient} from "@/utils/supabase/server"
+// import { cookies } from "next/headers";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -9,12 +9,13 @@ const openai = new OpenAI({
 export async function createThread() {
     const thread = await openai.beta.threads.create();
 
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    // TODO: Will be included in the next release
+    // const cookieStore = cookies();
+    // const supabase = createClient(cookieStore);
     
-    const { error } = await supabase.from('threads').insert({
-            thread_id: thread.id,
-    })
+    // const { error } = await supabase.from('threads').insert({
+    //         thread_id: thread.id,
+    // })
 
-    return error ? null : thread.id;
+    return thread.id;
 }

@@ -29,7 +29,8 @@ export async function POST(req: Request) {
         content: input.message,
     });
 
-    await insertMessageToDB(threadId, createdMessage);
+    // TODO: Will be included in the next release
+    // await insertMessageToDB(threadId, createdMessage);
 
     return experimental_AssistantResponse(
         { threadId, messageId: createdMessage.id },
@@ -74,7 +75,8 @@ export async function POST(req: Request) {
             ).data;
 
             for (const message of responseMessages) {
-                await insertMessageToDB(threadId, message);
+                // TODO: Will be included in the next release
+                // await insertMessageToDB(threadId, message);
                 sendMessage({
                     id: message.id,
                     role: "assistant",
