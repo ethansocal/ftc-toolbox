@@ -43,12 +43,12 @@ export default ({
                                         <AvatarImage
                                             src={
                                                 isUser
-                                                    ? user.avatar_url!
+                                                    ? user?.avatar_url!
                                                     : AILogo.src
                                             }
                                             alt="Profile Picture"
                                         />
-                                        <AvatarFallback>CN</AvatarFallback>
+                                        <AvatarFallback></AvatarFallback>
                                     </Avatar>
 
                                     <text className="font-bold pl-2">
