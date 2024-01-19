@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Message, experimental_useAssistant as useAssistant } from "ai/react";
 
+import { useEffect, useState } from "react";
 import MessageSkeleton from "./MessageSkeleton";
 
 import remarkGfm from "remark-gfm";
@@ -15,6 +16,14 @@ import remarkMath from "remark-math";
 import { CodeBlock } from "./Codeblock";
 import { MemoizedReactMarkdown } from "./Markdown";
 import Link from "next/link";
+
+const conversationStarters = [
+    "What is an alliance marker?",
+    "What are the dimension limits for the FTC robots?",
+    "How can we earn the Set Bonus during a match?",
+    "What is mosaic scoring and how it works?",
+    "What is considered knocking down the pixels?",
+];
 
 export default ({
     messages,
@@ -31,6 +40,16 @@ export default ({
     input: any;
     status: any;
 }) => {
+    const [randomStarter, setRandomStarter] = useState("");
+
+    useEffect(() => {
+        const randomIndex = Math.floor(
+            Math.random() * conversationStarters.length,
+        );
+        const selectedStarter = conversationStarters[randomIndex];
+        setRandomStarter(selectedStarter);
+    }, []);
+
     return (
         <div className="flex flex-col h-screen">
             <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-6 mt-16">
@@ -124,6 +143,21 @@ export default ({
                 </div>
             </ScrollArea>
 
+            {messages.length == 0 && (
+                <div className="flex container justify-center mb-3 text-xs text-muted-foreground w-full">
+                    <Button
+                        className="mb-1"
+                        variant="outline"
+                        onClick={() => {
+                            handleInputChange({
+                                target: { value: randomStarter },
+                            });
+                        }}
+                    >
+                        {randomStarter}
+                    </Button>
+                </div>
+            )}
             <form
                 className="flex container rounded-md border mb-3 p-2 w-4/5 md:w-9/12 lg:w-5/12"
                 onSubmit={(e) => {
