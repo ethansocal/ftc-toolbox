@@ -33,12 +33,12 @@ export default ({
 }) => {
     return (
         <div className="flex flex-col h-screen">
-            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-6 mt-10">
+            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-6 mt-16">
                 <div className="container mx-auto md:w-9/12 lg:w-5/12">
                     {messages.map((message: Message, k: number) => {
                         const isUser = message.role === "user";
                         return (
-                            <div className="p-2" key={k}>
+                            <div className="p-2 mb-3" key={k}>
                                 <div className="flex items-center">
                                     <Avatar className="w-6 h-6">
                                         <AvatarImage
