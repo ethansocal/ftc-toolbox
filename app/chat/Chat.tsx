@@ -14,6 +14,7 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { CodeBlock } from "./Codeblock";
 import { MemoizedReactMarkdown } from "./Markdown";
+import Link from "next/link";
 
 export default ({
     messages,
@@ -32,7 +33,7 @@ export default ({
 }) => {
     return (
         <div className="flex flex-col h-screen">
-            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-5">
+            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-5 mt-10">
                 <div className="container mx-auto md:w-9/12 lg:w-5/12">
                     {messages.map((message: Message, k: number) => {
                         const isUser = message.role === "user";
@@ -140,13 +141,13 @@ export default ({
             <div className="flex container justify-center mb-3 text-xs text-muted-foreground">
                 Centerstage AI is not always accurate. Double check important
                 information.{" "}
-                <a
-                    href="https://github.com/ethansocal/ftc-toolbox"
+                <Link
+                    href="https://github.com/ethansocal/ftc-toolbox/issues"
                     target="_blank"
                     className="text-blue-500 ml-1"
                 >
-                    Github
-                </a>
+                    Issues?
+                </Link>
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" className={GeistSans.className}>
             <body className="bg-background text-foreground">
-                <header className="flex flex-col items-center justify-center w-full py-3 px-4">
+                <header className="flex flex-col items-center justify-center w-full py-3 px-4 fixed top-0">
                     <div className="flex flex-row items-center justify-between w-full h-full">
                         <Link
                             href="/"
@@ -41,8 +41,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 </span>
                             </h1>
                         </Link>
-                        <Link href="https://github.com/">
-                            <GitHubLogoIcon />
+                        <Link
+                            href="https://github.com/ethansocal/ftc-toolbox"
+                            target="_blank"
+                        >
+                            <GitHubLogoIcon className={"h-6 w-6"} />
                         </Link>
                     </div>
                 </header>
