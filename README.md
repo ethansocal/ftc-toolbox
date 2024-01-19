@@ -1,6 +1,8 @@
 # FTC Toolbox
 
-![cover_image](https://github.com/ethansocal/ftc-toolbox/cover_image.png?raw=true(https://github.com/ethansocal/ftc-toolbox/blob/main/cover_image.png?raw=true)
+<p align="center">
+    <img src="https://github.com/ethansocal/ftc-toolbox/blob/main/cover_image.png?raw=true" width=55% height=55%>
+</p>
 
 FTC Toolbox is a specialized AI chatbot designed for First Robotics Competition (FTC) teams. It provides answers to queries related to robot design, programming, team strategy, and competition rules.
 
