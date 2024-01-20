@@ -60,7 +60,7 @@ Welcome to our project - we are super excited to have you on board!
 
 <details>
  <summary>What documentation do we use to train the AI?</summary>
- Centerstage AI uses [gm0](https://gm0.org/en/latest/), gm1, gm2, and Q&A's from the official forum. 
+ Centerstage AI uses gm0, gm1, gm2, and Q&A's from the official forum. 
 </details>
 
 <br>
