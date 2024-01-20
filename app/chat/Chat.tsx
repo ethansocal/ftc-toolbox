@@ -1,6 +1,8 @@
 "use client";
 
 import AILogo from "@/public/logo.png";
+import UserLogo from "@/public/user_profile.png";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
@@ -63,7 +65,7 @@ export default ({
                                         <AvatarImage
                                             src={
                                                 isUser
-                                                    ? user?.avatar_url!
+                                                    ? UserLogo.src
                                                     : AILogo.src
                                             }
                                             alt="Profile Picture"
