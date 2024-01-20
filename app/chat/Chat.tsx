@@ -78,7 +78,7 @@ export default ({
                                     </text>
                                 </div>
 
-                                <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
+                                <div className="flex-1 px-1 ml-8 space-y-2 overflow-hidden">
                                     <MemoizedReactMarkdown
                                         className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 font-extralight leading-relaxed"
                                         remarkPlugins={[remarkGfm, remarkMath]}
