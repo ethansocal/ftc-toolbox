@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     });
 
 
-    // await insertMessageToDB(threadId, createdMessage);
+    await insertMessageToDB(threadId, createdMessage);
 
     return experimental_AssistantResponse(
         { threadId, messageId: createdMessage.id },
