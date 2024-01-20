@@ -29,8 +29,8 @@ export async function POST(req: Request) {
         content: input.message,
     });
 
-    // TODO: Will be included in the next release
-    await insertMessageToDB(threadId, createdMessage);
+
+    // await insertMessageToDB(threadId, createdMessage);
 
     return experimental_AssistantResponse(
         { threadId, messageId: createdMessage.id },

@@ -53,8 +53,8 @@ export default ({
     }, []);
 
     return (
-        <div className="flex flex-col h-screen">
-            <ScrollArea className="flex rounded-md w-screen flex-grow justify-center pt-6 mt-16">
+        <div className="flex flex-col h-[calc(100dvh-4rem)]">
+            <ScrollArea className="flex flex-grow w-screen justify-center mt-4">
                 <div className="container mx-auto md:w-9/12 lg:w-5/12">
                     {messages.map((message: Message, k: number) => {
                         const isUser = message.role === "user";

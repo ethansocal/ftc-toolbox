@@ -28,6 +28,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en" className={GeistSans.className}>
+            <head>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+                ></meta>
+            </head>
+
             <body className="bg-background text-foreground">
                 <header className="flex flex-col items-center justify-center w-full py-3 px-4 fixed top-0 border-b border-gray-900">
                     <div className="flex flex-row items-center justify-between w-full h-full">
@@ -69,7 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     </div>
                 </header>
 
-                <main className="flex flex-col items-center">
+                <main className="flex flex-col items-center mt-16">
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="dark"
