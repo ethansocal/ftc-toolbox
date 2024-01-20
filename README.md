@@ -58,6 +58,11 @@ Welcome to our project - we are super excited to have you on board!
  Yes, FTC Toolbox is a great resource for quick information during competitions. However, always ensure compliance with FTC competition rules regarding the use of digital tools.
 </details>
 
+<details>
+ <summary>What documentation do we use to train the AI?</summary>
+ Centerstage AI uses gm0, gm1, gm2, and Q&A's from the official forum. 
+</details>
+
 <br>
 
 ## 🌟 Roadmap: The Future of FTC Toolbox
