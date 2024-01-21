@@ -15,24 +15,9 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 
-// import GAnalytics from "analytics";
-// //@ts-ignore
-// import googleAnalytics from "@analytics/google-analytics";
-// //@ts-ignore
-// import { AnalyticsProvider } from "use-analytics";
-
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "http://localhost:3000";
-
-// const analytics = GAnalytics({
-//     app: "ftc-toolbox",
-//     plugins: [
-//         googleAnalytics({
-//             measurementIds: ["G-17D5533R47"],
-//         }),
-//     ],
-// });
 
 export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
@@ -103,6 +88,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         disableTransitionOnChange
                     >
                         {children}
+
                         <GoogleAnalytics gaId="G-17D5533R47" />
                         <Analytics />
                         <SpeedInsights />
