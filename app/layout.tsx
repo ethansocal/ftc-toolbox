@@ -64,12 +64,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 <Link
                                     href="https://github.com/ethansocal/ftc-toolbox"
                                     target="_blank"
-                                    onClick={() =>
-                                        sendGAEvent({
-                                            event: "github",
-                                            value: "header",
-                                        })
-                                    }
                                 >
                                     <GitHubLogoIcon className={"h-6 w-6"} />
                                 </Link>
@@ -78,12 +72,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 <Link
                                     href="https://discord.gg/ucrrz2K6Yd"
                                     target="_blank"
-                                    onClick={() =>
-                                        sendGAEvent({
-                                            event: "discord",
-                                            value: "header",
-                                        })
-                                    }
                                 >
                                     <DiscordLogoIcon className={"h-6 w-6"} />
                                 </Link>
