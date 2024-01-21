@@ -5,7 +5,6 @@ import UserLogo from "@/public/user_profile.png";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { sendGAEvent } from "@next/third-parties/google";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -165,11 +164,8 @@ export default ({
                 className="flex container rounded-md border mb-3 p-2 w-4/5 md:w-9/12 lg:w-5/12"
                 onSubmit={(e) => {
                     e.preventDefault();
+
                     if (status !== "in_progress") {
-                        sendGAEvent({
-                            event: "chat",
-                            value: "sent_message",
-                        });
                         submitMessage();
                     }
                 }}

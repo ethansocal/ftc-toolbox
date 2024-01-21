@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
-import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "./globals.css";
 
