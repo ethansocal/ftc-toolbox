@@ -88,13 +88,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         disableTransitionOnChange
                     >
                         {children}
-
-                        <GoogleAnalytics gaId="G-17D5533R47" />
-                        <Analytics />
-                        <SpeedInsights />
                     </ThemeProvider>
                 </main>
             </body>
+            <GoogleAnalytics gaId="G-17D5533R47" />
+            <Analytics />
+            <SpeedInsights />
         </html>
     );
 }

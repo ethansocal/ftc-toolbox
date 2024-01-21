@@ -166,7 +166,10 @@ export default ({
                 onSubmit={(e) => {
                     e.preventDefault();
                     if (status !== "in_progress") {
-                        sendGAEvent({ event: "chat", value: input });
+                        sendGAEvent({
+                            event: "chat",
+                            value: "sent_message",
+                        });
                         submitMessage();
                     }
                 }}
