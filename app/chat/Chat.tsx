@@ -5,6 +5,7 @@ import UserLogo from "@/public/user_profile.png";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { sendGAEvent } from "@next/third-parties/google";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -165,6 +166,7 @@ export default ({
                 onSubmit={(e) => {
                     e.preventDefault();
                     if (status !== "in_progress") {
+                        sendGAEvent({ event: "chat", value: input });
                         submitMessage();
                     }
                 }}

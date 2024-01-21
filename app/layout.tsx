@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
 
 import "./globals.css";
 
@@ -64,6 +64,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 <Link
                                     href="https://github.com/ethansocal/ftc-toolbox"
                                     target="_blank"
+                                    onClick={() =>
+                                        sendGAEvent({
+                                            event: "github",
+                                            value: "header",
+                                        })
+                                    }
                                 >
                                     <GitHubLogoIcon className={"h-6 w-6"} />
                                 </Link>
@@ -72,6 +78,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                                 <Link
                                     href="https://discord.gg/ucrrz2K6Yd"
                                     target="_blank"
+                                    onClick={() =>
+                                        sendGAEvent({
+                                            event: "discord",
+                                            value: "header",
+                                        })
+                                    }
                                 >
                                     <DiscordLogoIcon className={"h-6 w-6"} />
                                 </Link>
