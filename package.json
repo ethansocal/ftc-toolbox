@@ -46,7 +46,7 @@
         "@vercel/analytics": "^1.1.2",
         "@vercel/speed-insights": "^1.0.5",
         "ai": "^2.2.31",
-        "autoprefixer": "10.4.15",
+        "autoprefixer": "10.4.19",
         "axios": "^1.6.5",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
